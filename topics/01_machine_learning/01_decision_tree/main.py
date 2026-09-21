@@ -26,24 +26,28 @@ print(y)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model = DecisionTreeClassifier(random_state=42)
+model = DecisionTreeClassifier(
+    criterion="gini",
+    random_state=42
+)
 model.fit(X_train, y_train)
 
 predictions = model.predict(X_test)
-print(predictions)
+
+print("Test targets:", y_test.to_numpy())
+print("Test predictions:", predictions)
 
 accuracy = accuracy_score(y_test, predictions)
-
 print("Accuracy:", accuracy)
 
 new_motor = pd.DataFrame({
-    "temperature": [75],
-    "vibration": [0.2],
-    "rpm": [4700],
-    "pressure": [2.1]
+    "temperature": [87],
+    "vibration": [0.8],
+    "rpm": [4950],
+    "pressure": [2.3]
 })
 
 prediction = model.predict(new_motor)
-print("Prediction:", prediction)
+print("Prediction for additional motor:", prediction)
 
 print(export_text(model, feature_names=list(X.columns)))
