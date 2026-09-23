@@ -29,14 +29,12 @@ X = torch.column_stack([
     pressure
 ])
 
-
 # ============================================================
 # 2. GENERATE LABELS
 # ============================================================
 
 y = ((temperature > 85) & (vibration > 0.7)).float()
 y = y.unsqueeze(1)
-
 
 # ============================================================
 # 3. TRAIN / TEST SPLIT
@@ -52,13 +50,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 print("Training samples:", len(X_train))
 print("Test samples:", len(X_test))
 
-
 # ============================================================
 # 4. SAVE ORIGINAL TEST VALUES
 # ============================================================
 
 X_test_original = X_test.clone()
-
 
 # ============================================================
 # 5. NORMALIZATION
@@ -71,7 +67,6 @@ std = X_train.std(dim=0)
 X_train = (X_train - mean) / std
 X_test = (X_test - mean) / std
 
-
 # ============================================================
 # 6. CREATE NEURAL NETWORK
 # ============================================================
@@ -81,7 +76,6 @@ model = nn.Sequential(
     nn.ReLU(),
     nn.Linear(8, 1)
 )
-
 
 # ============================================================
 # 7. LOSS + OPTIMIZER
@@ -94,24 +88,30 @@ optimizer = torch.optim.Adam(
     lr=0.01
 )
 
-
 # ============================================================
 # 8. TRAINING
 # ============================================================
 
+model.train()
+
 for epoch in range(1000):
 
+    # 1. Clear gradients from the previous iteration
+    optimizer.zero_grad()
+
+    # 2. Forward pass
     predictions = model(X_train)
 
+    # 3. Calculate loss
     loss = loss_function(
         predictions,
         y_train
     )
 
-    optimizer.zero_grad()
-
+    # 4. Backpropagation
     loss.backward()
 
+    # 5. Update weights and biases
     optimizer.step()
 
     if epoch % 100 == 0:
@@ -121,10 +121,11 @@ for epoch in range(1000):
             f"Loss: {loss.item():.4f}"
         )
 
-
 # ============================================================
 # 9. TRAINING ACCURACY
 # ============================================================
+
+model.eval()
 
 with torch.no_grad():
 
@@ -142,7 +143,6 @@ with torch.no_grad():
         train_prediction == y_train
     ).float().mean()
 
-
 # ============================================================
 # 10. TEST PROBABILITIES
 # ============================================================
@@ -155,7 +155,6 @@ with torch.no_grad():
         test_output
     )
 
-
 # ============================================================
 # 11. TEST WITH DIFFERENT THRESHOLDS
 # ============================================================
@@ -164,6 +163,12 @@ thresholds = [0.3, 0.5, 0.7]
 
 y_true = y_test.numpy().ravel()
 
+print()
+print(
+    "Actual positive test samples:",
+    int(y_test.sum().item())
+)
+
 for threshold in thresholds:
 
     test_prediction = (
@@ -171,6 +176,14 @@ for threshold in thresholds:
     ).float()
 
     y_pred = test_prediction.numpy().ravel()
+
+    test_accuracy = (
+        test_prediction == y_test
+    ).float().mean().item()
+
+    positive_predictions = int(
+        test_prediction.sum().item()
+    )
 
     print()
     print("=" * 40)
@@ -182,15 +195,22 @@ for threshold in thresholds:
     print(
         confusion_matrix(
             y_true,
-            y_pred
+            y_pred,
+            labels=[0, 1]
         )
+    )
+
+    print(
+        "Accuracy:",
+        test_accuracy
     )
 
     print(
         "Precision:",
         precision_score(
             y_true,
-            y_pred
+            y_pred,
+            zero_division=0
         )
     )
 
@@ -198,7 +218,8 @@ for threshold in thresholds:
         "Recall:",
         recall_score(
             y_true,
-            y_pred
+            y_pred,
+            zero_division=0
         )
     )
 
@@ -206,10 +227,15 @@ for threshold in thresholds:
         "F1-score:",
         f1_score(
             y_true,
-            y_pred
+            y_pred,
+            zero_division=0
         )
     )
 
+    print(
+        "Positive predictions:",
+        positive_predictions
+    )
 
 # ============================================================
 # 12. SHOW TRAINING ACCURACY
@@ -224,7 +250,6 @@ print(
     "Training accuracy:",
     train_accuracy.item()
 )
-
 
 # ============================================================
 # 13. ANALYZE ONE MOTOR STEP BY STEP
@@ -241,7 +266,6 @@ print()
 print("=" * 60)
 print("STEP-BY-STEP ANALYSIS OF ONE MOTOR")
 print("=" * 60)
-
 
 # ------------------------------------------------------------
 # Original values
@@ -270,7 +294,6 @@ print(
     x_original[3].item()
 )
 
-
 # ------------------------------------------------------------
 # Normalized values
 # ------------------------------------------------------------
@@ -279,7 +302,6 @@ print()
 print("2. NORMALIZED VALUES")
 
 print(x_normalized)
-
 
 # ------------------------------------------------------------
 # First layer
@@ -297,7 +319,6 @@ print("3. FIRST LAYER - BEFORE ReLU")
 
 print(first_layer_output)
 
-
 # ------------------------------------------------------------
 # ReLU
 # ------------------------------------------------------------
@@ -313,7 +334,6 @@ print()
 print("4. FIRST LAYER - AFTER ReLU")
 
 print(relu_output)
-
 
 # ------------------------------------------------------------
 # Second layer
@@ -333,7 +353,6 @@ print(
     second_layer_output.item()
 )
 
-
 # ------------------------------------------------------------
 # Sigmoid
 # ------------------------------------------------------------
@@ -351,7 +370,6 @@ print("6. SIGMOID - PROBABILITY")
 print(
     probability.item()
 )
-
 
 # ------------------------------------------------------------
 # Final decision
@@ -385,7 +403,6 @@ print(
     "Real value:",
     int(y_test[i].item())
 )
-
 
 # ============================================================
 # 14. SHOW THE NETWORK WEIGHTS
