@@ -43,20 +43,79 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Árbol CON LIMITACIONES
-model = DecisionTreeClassifier(
+# ---------------------------------------------------------------------------
+# Model 1: depth-limited tree
+# ---------------------------------------------------------------------------
+
+limited_model = DecisionTreeClassifier(
     random_state=42,
     max_depth=2
 )
 
-model.fit(X_train, y_train)
+limited_model.fit(X_train, y_train)
 
-# Predicciones
-train_predictions = model.predict(X_train)
-test_predictions = model.predict(X_test)
+limited_train_predictions = limited_model.predict(X_train)
+limited_test_predictions = limited_model.predict(X_test)
 
-# Accuracy
-train_accuracy = accuracy_score(y_train, train_predictions)
-test_accuracy = accuracy_score(y_test, test_predictions)
+limited_train_accuracy = accuracy_score(
+    y_train,
+    limited_train_predictions
+)
 
-print("Training accuracy:", train_accuracy)
-print("Test accuracy:", test_accuracy)
+limited_test_accuracy = accuracy_score(
+    y_test,
+    limited_test_predictions
+)
+
+limited_gap = limited_train_accuracy - limited_test_accuracy
+
+
+# ---------------------------------------------------------------------------
+# Model 2: unrestricted tree
+# ---------------------------------------------------------------------------
+
+unrestricted_model = DecisionTreeClassifier(
+    random_state=42,
+    max_depth=None
+)
+
+unrestricted_model.fit(X_train, y_train)
+
+unrestricted_train_predictions = unrestricted_model.predict(X_train)
+unrestricted_test_predictions = unrestricted_model.predict(X_test)
+
+unrestricted_train_accuracy = accuracy_score(
+    y_train,
+    unrestricted_train_predictions
+)
+
+unrestricted_test_accuracy = accuracy_score(
+    y_test,
+    unrestricted_test_predictions
+)
+
+unrestricted_gap = (
+    unrestricted_train_accuracy -
+    unrestricted_test_accuracy
+)
+
+
+# ---------------------------------------------------------------------------
+# Results
+# ---------------------------------------------------------------------------
+
+print("Realized label noise:", noise.sum(), "/", n)
+
+print("\nLIMITED TREE")
+print("Max depth:", limited_model.get_depth())
+print("Number of leaves:", limited_model.get_n_leaves())
+print("Training accuracy:", limited_train_accuracy)
+print("Test accuracy:", limited_test_accuracy)
+print("Generalization gap:", limited_gap)
+
+print("\nUNRESTRICTED TREE")
+print("Max depth:", unrestricted_model.get_depth())
+print("Number of leaves:", unrestricted_model.get_n_leaves())
+print("Training accuracy:", unrestricted_train_accuracy)
+print("Test accuracy:", unrestricted_test_accuracy)
+print("Generalization gap:", unrestricted_gap)
