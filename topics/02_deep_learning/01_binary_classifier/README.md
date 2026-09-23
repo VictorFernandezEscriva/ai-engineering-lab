@@ -482,11 +482,11 @@ updated weights
 The complete training cycle is:
 
 ```text
+zero old gradients
+     ↓
 forward pass
      ↓
 calculate loss
-     ↓
-zero old gradients
      ↓
 backpropagation
      ↓
