@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 
+torch.manual_seed(42)
+
 # Datos de entrenamiento
 X = torch.tensor([
     [70.0, 0.2, 4500.0, 2.1],
@@ -49,6 +51,12 @@ model = nn.Sequential(
     nn.Linear(8, 1)
 )
 
+print("\nModel:")
+print(model)
+
+print("\nInput shape:", X_normalized.shape)
+print("Target shape:", y.shape)
+
 loss_function = nn.BCEWithLogitsLoss()
 
 optimizer = torch.optim.Adam(
@@ -56,21 +64,23 @@ optimizer = torch.optim.Adam(
     lr=0.01
 )
 
+model.train()
+
 for epoch in range(1000):
 
-    # 1. Predicción
-    predictions = model(X_normalized)
-
-    # 2. Calcular error
-    loss = loss_function(predictions, y)
-
-    # 3. Borrar gradientes anteriores
+    # 1. Clear gradients from the previous iteration
     optimizer.zero_grad()
 
-    # 4. Calcular cómo cambiar los pesos
+    # 2. Forward pass
+    predictions = model(X_normalized)
+
+    # 3. Calculate loss
+    loss = loss_function(predictions, y)
+
+    # 4. Backpropagation: calculate gradients
     loss.backward()
 
-    # 5. Actualizar los pesos
+    # 5. Update weights and biases
     optimizer.step()
 
     if epoch % 100 == 0:
@@ -83,9 +93,11 @@ new_motor = torch.tensor([
 
 new_motor_normalized = (new_motor - mean) / std
 
-output = model(new_motor_normalized)
+model.eval()
 
-probability = torch.sigmoid(output)
+with torch.no_grad():
+    output = model(new_motor_normalized)
+    probability = torch.sigmoid(output)
 
 print("\nRaw output:", output.item())
 print("Probability of failure:", probability.item())
