@@ -7,9 +7,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 
-
 # ============================================================
-# 1. GENERAR DATASET
+# 1. GENERATE DATASET
 # ============================================================
 
 torch.manual_seed(42)
@@ -21,10 +20,14 @@ image_size = 32
 images = []
 labels = []
 
-for i in range(n_images):
+for _ in range(n_images):
 
-    image = np.zeros((image_size, image_size), dtype=np.float32)
+    image = np.zeros(
+        (image_size, image_size),
+        dtype=np.float32
+    )
 
+    # Random shape position
     x = np.random.randint(8, 24)
     y = np.random.randint(8, 24)
 
@@ -34,12 +37,13 @@ for i in range(n_images):
 
     if label == 0:
 
+        # Draw a circle
         for row in range(image_size):
             for col in range(image_size):
 
                 distance = np.sqrt(
-                    (row - y) ** 2 +
-                    (col - x) ** 2
+                    (row - y) ** 2
+                    + (col - x) ** 2
                 )
 
                 if distance < 6:
@@ -47,6 +51,7 @@ for i in range(n_images):
 
     else:
 
+        # Draw a square
         image[
             y - 5:y + 6,
             x - 5:x + 6
@@ -64,9 +69,12 @@ print("Labels shape:", y.shape)
 
 
 # ============================================================
-# 2. AÑADIR CANAL
+# 2. ADD CHANNEL DIMENSION
 # ============================================================
 
+# [batch, height, width]
+# ->
+# [batch, channels, height, width]
 X = X.unsqueeze(1)
 
 print("After adding channel:", X.shape)
@@ -86,9 +94,29 @@ X_train, X_test, y_train, y_test = train_test_split(
 print("Training images:", X_train.shape)
 print("Test images:", X_test.shape)
 
+print(
+    "Training circles:",
+    int((y_train == 0).sum())
+)
+
+print(
+    "Training squares:",
+    int((y_train == 1).sum())
+)
+
+print(
+    "Test circles:",
+    int((y_test == 0).sum())
+)
+
+print(
+    "Test squares:",
+    int((y_test == 1).sum())
+)
+
 
 # ============================================================
-# 4. CNN
+# 4. CREATE CNN
 # ============================================================
 
 model = nn.Sequential(
@@ -127,12 +155,12 @@ model = nn.Sequential(
     )
 )
 
-print()
+print("\nMODEL:")
 print(model)
 
 
 # ============================================================
-# 5. LOSS + OPTIMIZER
+# 5. LOSS AND OPTIMIZER
 # ============================================================
 
 loss_function = nn.BCEWithLogitsLoss()
@@ -147,25 +175,28 @@ optimizer = torch.optim.Adam(
 # 6. TRAINING
 # ============================================================
 
-print()
-print("Training...")
+print("\nTraining...")
+
+model.train()
 
 for epoch in range(1000):
 
-    # Forward pass
+    # Clear gradients from the previous iteration
+    optimizer.zero_grad()
+
+    # Forward pass using training data only
     predictions = model(X_train)
 
-    # Calculate loss
+    # Calculate training loss
     loss = loss_function(
         predictions,
         y_train.float().unsqueeze(1)
     )
 
-    # Backpropagation
-    optimizer.zero_grad()
-
+    # Calculate gradients
     loss.backward()
 
+    # Update convolution and linear parameters
     optimizer.step()
 
     if (epoch + 1) % 100 == 0:
@@ -179,6 +210,8 @@ for epoch in range(1000):
 # ============================================================
 # 7. EVALUATE TRAINING DATA
 # ============================================================
+
+model.eval()
 
 with torch.no_grad():
 
@@ -221,10 +254,28 @@ test_accuracy = accuracy_score(
     test_predictions.numpy()
 )
 
+generalization_gap = (
+    train_accuracy - test_accuracy
+)
 
-print()
-print("Training accuracy:", train_accuracy)
-print("Test accuracy:", test_accuracy)
+
+print("\nGENERAL RESULTS")
+print("=" * 50)
+
+print(
+    "Training accuracy:",
+    train_accuracy
+)
+
+print(
+    "Test accuracy:",
+    test_accuracy
+)
+
+print(
+    "Generalization gap:",
+    generalization_gap
+)
 
 
 # ============================================================
@@ -233,20 +284,31 @@ print("Test accuracy:", test_accuracy)
 
 cm = confusion_matrix(
     y_test.numpy(),
-    test_predictions.numpy()
+    test_predictions.numpy(),
+    labels=[0, 1]
 )
 
-print()
-print("Confusion matrix:")
+print("\nConfusion matrix:")
 print(cm)
 
+print(
+    "\nMatrix layout:"
+)
+
+print(
+    "[[correct circles, circles predicted as squares],"
+)
+
+print(
+    " [squares predicted as circles, correct squares]]"
+)
+
 
 # ============================================================
-# 10. EXAMINAR ALGUNAS PREDICCIONES
+# 10. INSPECT EXAMPLE PREDICTIONS
 # ============================================================
 
-print()
-print("Example predictions:")
+print("\nExample predictions:")
 
 for i in range(10):
 
@@ -263,12 +325,19 @@ for i in range(10):
         f"Probability={probability:.4f}"
     )
 
-print()
-print("FIRST CONVOLUTION FILTERS:")
+
+# ============================================================
+# 11. INSPECT FIRST CONVOLUTION FILTERS
+# ============================================================
+
+print("\nFIRST CONVOLUTION FILTERS:")
 
 filters = model[0].weight.detach()
 
-print("Filter tensor shape:", filters.shape)
+print(
+    "Filter tensor shape:",
+    filters.shape
+)
 
 for i in range(16):
 
@@ -277,70 +346,98 @@ for i in range(16):
     print(filters[i, 0])
 
 
+# ============================================================
+# 12. INSPECT FIRST-LAYER FEATURE MAPS
+# ============================================================
 
-# Cogemos una imagen del conjunto de test
+# Select one unseen test image
 image = X_test[0:1]
 
-# Pasamos la imagen solamente por la primera convolución
 with torch.no_grad():
-    feature_maps = model[0](image)
+
+    first_feature_maps = model[0](image)
 
 
-print()
-print("Input shape:", image.shape)
-print("Feature maps shape:", feature_maps.shape)
+print(
+    "\nInput shape:",
+    image.shape
+)
+
+print(
+    "First convolution feature maps shape:",
+    first_feature_maps.shape
+)
 
 
-# Dibujar la imagen original
+# Show original image
 plt.figure(figsize=(4, 4))
-plt.imshow(image[0, 0], cmap="gray")
+
+plt.imshow(
+    image[0, 0],
+    cmap="gray"
+)
+
 plt.title("Original image")
 plt.axis("off")
 plt.show()
 
 
-# Dibujar los 16 feature maps
-fig, axes = plt.subplots(4, 4, figsize=(10, 10))
+# Show 16 first-layer feature maps
+fig, axes = plt.subplots(
+    4,
+    4,
+    figsize=(10, 10)
+)
 
 for i, ax in enumerate(axes.flat):
 
     ax.imshow(
-        feature_maps[0, i],
+        first_feature_maps[0, i],
         cmap="gray"
     )
 
-    ax.set_title(f"Filter {i}")
+    ax.set_title(
+        f"Conv1 Filter {i}"
+    )
+
     ax.axis("off")
 
 plt.tight_layout()
 plt.show()
 
-# ============================================================
-# VISUALIZAR SEGUNDA CONVOLUCIÓN
-# ============================================================
 
-# Cogemos una imagen del conjunto de test
-image = X_test[0:1]
+# ============================================================
+# 13. INSPECT SECOND-LAYER FEATURE MAPS
+# ============================================================
 
 with torch.no_grad():
 
-    # Primera convolución + ReLU + MaxPool
+    # First convolutional block
     x = model[0](image)
     x = model[1](x)
     x = model[2](x)
 
-    # Segunda convolución
+    print(
+        "\nAfter Conv1 + ReLU + MaxPool:",
+        x.shape
+    )
+
+    # Second convolution
     second_feature_maps = model[3](x)
 
 
-print()
-print("After Conv1 + ReLU + MaxPool:", x.shape)
-print("After Conv2:", second_feature_maps.shape)
+print(
+    "After Conv2:",
+    second_feature_maps.shape
+)
 
 
-# Mostrar algunos feature maps de la segunda convolución
-
-fig, axes = plt.subplots(4, 4, figsize=(10, 10))
+# Show the first 16 of the 32 second-layer feature maps
+fig, axes = plt.subplots(
+    4,
+    4,
+    figsize=(10, 10)
+)
 
 for i, ax in enumerate(axes.flat):
 
@@ -349,7 +446,10 @@ for i, ax in enumerate(axes.flat):
         cmap="gray"
     )
 
-    ax.set_title(f"Conv2 Filter {i}")
+    ax.set_title(
+        f"Conv2 Filter {i}"
+    )
+
     ax.axis("off")
 
 plt.tight_layout()
