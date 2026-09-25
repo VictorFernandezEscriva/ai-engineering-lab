@@ -2,9 +2,10 @@ import torch
 import torch.nn as nn
 import numpy as np
 
-# --------------------------------------------------
+
+# ============================================================
 # 1. GENERATE DATASET
-# --------------------------------------------------
+# ============================================================
 
 torch.manual_seed(42)
 np.random.seed(42)
@@ -15,11 +16,14 @@ image_size = 32
 images = []
 labels = []
 
-for i in range(n_images):
+for _ in range(n_images):
 
-    image = np.zeros((image_size, image_size), dtype=np.float32)
+    image = np.zeros(
+        (image_size, image_size),
+        dtype=np.float32
+    )
 
-    # Random position
+    # Random shape position
     x = np.random.randint(8, 24)
     y = np.random.randint(8, 24)
 
@@ -29,13 +33,13 @@ for i in range(n_images):
 
     if label == 0:
 
-        # Circle
+        # Draw a circle
         for row in range(image_size):
             for col in range(image_size):
 
                 distance = np.sqrt(
-                    (row - y) ** 2 +
-                    (col - x) ** 2
+                    (row - y) ** 2
+                    + (col - x) ** 2
                 )
 
                 if distance < 6:
@@ -43,7 +47,7 @@ for i in range(n_images):
 
     else:
 
-        # Square
+        # Draw a square
         image[
             y - 5:y + 6,
             x - 5:x + 6
@@ -59,13 +63,18 @@ y = torch.tensor(labels)
 print("Dataset shape:", X.shape)
 print("Labels shape:", y.shape)
 
+# Add grayscale channel dimension:
+# [batch, height, width]
+# ->
+# [batch, channels, height, width]
 X = X.unsqueeze(1)
 
 print("After adding channel:", X.shape)
 
-# --------------------------------------------------
-# 2. CNN MODEL
-# --------------------------------------------------
+
+# ============================================================
+# 2. CREATE CNN
+# ============================================================
 
 model = nn.Sequential(
 
@@ -103,20 +112,29 @@ model = nn.Sequential(
     )
 )
 
+print("\nMODEL:")
 print(model)
 
-# --------------------------------------------------
-# 3. FORWARD PASS
-# --------------------------------------------------
+
+# ============================================================
+# 3. INSPECT INITIAL FORWARD PASS
+# ============================================================
+
+model.eval()
 
 with torch.no_grad():
+    initial_output = model(X[:5])
 
-    output = model(X[:5])
+print("\nInitial output shape:")
+print(initial_output.shape)
 
-print()
-print("Output shape:", output.shape)
-print("Raw output:")
-print(output)
+print("\nInitial raw output:")
+print(initial_output)
+
+
+# ============================================================
+# 4. LOSS AND OPTIMIZER
+# ============================================================
 
 loss_function = nn.BCEWithLogitsLoss()
 
@@ -125,23 +143,77 @@ optimizer = torch.optim.Adam(
     lr=0.001
 )
 
+
+# ============================================================
+# 5. TRAIN CNN
+# ============================================================
+
+model.train()
+
 for epoch in range(1000):
 
+    # Clear gradients from the previous iteration
+    optimizer.zero_grad()
+
+    # Forward pass
     predictions = model(X)
 
+    # Calculate training loss
     loss = loss_function(
         predictions,
         y.float().unsqueeze(1)
     )
 
-    optimizer.zero_grad()
-
+    # Calculate gradients
     loss.backward()
 
+    # Update convolution and linear parameters
     optimizer.step()
 
     if (epoch + 1) % 100 == 0:
+
         print(
             f"Epoch {epoch + 1}, "
             f"Loss: {loss.item():.4f}"
         )
+
+
+# ============================================================
+# 6. TRAINING ACCURACY
+# ============================================================
+
+model.eval()
+
+with torch.no_grad():
+
+    output = model(X)
+
+    probabilities = torch.sigmoid(output)
+
+    predictions = (
+        probabilities >= 0.5
+    ).long()
+
+    training_accuracy = (
+        predictions.squeeze(1) == y
+    ).float().mean()
+
+
+print(
+    "\nTraining accuracy:",
+    training_accuracy.item()
+)
+
+
+# ============================================================
+# 7. INSPECT LEARNED CONVOLUTION FILTERS
+# ============================================================
+
+print("\nFIRST CONVOLUTION WEIGHT SHAPE:")
+print(model[0].weight.shape)
+
+print("\nSECOND CONVOLUTION WEIGHT SHAPE:")
+print(model[3].weight.shape)
+
+print("\nEXAMPLE LEARNED FILTER FROM FIRST CONVOLUTION:")
+print(model[0].weight[0, 0].detach())
