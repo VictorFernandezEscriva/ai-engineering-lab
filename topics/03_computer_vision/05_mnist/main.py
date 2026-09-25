@@ -1,11 +1,11 @@
 import torch
-import torch.nn as nn
 from torchvision import datasets
 from torchvision.transforms import ToTensor
+import matplotlib.pyplot as plt
 
 
 # ============================================================
-# 1. DESCARGAR DATASET
+# 1. LOAD MNIST DATASET
 # ============================================================
 
 train_dataset = datasets.MNIST(
@@ -28,11 +28,61 @@ print("Test samples:", len(test_dataset))
 
 
 # ============================================================
-# 2. MIRAR UNA IMAGEN
+# 2. INSPECT ONE SAMPLE
 # ============================================================
 
 image, label = train_dataset[0]
 
+
 print()
+print("Image type:", type(image))
 print("Image shape:", image.shape)
+print("Image dtype:", image.dtype)
+
+print(
+    "Pixel value range:",
+    image.min().item(),
+    "to",
+    image.max().item()
+)
+
 print("Label:", label)
+
+
+# ============================================================
+# 3. UNDERSTAND THE SAMPLE STRUCTURE
+# ============================================================
+
+print()
+print("Channels:", image.shape[0])
+print("Height:", image.shape[1])
+print("Width:", image.shape[2])
+
+# ============================================================
+# 4. VISUALIZE EXAMPLE IMAGES
+# ============================================================
+
+fig, axes = plt.subplots(
+    2,
+    5,
+    figsize=(10, 5)
+)
+
+for i, ax in enumerate(axes.flat):
+
+    image, label = train_dataset[i]
+
+    ax.imshow(
+        image.squeeze(0),
+        cmap="gray"
+    )
+
+    ax.set_title(
+        f"Label: {label}"
+    )
+
+    ax.axis("off")
+
+
+plt.tight_layout()
+plt.show()
