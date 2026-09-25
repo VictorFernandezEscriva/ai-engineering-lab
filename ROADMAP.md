@@ -174,7 +174,7 @@ The following concepts can now be explained:
 
 # Phase 03 — Computer Vision Foundations
 
-**Status:** IN PROGRESS — near completion
+**Status:** COMPLETE
 
 ## Concepts
 
@@ -400,7 +400,7 @@ Before continuing, be able to explain:
 
 # Phase 04 — LLM Fundamentals
 
-**Status:** NEXT
+**Status:** IN PROGRESS
 
 ## Goal
 
