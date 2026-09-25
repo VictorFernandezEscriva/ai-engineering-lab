@@ -1,171 +1,1126 @@
 # AI Engineering Roadmap
 
-This is a learning path, not the directory hierarchy. Topics are grouped by technical domain. Future work stays here until it starts; no placeholder folders are required. Existing implementations are not proof of mastery.
+This roadmap describes the learning path of the repository.
 
-## Phase 01 — Machine Learning foundations
+It is not the directory hierarchy.
 
-**Status:** Existing experiments; reviewed, with verification limits.
+Topics are grouped by technical domain, and future work remains documented here until implementation begins. Existing code is not considered proof of understanding by itself: experiments should be executed, inspected and explained before a phase is considered complete.
 
-- **Concepts:** features, targets, trees, generalization.
-- **Expected practical work:** Review the two existing ML experiments; later compare depths and splits.
-- **Before continuing:** Explain held-out evaluation and the limits of tiny samples.
+The general learning pattern is:
 
-## Phase 02 — Deep Learning foundations
+```text
+CONCEPT
+↓
+QUESTION
+↓
+HYPOTHESIS
+↓
+IMPLEMENTATION
+↓
+EXPERIMENT
+↓
+EVIDENCE
+↓
+INTERPRETATION
+↓
+LIMITATIONS
+↓
+PRODUCT CONNECTION
+```
 
-**Status:** Existing experiments; reviewed, with verification limits.
+---
 
-- **Concepts:** tensors, logits, loss, gradients, thresholds.
-- **Expected practical work:** Review the two existing neural classifiers and their recorded metrics.
-- **Before continuing:** Trace forward/backward passes and explain normalization without leakage.
+# Phase 01 — Machine Learning Foundations
 
-## Phase 03 — Computer Vision foundations
+**Status:** COMPLETE
 
-**Status:** Existing experiments; reviewed, with verification limits.
+## Concepts
 
-- **Concepts:** kernels, channels, pooling, image datasets.
-- **Expected practical work:** Review fixed filters; complete shape CNN runs and MNIST loading.
-- **Before continuing:** Trace tensor shapes and distinguish training fit from held-out accuracy.
+* features and targets,
+* supervised learning,
+* decision trees,
+* training and inference,
+* model capacity,
+* overfitting,
+* train/test splits,
+* generalization,
+* evaluation limitations.
 
-## Phase 04 — LLM fundamentals
+## Verified practical work
 
-**Status:** IN PROGRESS: conceptual introduction.
+Implemented and reviewed experiments covering:
 
-- **Concepts:** architecture, weights, tokens, embeddings, sampling, context.
-- **Expected practical work:** Continue the introductory lesson; later inspect tokenization.
-- **Before continuing:** Distinguish model, runtime, application and hardware.
+```text
+Decision Tree
+↓
+explicit learned decision boundaries
+↓
+predictions
+```
 
-## Phase 05 — Local models and inference
+and:
 
-**Status:** Planned.
+```text
+model capacity
+↓
+training performance
+↓
+test performance
+↓
+overfitting
+```
 
-- **Concepts:** artifacts, loading, inference, resource use.
-- **Expected practical work:** Run a compatible small model locally and record configuration.
-- **Before continuing:** Explain training versus inference and basic memory constraints.
+Experiments demonstrated that a more expressive model can achieve better training performance while generalizing worse.
 
-## Phase 06 — Ollama and local APIs
+## Completion checkpoint
 
-**Status:** Planned.
+The following concepts can now be explained:
 
-- **Concepts:** runtime management, HTTP, request/response.
-- **Expected practical work:** Call a local inference endpoint and inspect requests and errors.
-- **Before continuing:** Identify the model artifact and the process serving it.
+* difference between features and targets,
+* difference between `fit()` and `predict()`,
+* why training performance is not enough,
+* what held-out evaluation means,
+* why model capacity can produce overfitting,
+* why a single small test split provides limited evidence.
 
-## Phase 07 — Python integration
+---
 
-**Status:** Planned.
+# Phase 02 — Deep Learning Foundations
 
-- **Concepts:** JSON, streaming, timeouts, configuration.
-- **Expected practical work:** Build a small Python CLI client with explicit error handling.
-- **Before continuing:** Understand the local API contract and Python exceptions.
+**Status:** COMPLETE
 
-## Phase 08 — llama.cpp and GGUF
+## Concepts
 
-**Status:** Planned.
+* tensors,
+* matrix operations,
+* neural-network layers,
+* weights and biases,
+* activations,
+* logits,
+* sigmoid,
+* binary classification,
+* loss functions,
+* gradient descent,
+* backpropagation,
+* optimizers,
+* thresholds,
+* normalization,
+* evaluation metrics.
 
-- **Concepts:** model format, native/server execution, offload.
-- **Expected practical work:** Compare compatible execution paths with recorded settings.
-- **Before continuing:** Understand runtime boundaries and distinguish format from architecture.
+## Verified practical work
 
-## Phase 09 — Hardware and quantization
+Implemented neural classifiers using PyTorch.
 
-**Status:** Planned.
+The experiments covered:
 
-- **Concepts:** RAM, VRAM, numerical precision, bandwidth.
-- **Expected practical work:** Use the hardware tool and compare supported precisions on fixed inputs.
-- **Before continuing:** Explain parameter memory and recognize quality/resource trade-offs.
+```text
+input features
+↓
+Linear layer
+↓
+ReLU
+↓
+Linear layer
+↓
+logit
+↓
+prediction
+```
 
-## Phase 10 — Inference benchmarking and evaluation
+Training was implemented using:
 
-**Status:** Planned.
+```text
+forward pass
+↓
+loss
+↓
+backpropagation
+↓
+gradients
+↓
+optimizer
+↓
+updated weights
+```
 
-- **Concepts:** latency, throughput, quality, repeatability.
-- **Expected practical work:** Build a benchmark with warm-up, repeated runs and a fixed evaluation set.
-- **Before continuing:** Control model, prompts, hardware and sampling settings.
+Additional experiments studied:
 
-## Phase 11 — Embeddings
+* train/test separation,
+* normalization using training statistics,
+* classification thresholds,
+* accuracy,
+* precision,
+* recall,
+* F1,
+* confusion matrices,
+* individual forward-pass inspection.
 
-**Status:** Planned.
+## Completion checkpoint
 
-- **Concepts:** vector representations, similarity, normalization.
-- **Expected practical work:** Encode a small text collection and inspect pairwise similarities.
-- **Before continuing:** Understand vectors and distinguish embedding output from generated text.
+The following concepts can now be explained:
 
-## Phase 12 — Semantic search
+* what a tensor represents,
+* what weights and biases are,
+* why a neural network produces logits,
+* difference between logits and probabilities,
+* purpose of an activation function,
+* purpose of a loss function,
+* how backpropagation calculates gradients,
+* how an optimizer changes model parameters,
+* why thresholds affect precision and recall,
+* why preprocessing must avoid test-data leakage.
 
-**Status:** Planned.
+---
 
-- **Concepts:** ranking, top-k retrieval, relevance.
-- **Expected practical work:** Build and evaluate retrieval over a small document collection.
-- **Before continuing:** Explain embeddings and similarity; define relevance judgments.
+# Phase 03 — Computer Vision Foundations
 
-## Phase 13 — RAG
+**Status:** IN PROGRESS — near completion
 
-**Status:** Planned.
+## Concepts
 
-- **Concepts:** chunking, retrieval, grounded prompts, citations.
-- **Expected practical work:** Build document question answering with retrieval and answer evaluation.
-- **Before continuing:** Measure retrieval quality and identify unsupported generated claims.
+* images as tensors,
+* channels,
+* convolution kernels,
+* feature maps,
+* learned convolution filters,
+* ReLU,
+* pooling,
+* spatial dimensions,
+* CNN architectures,
+* image datasets,
+* DataLoaders,
+* mini-batches,
+* multiclass classification,
+* image-model evaluation.
 
-## Phase 14 — Tool calling
+## Verified practical work
 
-**Status:** Planned.
+### Manual convolution
 
-- **Concepts:** schemas, argument validation, execution boundaries.
-- **Expected practical work:** Execute a small allowlisted set of application functions.
-- **Before continuing:** Separate model requests from authorized application execution.
+Implemented convolution using manually selected kernels.
 
-## Phase 15 — Agents
+Learned the relationship:
 
-**Status:** Planned.
+```text
+image
++
+kernel
+↓
+convolution
+↓
+feature map
+```
 
-- **Concepts:** state, action loops, retries, stopping conditions.
-- **Expected practical work:** Implement a bounded loop and inspect its traces and failures.
-- **Before continuing:** Understand tool execution, budgets and observable termination.
+### Multiple filters
 
-## Phase 16 — Multimodal models
+Applied several filters to the same image and verified:
 
-**Status:** Planned.
+```text
+1 input channel
+↓
+multiple filters
+↓
+multiple output feature maps
+```
 
-- **Concepts:** image/text inputs, representations, resource costs.
-- **Expected practical work:** Evaluate a compatible model on a small image-and-text task.
-- **Before continuing:** Understand image tensors and text inference evaluation.
+### Learned convolution filters
 
-## Phase 17 — Fine-tuning / LoRA / QLoRA
+Built a CNN where convolution kernels were no longer manually defined.
 
-**Status:** Planned.
+Instead:
 
-- **Concepts:** adaptation, adapters, quantization, evaluation.
-- **Expected practical work:** Run a small controlled adaptation with an independent test set.
-- **Before continuing:** Understand training objectives, data quality and baseline comparisons.
+```text
+initialized convolution weights
+↓
+forward pass
+↓
+loss
+↓
+backpropagation
+↓
+optimizer
+↓
+learned filters
+```
 
-## Phase 18 — AI backend engineering
+### Synthetic shape classification
 
-**Status:** Planned.
+Built a CNN that classified:
 
-- **Concepts:** service APIs, concurrency, lifecycle, observability.
-- **Expected practical work:** Build a service with streaming, cancellation and bounded resource use.
-- **Before continuing:** Understand inference costs, API contracts and failure handling.
+```text
+circle
+vs
+square
+```
 
-## Phase 19 — Flutter integration
+and inspected:
 
-**Status:** Planned.
+* convolution weight shapes,
+* feature-map shapes,
+* learned filters,
+* training accuracy.
 
-- **Concepts:** Dart clients, streaming UI, application state.
-- **Expected practical work:** Build a client for an evaluated backend and handle connection failures.
-- **Before continuing:** Understand the backend contract and asynchronous state changes.
+### Held-out evaluation
 
-## Phase 20 — Packaging and offline distribution
+Introduced an independent train/test split and inspected internal feature maps.
 
-**Status:** Planned.
+Verified:
 
-- **Concepts:** installation, artifacts, compatibility, updates.
-- **Expected practical work:** Package a prototype and test it on another machine without network access.
-- **Before continuing:** Account for model files, dependency availability and artifact licenses.
+```text
+Training accuracy: 100%
+Test accuracy:     100%
+```
 
-## Phase 21 — Production/product engineering
+on the restricted synthetic dataset.
 
-**Status:** Planned.
+The limitations of this result were documented.
 
-- **Concepts:** requirements, reliability, privacy, security, maintenance.
-- **Expected practical work:** Define acceptance criteria, threat model, regression evaluation and recovery behavior.
-- **Before continuing:** Justify the full stack and distinguish a demo from a supported product.
+### MNIST dataset
+
+Moved from manually generated images to a standard labelled dataset.
+
+Verified:
+
+```text
+60,000 training images
+10,000 test images
+```
+
+with individual image shape:
+
+```text
+[1, 28, 28]
+```
+
+### DataLoader and mini-batches
+
+Introduced PyTorch `DataLoader`.
+
+Verified:
+
+```text
+batch size = 64
+
+training batches = 938
+test batches     = 157
+```
+
+and learned that:
+
+```text
+1 epoch
+=
+one complete traversal of all training batches
+```
+
+### MNIST multiclass CNN
+
+Built the first multiclass CNN in the repository.
+
+Architecture:
+
+```text
+MNIST image
+↓
+Conv2d
+↓
+ReLU
+↓
+MaxPool
+↓
+Conv2d
+↓
+ReLU
+↓
+MaxPool
+↓
+Flatten
+↓
+Linear
+↓
+10 logits
+```
+
+Training used:
+
+```text
+Dataset
+↓
+DataLoader
+↓
+mini-batch
+↓
+CNN
+↓
+CrossEntropyLoss
+↓
+backpropagation
+↓
+Adam
+```
+
+Verified after three epochs:
+
+```text
+Test accuracy: 98.08%
+```
+
+## Remaining practical work
+
+Before closing this phase:
+
+1. perform MNIST error analysis,
+2. build a confusion matrix,
+3. inspect misclassified digits,
+4. inspect per-class performance,
+5. understand why aggregate accuracy can hide specific failure modes,
+6. update the Computer Vision topic overview.
+
+## Completion checkpoint
+
+Before continuing, be able to explain:
+
+* `[batch, channels, height, width]`,
+* difference between a filter and a feature map,
+* why convolution preserves local structure,
+* why pooling reduces spatial resolution,
+* why `out_channels` creates multiple feature maps,
+* how convolution filters are learned,
+* why `Flatten()` reorganizes rather than deletes values,
+* how a DataLoader produces batches,
+* what an epoch means,
+* why one optimizer update normally occurs per training batch,
+* difference between binary and multiclass classification,
+* why MNIST produces ten logits,
+* how `argmax` selects a class,
+* why `CrossEntropyLoss` consumes raw logits,
+* difference between training performance and held-out test performance.
+
+---
+
+# Phase 04 — LLM Fundamentals
+
+**Status:** NEXT
+
+## Goal
+
+Understand how a language model works internally before focusing on LLM applications and infrastructure.
+
+The objective is not only to call an LLM API.
+
+The objective is to understand the pipeline:
+
+```text
+text
+↓
+tokenizer
+↓
+tokens
+↓
+embeddings
+↓
+transformer
+↓
+logits
+↓
+next-token probabilities
+↓
+generated text
+```
+
+## Concepts
+
+* language modelling,
+* tokens,
+* token IDs,
+* vocabulary,
+* tokenization,
+* embeddings,
+* positional information,
+* attention,
+* queries,
+* keys,
+* values,
+* self-attention,
+* transformer blocks,
+* feed-forward networks,
+* residual connections,
+* normalization,
+* logits,
+* softmax,
+* next-token prediction,
+* context windows,
+* sampling,
+* temperature,
+* model weights.
+
+## Expected practical work
+
+Build small experiments progressing toward a minimal GPT-like model.
+
+Suggested progression:
+
+```text
+text
+↓
+tokenization
+↓
+token IDs
+↓
+embedding vectors
+↓
+attention
+↓
+transformer block
+↓
+next-token logits
+↓
+sampling
+```
+
+Later combine the pieces into a small educational language model.
+
+## Completion checkpoint
+
+Before continuing, be able to explain:
+
+* why LLMs operate on tokens instead of raw text,
+* difference between a token and a token ID,
+* what an embedding represents,
+* why embedding vectors are learned,
+* what attention is trying to accomplish,
+* what queries, keys and values represent,
+* why transformer blocks are stacked,
+* what the final logits represent,
+* how next-token prediction produces text,
+* difference between model architecture, weights, runtime and application.
+
+---
+
+# Phase 05 — Local Models and Inference
+
+**Status:** PLANNED
+
+## Concepts
+
+* pretrained model artifacts,
+* model loading,
+* inference,
+* context,
+* generation,
+* CPU inference,
+* GPU inference,
+* RAM,
+* VRAM,
+* runtime configuration.
+
+## Expected practical work
+
+Run a compatible small language model locally and record:
+
+* model,
+* model size,
+* hardware,
+* context configuration,
+* generation settings,
+* latency,
+* memory usage.
+
+## Completion checkpoint
+
+Explain:
+
+* training vs inference,
+* model architecture vs model weights,
+* why models require memory,
+* basic CPU/GPU inference differences.
+
+---
+
+# Phase 06 — Ollama and Local APIs
+
+**Status:** PLANNED
+
+## Concepts
+
+* inference runtime,
+* model management,
+* local model server,
+* HTTP,
+* API requests,
+* responses,
+* generation parameters.
+
+## Expected practical work
+
+Run a local model through Ollama and call it through its HTTP API.
+
+Inspect:
+
+```text
+Python / client
+↓
+HTTP request
+↓
+Ollama
+↓
+model runtime
+↓
+generated tokens
+↓
+HTTP response
+```
+
+## Completion checkpoint
+
+Identify:
+
+* which model is loaded,
+* which process serves it,
+* which process calls it,
+* where inference occurs,
+* what the HTTP API is responsible for.
+
+---
+
+# Phase 07 — Python Integration
+
+**Status:** PLANNED
+
+## Concepts
+
+* HTTP clients,
+* JSON,
+* streaming,
+* exceptions,
+* timeouts,
+* configuration,
+* application boundaries.
+
+## Expected practical work
+
+Build a Python CLI that communicates with a local language model.
+
+Include:
+
+* structured requests,
+* error handling,
+* streaming,
+* timeouts,
+* configuration.
+
+## Completion checkpoint
+
+Understand the complete contract between:
+
+```text
+Python application
+↔
+LLM runtime
+```
+
+---
+
+# Phase 08 — llama.cpp and GGUF
+
+**Status:** PLANNED
+
+## Concepts
+
+* native inference runtimes,
+* GGUF,
+* model formats,
+* quantized model artifacts,
+* CPU execution,
+* GPU offload,
+* local servers.
+
+## Expected practical work
+
+Run compatible models through `llama.cpp`.
+
+Compare:
+
+```text
+Ollama
+vs
+llama.cpp
+```
+
+while keeping model and test prompts controlled where possible.
+
+## Completion checkpoint
+
+Distinguish clearly between:
+
+* model architecture,
+* model weights,
+* model file format,
+* inference runtime.
+
+---
+
+# Phase 09 — Hardware and Quantization
+
+**Status:** PLANNED
+
+## Concepts
+
+* parameter count,
+* numerical precision,
+* FP32,
+* FP16,
+* BF16,
+* INT8,
+* lower-bit quantization,
+* RAM,
+* VRAM,
+* memory bandwidth,
+* GPU offloading.
+
+## Expected practical work
+
+Compare compatible model configurations using fixed prompts and hardware.
+
+Record:
+
+* memory consumption,
+* loading behavior,
+* latency,
+* generation speed,
+* qualitative output changes.
+
+## Completion checkpoint
+
+Explain approximately why model memory requirements change with numerical precision and quantization.
+
+---
+
+# Phase 10 — Inference Benchmarking and Evaluation
+
+**Status:** PLANNED
+
+## Concepts
+
+* latency,
+* time to first token,
+* tokens per second,
+* throughput,
+* warm-up,
+* repeatability,
+* evaluation datasets,
+* output quality.
+
+## Expected practical work
+
+Build a reproducible inference benchmark.
+
+Control:
+
+* model,
+* hardware,
+* prompts,
+* context,
+* sampling settings,
+* number of runs.
+
+## Completion checkpoint
+
+Distinguish performance benchmarking from model-quality evaluation.
+
+---
+
+# Phase 11 — Embeddings
+
+**Status:** PLANNED
+
+## Concepts
+
+* vector representations,
+* embedding models,
+* vector dimensions,
+* cosine similarity,
+* normalization,
+* semantic similarity.
+
+## Expected practical work
+
+Encode a small text collection and compare vector similarities.
+
+## Completion checkpoint
+
+Understand the difference between:
+
+```text
+text generation
+```
+
+and:
+
+```text
+text → vector representation
+```
+
+---
+
+# Phase 12 — Semantic Search
+
+**Status:** PLANNED
+
+## Concepts
+
+* retrieval,
+* similarity ranking,
+* top-k,
+* document representations,
+* relevance,
+* retrieval evaluation.
+
+## Expected practical work
+
+Build semantic search over a small document collection.
+
+Measure whether relevant documents appear in the top results.
+
+## Completion checkpoint
+
+Explain:
+
+* query embedding,
+* document embedding,
+* similarity search,
+* top-k retrieval,
+* relevance evaluation.
+
+---
+
+# Phase 13 — RAG
+
+**Status:** PLANNED
+
+## Concepts
+
+* document ingestion,
+* chunking,
+* embeddings,
+* indexing,
+* retrieval,
+* context construction,
+* grounded generation,
+* citations,
+* hallucination analysis.
+
+## Expected practical work
+
+Build:
+
+```text
+documents
+↓
+chunks
+↓
+embeddings
+↓
+retrieval
+↓
+context
+↓
+LLM
+↓
+answer
+```
+
+Evaluate both retrieval and generated answers.
+
+## Completion checkpoint
+
+Distinguish:
+
+```text
+retrieval failure
+```
+
+from:
+
+```text
+generation failure
+```
+
+and detect unsupported generated claims.
+
+---
+
+# Phase 14 — Tool Calling
+
+**Status:** PLANNED
+
+## Concepts
+
+* tool schemas,
+* structured arguments,
+* validation,
+* execution boundaries,
+* allowlists,
+* application authorization.
+
+## Expected practical work
+
+Expose a small set of application functions to a model.
+
+Validate arguments before execution.
+
+## Completion checkpoint
+
+Understand that:
+
+```text
+model requests action
+```
+
+is different from:
+
+```text
+application authorizes and executes action
+```
+
+---
+
+# Phase 15 — Agents
+
+**Status:** PLANNED
+
+## Concepts
+
+* state,
+* planning,
+* actions,
+* observations,
+* tool loops,
+* retries,
+* budgets,
+* stopping conditions,
+* traces.
+
+## Expected practical work
+
+Implement a bounded agent loop with observable execution.
+
+## Completion checkpoint
+
+Explain:
+
+* agent state,
+* action selection,
+* execution,
+* observation,
+* termination,
+* failure handling.
+
+---
+
+# Phase 16 — Multimodal Models
+
+**Status:** PLANNED
+
+## Concepts
+
+* image inputs,
+* text inputs,
+* image representations,
+* multimodal context,
+* vision-language models,
+* resource requirements.
+
+## Expected practical work
+
+Evaluate a compatible multimodal model using a small image-and-text task.
+
+## Completion checkpoint
+
+Connect previous computer-vision concepts with language-model inference.
+
+---
+
+# Phase 17 — Fine-Tuning / LoRA / QLoRA
+
+**Status:** PLANNED
+
+## Concepts
+
+* pretrained models,
+* adaptation,
+* supervised fine-tuning,
+* adapters,
+* LoRA,
+* QLoRA,
+* datasets,
+* training objectives,
+* evaluation.
+
+## Expected practical work
+
+Run a small controlled adaptation and compare it against an unchanged baseline.
+
+## Completion checkpoint
+
+Understand:
+
+* why fine-tuning is used,
+* what parameters are updated,
+* role of training-data quality,
+* why independent evaluation is required.
+
+---
+
+# Phase 18 — AI Backend Engineering
+
+**Status:** PLANNED
+
+## Concepts
+
+* service APIs,
+* model lifecycle,
+* concurrency,
+* streaming,
+* cancellation,
+* queues,
+* resource management,
+* observability,
+* failure handling.
+
+## Expected practical work
+
+Build an inference service with:
+
+* streaming,
+* request cancellation,
+* bounded concurrency,
+* structured errors,
+* logging,
+* metrics.
+
+## Completion checkpoint
+
+Understand how inference behavior affects backend architecture.
+
+---
+
+# Phase 19 — Flutter Integration
+
+**Status:** PLANNED
+
+## Concepts
+
+* Dart HTTP clients,
+* asynchronous requests,
+* streaming UI,
+* application state,
+* connection failures.
+
+## Expected practical work
+
+Build a client for an evaluated AI backend.
+
+## Completion checkpoint
+
+Understand:
+
+```text
+Flutter application
+↔
+AI backend
+↔
+model runtime
+```
+
+and the asynchronous state transitions between them.
+
+---
+
+# Phase 20 — Packaging and Offline Distribution
+
+**Status:** PLANNED
+
+## Concepts
+
+* application packaging,
+* dependencies,
+* model artifacts,
+* compatibility,
+* installation,
+* updates,
+* offline operation.
+
+## Expected practical work
+
+Package a prototype and install it on another machine without relying on network access.
+
+## Completion checkpoint
+
+Account for:
+
+* model files,
+* runtime dependencies,
+* hardware requirements,
+* licenses,
+* updates,
+* storage requirements.
+
+---
+
+# Phase 21 — Production and Product Engineering
+
+**Status:** PLANNED
+
+## Concepts
+
+* product requirements,
+* acceptance criteria,
+* reliability,
+* privacy,
+* security,
+* observability,
+* evaluation,
+* maintenance,
+* recovery.
+
+## Expected practical work
+
+Turn one previous prototype into a production-oriented system.
+
+Define:
+
+* functional requirements,
+* quality requirements,
+* evaluation criteria,
+* threat model,
+* failure behavior,
+* monitoring,
+* regression tests,
+* recovery behavior.
+
+## Completion checkpoint
+
+Be able to justify the complete system:
+
+```text
+product requirement
+↓
+data
+↓
+model
+↓
+runtime
+↓
+backend
+↓
+client
+↓
+evaluation
+↓
+deployment
+↓
+monitoring
+```
+
+and clearly distinguish an experimental demo from a supported product.
