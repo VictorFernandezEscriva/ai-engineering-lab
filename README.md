@@ -181,7 +181,8 @@ AI Engineering
     ├── Attention Output Projection ✅
     ├── Residual Connection ✅
     ├── Layer Normalization ✅
-    └── Feed-Forward Network ← NEXT
+    ├── Feed-Forward Network ✅
+    └── FFN Residual + Transformer Block ← NEXT
 ```
 
 The current objective is to understand the internal mechanics of a GPT-like language model before moving into higher-level LLM applications.
@@ -328,6 +329,8 @@ Implemented so far:
 05_causal_attention
 06_multi_head_attention
 07_attention_output_residual
+08_layer_normalization
+09_feed_forward_network
 ```
 
 These experiments progressively build the internal representation pipeline of an autoregressive Transformer.

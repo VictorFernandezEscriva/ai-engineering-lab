@@ -446,8 +446,9 @@ LLM Engineering
 ├── Attention Output Projection ✅
 ├── Residual Connection ✅
 ├── Layer Normalization ✅
+├── Feed-Forward Network ✅
 │
-└── Feed-Forward Network ← NEXT
+└── FFN Residual + Transformer Block ← NEXT
 ```
 
 ---
@@ -466,7 +467,7 @@ Status:
 COMPLETE
 ```
 
-Extended the multi-head attention mechanism with:
+Extended multi-head attention with:
 
 ```text
 concatenated heads
@@ -486,8 +487,6 @@ attention update
 residual representation
 ```
 
-The residual path preserves direct access to the previous representation.
-
 ---
 
 ## Experiment 20 — Layer Normalization
@@ -504,7 +503,7 @@ Status:
 COMPLETE
 ```
 
-Introduced LayerNorm over the feature dimension of each token.
+LayerNorm was applied independently across the feature dimensions of each token.
 
 Verified for token `"e"`:
 
@@ -513,43 +512,111 @@ before:
 
 mean     = -0.315053
 variance =  1.859519
-```
 
-after normalization:
+after:
 
-```text
 mean     ≈ 0
 variance ≈ 1
 ```
 
-The tensor shape remained:
-
-```text
-[3, 8]
-```
-
-LayerNorm was also reproduced manually and matched PyTorch:
+Manual normalization matched PyTorch:
 
 ```text
 MANUAL NORMALIZATION MATCH:
 True
 ```
 
-Verified initial learnable parameters:
+---
+
+## Experiment 21 — Feed-Forward Network
+
+Folder:
 
 ```text
-gamma = ones
-beta  = zeros
+09_feed_forward_network/
 ```
 
-Key mental model:
+Status:
 
 ```text
-each token
+COMPLETE
+```
+
+Implemented a position-wise Transformer feed-forward network:
+
+```text
+d_model
+8
 ↓
-normalize its own feature dimensions
+Linear
 ↓
-preserve the same tensor shape
+32
+↓
+GELU
+↓
+Linear
+↓
+8
+```
+
+Verified tensor progression:
+
+```text
+[3, 8]
+↓
+[3, 32]
+↓
+GELU
+↓
+[3, 32]
+↓
+[3, 8]
+```
+
+The same FFN parameters are shared across all token positions.
+
+However, each token is processed independently during a forward pass.
+
+Verified:
+
+```text
+PROCESSING TOKEN ALONE MATCHES BATCHED RESULT:
+True
+```
+
+Changing only token `"h"` produced:
+
+```text
+h output unchanged: False
+e output unchanged: True
+l output unchanged: True
+```
+
+This demonstrates that the FFN does not directly mix token positions.
+
+During training, however, gradients from multiple token positions contribute to the same shared FFN parameters.
+
+Therefore:
+
+```text
+shared parameters
+→ shared learning
+```
+
+does not mean:
+
+```text
+direct token interaction during the FFN forward pass
+```
+
+Key distinction:
+
+```text
+ATTENTION
+→ exchanges information between token positions
+
+FFN
+→ transforms each token representation independently
 ```
 
 ---
@@ -559,11 +626,11 @@ preserve the same tensor shape
 The next progression is:
 
 ```text
-feed-forward network
+FFN residual connection
 ↓
-second residual connection
+normalization
 ↓
-Transformer block
+complete Transformer block
 ↓
 stacked Transformer blocks
 ↓
@@ -580,7 +647,7 @@ sampling
 generated text
 ```
 
-After these mechanisms are understood individually, they will be combined into a small educational GPT-like language model.
+After the next experiment, the individual components required for a complete educational Transformer block will have been implemented.
 
 ---
 

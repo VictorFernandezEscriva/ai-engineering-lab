@@ -847,42 +847,127 @@ LayerNorm
 
 ## Experiment 21 — Feed-Forward Network
 
+**Status:** COMPLETE
+
+Implemented the position-wise feed-forward network used inside a Transformer.
+
+Architecture:
+
+```text
+d_model = 8
+↓
+Linear(8, 32)
+↓
+GELU
+↓
+Linear(32, 8)
+↓
+d_model = 8
+```
+
+Verified shape progression:
+
+```text
+[3, 8]
+↓
+[3, 32]
+↓
+[3, 32]
+↓
+[3, 8]
+```
+
+The experiment verified that the same FFN parameters are reused for every token position.
+
+Processing token `"e"` independently produced the same result as processing it as part of the complete sequence:
+
+```text
+PROCESSING TOKEN ALONE MATCHES BATCHED RESULT:
+True
+```
+
+Changing only token `"h"` produced:
+
+```text
+h output unchanged: False
+e output unchanged: True
+l output unchanged: True
+```
+
+This demonstrates that the FFN transforms token positions independently during the forward pass.
+
+However, the parameters are shared.
+
+During training:
+
+```text
+loss from multiple positions
+↓
+gradients
+↓
+shared FFN parameters
+↓
+optimizer update
+```
+
+Therefore different token positions can indirectly influence future FFN outputs by contributing to updates of the shared parameters.
+
+Key distinction:
+
+```text
+ATTENTION
+→ communication between token positions
+```
+
+```text
+FFN
+→ nonlinear computation within each token position
+```
+
+---
+
+## Experiment 22 — FFN Residual and Complete Transformer Block
+
 **Status:** NEXT
 
 Goal:
 
-Understand the second major transformation inside a Transformer block.
+Complete the remaining Transformer sublayer and combine the mechanisms studied so far into one explicit Transformer block.
 
-Attention exchanges information between tokens.
-
-The feed-forward network instead processes each token independently:
+Planned structure:
 
 ```text
-token representation
+X
 ↓
-Linear
+Multi-Head Causal Attention
 ↓
-activation
+Output Projection
 ↓
-Linear
+Residual Addition
 ↓
-transformed token representation
+LayerNorm
+↓
+Feed-Forward Network
+↓
+Residual Addition
+↓
+LayerNorm
+↓
+Transformer Block Output
 ```
 
-The experiment will verify that the same feed-forward network is applied independently to every token position.
+The experiment will verify both residual paths and establish the complete flow through one Transformer block.
 
 ---
 
 ## Remaining LLM Fundamentals
 
-After Layer Normalization:
+After the Feed-Forward Network:
 
 ```text
-Feed-Forward Network
-↓
 Second Residual Connection
 ↓
-Transformer Block
+Complete Transformer Block
 ↓
 Stacked Transformer Blocks
 ↓
