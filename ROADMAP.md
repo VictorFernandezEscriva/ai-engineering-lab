@@ -633,42 +633,98 @@ LANGUAGE-MODEL HEAD
 
 ## Experiment 18 — Multi-Head Attention
 
-**Status:** NEXT
+**Status:** COMPLETE
 
-Goal:
+Implemented two-head causal self-attention.
 
-Understand why Transformers use multiple attention heads.
-
-Planned concepts:
-
-```text
-d_model
-num_heads
-head_dimension
-```
-
-For example:
+Verified configuration:
 
 ```text
 d_model = 8
 num_heads = 2
-
 head_dimension = 4
 ```
 
-Pipeline:
+The model dimension was divided across the attention heads:
+
+```text
+8 model dimensions
+↓
+2 heads
+↓
+4 dimensions per head
+```
+
+Verified tensor progression:
 
 ```text
 input
-│
-├── attention head 1
-├── attention head 2
-│
-↓
-concatenate heads
-↓
-output projection
+[3, 8]
+
+↓ Q / K / V
+
+[3, 8]
+
+↓ split heads
+
+[2, 3, 4]
+
+↓ causal attention
+
+attention weights
+[2, 3, 3]
+
+↓ head outputs
+
+[2, 3, 4]
+
+↓ concatenate
+
+[3, 8]
 ```
+
+The two heads produced different causal attention distributions over the same sequence.
+
+Key conclusion:
+
+```text
+one sequence
+↓
+multiple attention heads
+↓
+different contextual views
+↓
+concatenated representation
+```
+
+The current attention patterns are not linguistically meaningful because the model has not yet been trained.
+
+---
+
+## Experiment 19 — Attention Output and Residual Connection
+
+**Status:** NEXT
+
+Goal:
+
+Understand how the concatenated multi-head attention result is transformed and then combined with the original input representation.
+
+Planned progression:
+
+```text
+original input X
+↓
+multi-head attention
+↓
+attention output projection
+↓
++
+original X
+↓
+residual representation
+```
+
+The experiment will explain why Transformer blocks preserve access to the original token representation instead of replacing it entirely with the attention result.
 
 ---
 
@@ -677,8 +733,6 @@ output projection
 After multi-head attention:
 
 ```text
-Multi-Head Attention
-↓
 Attention Output Projection
 ↓
 Residual Connections
@@ -715,7 +769,7 @@ Additional concepts:
 - training vs inference,
 - KV cache,
 - modern positional methods such as RoPE,
-- grouped/multi-query attention conceptually.
+- grouped and multi-query attention conceptually.
 
 ---
 
