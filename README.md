@@ -180,7 +180,8 @@ AI Engineering
     ├── Multi-Head Attention ✅
     ├── Attention Output Projection ✅
     ├── Residual Connection ✅
-    └── Layer Normalization ← NEXT
+    ├── Layer Normalization ✅
+    └── Feed-Forward Network ← NEXT
 ```
 
 The current objective is to understand the internal mechanics of a GPT-like language model before moving into higher-level LLM applications.

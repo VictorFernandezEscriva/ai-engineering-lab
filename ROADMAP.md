@@ -781,34 +781,106 @@ Residual connections preserve a direct information path through deep Transformer
 
 ## Experiment 20 — Layer Normalization
 
+**Status:** COMPLETE
+
+Introduced `nn.LayerNorm(d_model)` after the attention residual representation.
+
+LayerNorm was applied independently to the feature dimensions of each token:
+
+```text
+h → normalize 8 features
+e → normalize 8 features
+l → normalize 8 features
+```
+
+The tensor shape remained:
+
+```text
+[3, 8]
+```
+
+For token `"e"`, the verified statistics before normalization were:
+
+```text
+mean     = -0.315053
+variance =  1.859519
+```
+
+After LayerNorm:
+
+```text
+mean     ≈ 0
+variance ≈ 1
+```
+
+Verified initialization:
+
+```text
+gamma = ones
+beta  = zeros
+```
+
+A manual implementation of:
+
+```text
+(x - mean)
+-----------------------
+sqrt(variance + epsilon)
+```
+
+matched PyTorch exactly within floating-point tolerance:
+
+```text
+MANUAL NORMALIZATION MATCH:
+True
+```
+
+Key conclusion:
+
+```text
+LayerNorm
+→ normalizes each token across its feature dimensions
+→ preserves sequence length and d_model
+```
+
+---
+
+## Experiment 21 — Feed-Forward Network
+
 **Status:** NEXT
 
 Goal:
 
-Understand why Transformer representations are normalized and how LayerNorm operates across the feature dimensions of each token.
+Understand the second major transformation inside a Transformer block.
 
-Planned progression:
+Attention exchanges information between tokens.
+
+The feed-forward network instead processes each token independently:
 
 ```text
-residual representation
+token representation
 ↓
-LayerNorm
+Linear
 ↓
-normalized representation
+activation
+↓
+Linear
+↓
+transformed token representation
 ```
 
-The experiment will inspect one token manually and verify how its mean and variance change under normalization.
+The experiment will verify that the same feed-forward network is applied independently to every token position.
 
 ---
 
 ## Remaining LLM Fundamentals
 
-After the attention residual connection:
+After Layer Normalization:
 
 ```text
-Layer Normalization
-↓
 Feed-Forward Network
+↓
+Second Residual Connection
 ↓
 Transformer Block
 ↓
@@ -829,6 +901,7 @@ Generated Text
 
 Additional concepts:
 
+- pre-norm vs post-norm Transformer organization,
 - context window,
 - temperature,
 - top-k,

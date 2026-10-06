@@ -445,8 +445,9 @@ LLM Engineering
 ├── Multi-Head Attention ✅
 ├── Attention Output Projection ✅
 ├── Residual Connection ✅
+├── Layer Normalization ✅
 │
-└── Layer Normalization ← NEXT
+└── Feed-Forward Network ← NEXT
 ```
 
 ---
@@ -465,7 +466,7 @@ Status:
 COMPLETE
 ```
 
-Extended the multi-head attention experiment with:
+Extended the multi-head attention mechanism with:
 
 ```text
 concatenated heads
@@ -475,51 +476,80 @@ output projection W_O
 attention update
 ```
 
-and a direct residual path:
+followed by:
 
 ```text
 original representation
 +
 attention update
 =
-updated representation
+residual representation
 ```
 
-Verified shape progression:
+The residual path preserves direct access to the previous representation.
+
+---
+
+## Experiment 20 — Layer Normalization
+
+Folder:
 
 ```text
-original X
-[3, 8]
+08_layer_normalization/
+```
 
-↓ multi-head attention
+Status:
 
-head outputs
-[2, 3, 4]
+```text
+COMPLETE
+```
 
-↓ concatenate
+Introduced LayerNorm over the feature dimension of each token.
 
-[3, 8]
+Verified for token `"e"`:
 
-↓ output projection
+```text
+before:
 
-[3, 8]
+mean     = -0.315053
+variance =  1.859519
+```
 
-↓ add original X
+after normalization:
 
-residual output
+```text
+mean     ≈ 0
+variance ≈ 1
+```
+
+The tensor shape remained:
+
+```text
 [3, 8]
 ```
 
-For token `"e"`, manual element-wise addition matched the computed residual representation.
+LayerNorm was also reproduced manually and matched PyTorch:
+
+```text
+MANUAL NORMALIZATION MATCH:
+True
+```
+
+Verified initial learnable parameters:
+
+```text
+gamma = ones
+beta  = zeros
+```
 
 Key mental model:
 
 ```text
-new representation
-=
-previous representation
-+
-learned contextual transformation
+each token
+↓
+normalize its own feature dimensions
+↓
+preserve the same tensor shape
 ```
 
 ---
@@ -529,9 +559,9 @@ learned contextual transformation
 The next progression is:
 
 ```text
-layer normalization
-↓
 feed-forward network
+↓
+second residual connection
 ↓
 Transformer block
 ↓
