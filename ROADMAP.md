@@ -1,12 +1,14 @@
 # AI Engineering Roadmap
 
-This roadmap describes the learning path of the repository.
+This roadmap defines the main learning progression of the repository.
 
-It is not the directory hierarchy.
+It is not the repository directory hierarchy.
 
-Topics are grouped by technical domain, and future work remains documented here until implementation begins. Existing code is not considered proof of understanding by itself: experiments should be executed, inspected and explained before a phase is considered complete.
+Topics are grouped by technical domain, while this document describes learning order.
 
-The general learning pattern is:
+Future work remains documented here until implementation begins.
+
+The learning process follows:
 
 ```text
 CONCEPT
@@ -28,6 +30,57 @@ LIMITATIONS
 PRODUCT CONNECTION
 ```
 
+The objective is not to study every AI technology with equal depth.
+
+The main path prioritizes:
+
+1. transferable fundamentals,
+2. practical AI Engineering,
+3. employability,
+4. ability to build real systems,
+5. architectural judgement,
+6. local and production AI.
+
+---
+
+# Main Learning Path
+
+```text
+Machine Learning
+↓
+Deep Learning
+↓
+Computer Vision Foundations
+↓
+Transformer / LLM Internals
+↓
+Local Inference
+↓
+LLM APIs
+↓
+Hardware and Quantization
+↓
+Embeddings
+↓
+Semantic Search
+↓
+RAG
+↓
+Tool Calling
+↓
+Agents
+↓
+Multimodal AI
+↓
+Fine-Tuning
+↓
+AI Backend Engineering
+↓
+Application Integration
+↓
+Production AI Engineering
+```
+
 ---
 
 # Phase 01 — Machine Learning Foundations
@@ -36,24 +89,24 @@ PRODUCT CONNECTION
 
 ## Concepts
 
-* features and targets,
-* supervised learning,
-* decision trees,
-* training and inference,
-* model capacity,
-* overfitting,
-* train/test splits,
-* generalization,
-* evaluation limitations.
+- features and targets,
+- supervised learning,
+- decision trees,
+- training and inference,
+- model capacity,
+- overfitting,
+- train/test splits,
+- generalization,
+- evaluation limitations.
 
-## Verified practical work
+## Verified Practical Work
 
 Implemented and reviewed experiments covering:
 
 ```text
 Decision Tree
 ↓
-explicit learned decision boundaries
+learned decision boundaries
 ↓
 predictions
 ```
@@ -72,16 +125,17 @@ overfitting
 
 Experiments demonstrated that a more expressive model can achieve better training performance while generalizing worse.
 
-## Completion checkpoint
+## Completion Checkpoint
 
-The following concepts can now be explained:
+Can explain:
 
-* difference between features and targets,
-* difference between `fit()` and `predict()`,
-* why training performance is not enough,
-* what held-out evaluation means,
-* why model capacity can produce overfitting,
-* why a single small test split provides limited evidence.
+- features vs targets,
+- `fit()` vs `predict()`,
+- training vs held-out performance,
+- model capacity,
+- overfitting,
+- generalization,
+- limitations of small test sets.
 
 ---
 
@@ -91,84 +145,69 @@ The following concepts can now be explained:
 
 ## Concepts
 
-* tensors,
-* matrix operations,
-* neural-network layers,
-* weights and biases,
-* activations,
-* logits,
-* sigmoid,
-* binary classification,
-* loss functions,
-* gradient descent,
-* backpropagation,
-* optimizers,
-* thresholds,
-* normalization,
-* evaluation metrics.
+- tensors,
+- matrix operations,
+- neural-network layers,
+- weights and biases,
+- activations,
+- logits,
+- sigmoid,
+- loss functions,
+- gradient descent,
+- backpropagation,
+- optimizers,
+- normalization,
+- thresholds,
+- evaluation metrics.
 
-## Verified practical work
+## Verified Practical Work
 
-Implemented neural classifiers using PyTorch.
+Implemented PyTorch classifiers.
 
-The experiments covered:
+Training pipeline:
 
 ```text
-input features
+input
 ↓
-Linear layer
+Linear
 ↓
 ReLU
 ↓
-Linear layer
+Linear
 ↓
 logit
-↓
-prediction
-```
-
-Training was implemented using:
-
-```text
-forward pass
 ↓
 loss
 ↓
 backpropagation
 ↓
-gradients
-↓
 optimizer
-↓
-updated weights
 ```
 
-Additional experiments studied:
+Evaluation included:
 
-* train/test separation,
-* normalization using training statistics,
-* classification thresholds,
-* accuracy,
-* precision,
-* recall,
-* F1,
-* confusion matrices,
-* individual forward-pass inspection.
+- accuracy,
+- precision,
+- recall,
+- F1,
+- confusion matrices,
+- threshold analysis.
 
-## Completion checkpoint
+## Completion Checkpoint
 
-The following concepts can now be explained:
+Can explain:
 
-* what a tensor represents,
-* what weights and biases are,
-* why a neural network produces logits,
-* difference between logits and probabilities,
-* purpose of an activation function,
-* purpose of a loss function,
-* how backpropagation calculates gradients,
-* how an optimizer changes model parameters,
-* why thresholds affect precision and recall,
-* why preprocessing must avoid test-data leakage.
+- tensors,
+- weights and biases,
+- logits,
+- probabilities,
+- activations,
+- loss,
+- gradients,
+- backpropagation,
+- optimizer updates,
+- threshold trade-offs,
+- preprocessing leakage.
 
 ---
 
@@ -178,28 +217,25 @@ The following concepts can now be explained:
 
 ## Concepts
 
-* images as tensors,
-* channels,
-* convolution kernels,
-* feature maps,
-* learned convolution filters,
-* ReLU,
-* pooling,
-* spatial dimensions,
-* CNN architectures,
-* image datasets,
-* DataLoaders,
-* mini-batches,
-* multiclass classification,
-* image-model evaluation.
+- images as tensors,
+- channels,
+- convolution,
+- kernels,
+- filters,
+- feature maps,
+- learned filters,
+- ReLU,
+- pooling,
+- CNNs,
+- datasets,
+- DataLoaders,
+- mini-batches,
+- multiclass classification,
+- evaluation.
 
-## Verified practical work
+## Verified Practical Work
 
-### Manual convolution
-
-Implemented convolution using manually selected kernels.
-
-Learned the relationship:
+### Manual Convolution
 
 ```text
 image
@@ -211,26 +247,20 @@ convolution
 feature map
 ```
 
-### Multiple filters
-
-Applied several filters to the same image and verified:
+### Multiple Filters
 
 ```text
 1 input channel
 ↓
 multiple filters
 ↓
-multiple output feature maps
+multiple feature maps
 ```
 
-### Learned convolution filters
-
-Built a CNN where convolution kernels were no longer manually defined.
-
-Instead:
+### Learned Filters
 
 ```text
-initialized convolution weights
+random convolution weights
 ↓
 forward pass
 ↓
@@ -243,9 +273,9 @@ optimizer
 learned filters
 ```
 
-### Synthetic shape classification
+### Synthetic Shape CNN
 
-Built a CNN that classified:
+Built a CNN classifying:
 
 ```text
 circle
@@ -253,31 +283,13 @@ vs
 square
 ```
 
-and inspected:
+### Held-Out Evaluation
 
-* convolution weight shapes,
-* feature-map shapes,
-* learned filters,
-* training accuracy.
+Evaluated generalization using separate training and test data.
 
-### Held-out evaluation
+The limitations of the synthetic generator were documented.
 
-Introduced an independent train/test split and inspected internal feature maps.
-
-Verified:
-
-```text
-Training accuracy: 100%
-Test accuracy:     100%
-```
-
-on the restricted synthetic dataset.
-
-The limitations of this result were documented.
-
-### MNIST dataset
-
-Moved from manually generated images to a standard labelled dataset.
+### MNIST Dataset
 
 Verified:
 
@@ -286,15 +298,13 @@ Verified:
 10,000 test images
 ```
 
-with individual image shape:
+with image shape:
 
 ```text
 [1, 28, 28]
 ```
 
-### DataLoader and mini-batches
-
-Introduced PyTorch `DataLoader`.
+### DataLoader
 
 Verified:
 
@@ -302,20 +312,10 @@ Verified:
 batch size = 64
 
 training batches = 938
-test batches     = 157
+test batches = 157
 ```
 
-and learned that:
-
-```text
-1 epoch
-=
-one complete traversal of all training batches
-```
-
-### MNIST multiclass CNN
-
-Built the first multiclass CNN in the repository.
+### Multiclass CNN
 
 Architecture:
 
@@ -341,85 +341,70 @@ Linear
 10 logits
 ```
 
-Training used:
+Held-out test performance exceeded:
 
 ```text
-Dataset
-↓
-DataLoader
-↓
-mini-batch
-↓
-CNN
-↓
-CrossEntropyLoss
-↓
-backpropagation
-↓
-Adam
+98%
 ```
 
-Verified after three epochs:
+### Error Analysis
+
+Performed:
+
+- confusion matrix analysis,
+- per-class accuracy,
+- frequent confusion analysis,
+- misclassified-image inspection.
+
+Verified test accuracy in the error-analysis run:
 
 ```text
-Test accuracy: 98.08%
+98.55%
 ```
 
-## Remaining practical work
+## Completion Checkpoint
 
-Before closing this phase:
+Can explain:
 
-1. perform MNIST error analysis,
-2. build a confusion matrix,
-3. inspect misclassified digits,
-4. inspect per-class performance,
-5. understand why aggregate accuracy can hide specific failure modes,
-6. update the Computer Vision topic overview.
-
-## Completion checkpoint
-
-Before continuing, be able to explain:
-
-* `[batch, channels, height, width]`,
-* difference between a filter and a feature map,
-* why convolution preserves local structure,
-* why pooling reduces spatial resolution,
-* why `out_channels` creates multiple feature maps,
-* how convolution filters are learned,
-* why `Flatten()` reorganizes rather than deletes values,
-* how a DataLoader produces batches,
-* what an epoch means,
-* why one optimizer update normally occurs per training batch,
-* difference between binary and multiclass classification,
-* why MNIST produces ten logits,
-* how `argmax` selects a class,
-* why `CrossEntropyLoss` consumes raw logits,
-* difference between training performance and held-out test performance.
+- `[batch, channels, height, width]`,
+- filter vs feature map,
+- convolution,
+- pooling,
+- `out_channels`,
+- learned filters,
+- Flatten,
+- DataLoader,
+- batches,
+- epochs,
+- multiclass logits,
+- `argmax`,
+- `CrossEntropyLoss`,
+- held-out evaluation.
 
 ---
 
-# Phase 04 — LLM Fundamentals
+# Phase 04 — Transformer and LLM Fundamentals
 
 **Status:** IN PROGRESS
 
 ## Goal
 
-Understand how a language model works internally before focusing on LLM applications and infrastructure.
+Understand how an autoregressive language model works internally before focusing on higher-level LLM applications.
 
-The objective is not only to call an LLM API.
+The objective is not merely to call an API.
 
-The objective is to understand the pipeline:
+The objective is to understand:
 
 ```text
 text
 ↓
 tokenizer
 ↓
-tokens
+token IDs
 ↓
 embeddings
 ↓
-transformer
+Transformer
 ↓
 logits
 ↓
@@ -428,72 +413,335 @@ next-token probabilities
 generated text
 ```
 
-## Concepts
+---
 
-* language modelling,
-* tokens,
-* token IDs,
-* vocabulary,
-* tokenization,
-* embeddings,
-* positional information,
-* attention,
-* queries,
-* keys,
-* values,
-* self-attention,
-* transformer blocks,
-* feed-forward networks,
-* residual connections,
-* normalization,
-* logits,
-* softmax,
-* next-token prediction,
-* context windows,
-* sampling,
-* temperature,
-* model weights.
+## Experiment 13 — Tokenization
 
-## Expected practical work
+**Status:** COMPLETE
 
-Build small experiments progressing toward a minimal GPT-like model.
-
-Suggested progression:
+Studied:
 
 ```text
 text
 ↓
-tokenization
+character tokens
 ↓
 token IDs
-↓
-embedding vectors
-↓
-attention
-↓
-transformer block
-↓
-next-token logits
-↓
-sampling
 ```
 
-Later combine the pieces into a small educational language model.
+Verified:
 
-## Completion checkpoint
+- vocabulary construction,
+- token-to-ID mapping,
+- ID-to-token mapping,
+- encoding,
+- decoding.
 
-Before continuing, be able to explain:
+Key distinction:
 
-* why LLMs operate on tokens instead of raw text,
-* difference between a token and a token ID,
-* what an embedding represents,
-* why embedding vectors are learned,
-* what attention is trying to accomplish,
-* what queries, keys and values represent,
-* why transformer blocks are stacked,
-* what the final logits represent,
-* how next-token prediction produces text,
-* difference between model architecture, weights, runtime and application.
+```text
+token
+≠
+token ID
+```
+
+---
+
+## Experiment 14 — Token Embeddings
+
+**Status:** COMPLETE
+
+Studied:
+
+```text
+token ID
+↓
+embedding-table lookup
+↓
+trainable vector
+```
+
+Verified:
+
+```text
+vocabulary size = 10
+embedding dimension = 4
+
+embedding table:
+[10, 4]
+```
+
+and:
+
+```text
+8 token IDs
+↓
+8 embeddings
+
+[8]
+→
+[8, 4]
+```
+
+Key distinction:
+
+```text
+token ID
+=
+index
+
+embedding
+=
+trainable representation
+```
+
+---
+
+## Experiment 15 — Positional Embeddings
+
+**Status:** COMPLETE
+
+Studied:
+
+```text
+token embedding
++
+position embedding
+=
+position-aware representation
+```
+
+Verified:
+
+```text
+same token
++
+different position
+=
+different combined representation
+```
+
+Key mental model:
+
+```text
+token embedding
+→ WHAT
+
+position embedding
+→ WHERE
+```
+
+---
+
+## Experiment 16 — Self-Attention
+
+**Status:** COMPLETE
+
+Implemented one attention head manually.
+
+Studied:
+
+```text
+X
+↓
+Q, K, V
+```
+
+then:
+
+```text
+Q @ Kᵀ
+↓
+attention scores
+↓
+softmax
+↓
+attention weights
+```
+
+and:
+
+```text
+attention weights
+@
+Values
+↓
+contextual representations
+```
+
+Key interpretation:
+
+```text
+Q + K
+→ determine where information should come from
+
+V
+→ contains the information being mixed
+```
+
+---
+
+## Experiment 17 — Causal Self-Attention
+
+**Status:** COMPLETE
+
+Introduced autoregressive masking.
+
+Without causal masking:
+
+```text
+h → h,e,l
+e → h,e,l
+l → h,e,l
+```
+
+With causal masking:
+
+```text
+h → h
+e → h,e
+l → h,e,l
+```
+
+Verified:
+
+```text
+future score
+↓
+-inf
+↓
+softmax
+↓
+attention weight = 0
+```
+
+Important distinction:
+
+```text
+ATTENTION
+→ determines what contextual information is used
+```
+
+while:
+
+```text
+LANGUAGE-MODEL HEAD
+→ produces scores over the complete vocabulary
+```
+
+---
+
+## Experiment 18 — Multi-Head Attention
+
+**Status:** NEXT
+
+Goal:
+
+Understand why Transformers use multiple attention heads.
+
+Planned concepts:
+
+```text
+d_model
+num_heads
+head_dimension
+```
+
+For example:
+
+```text
+d_model = 8
+num_heads = 2
+
+head_dimension = 4
+```
+
+Pipeline:
+
+```text
+input
+│
+├── attention head 1
+├── attention head 2
+│
+↓
+concatenate heads
+↓
+output projection
+```
+
+---
+
+## Remaining LLM Fundamentals
+
+After multi-head attention:
+
+```text
+Multi-Head Attention
+↓
+Attention Output Projection
+↓
+Residual Connections
+↓
+Layer Normalization
+↓
+Feed-Forward Network
+↓
+Transformer Block
+↓
+Stacked Transformer Blocks
+↓
+Language-Model Head
+↓
+Vocabulary Logits
+↓
+CrossEntropyLoss
+↓
+Next-Token Training
+↓
+Sampling
+↓
+Generated Text
+```
+
+Additional concepts:
+
+- context window,
+- temperature,
+- top-k,
+- top-p,
+- greedy decoding,
+- model parameters,
+- training vs inference,
+- KV cache,
+- modern positional methods such as RoPE,
+- grouped/multi-query attention conceptually.
+
+---
+
+## Phase 04 Final Project
+
+Build a small educational GPT-like model from scratch using PyTorch.
+
+The project should include:
+
+```text
+tokenization
+↓
+embeddings
+↓
+causal Transformer
+↓
+LM head
+↓
+next-token loss
+↓
+training
+↓
+generation
+```
+
+The final implementation should make the connection between all previous experiments explicit.
 
 ---
 
@@ -503,37 +751,29 @@ Before continuing, be able to explain:
 
 ## Concepts
 
-* pretrained model artifacts,
-* model loading,
-* inference,
-* context,
-* generation,
-* CPU inference,
-* GPU inference,
-* RAM,
-* VRAM,
-* runtime configuration.
+- pretrained models,
+- model loading,
+- inference,
+- context,
+- generation,
+- CPU inference,
+- GPU inference,
+- RAM,
+- VRAM.
 
-## Expected practical work
+## Practical Work
 
-Run a compatible small language model locally and record:
+Run a small compatible language model locally.
 
-* model,
-* model size,
-* hardware,
-* context configuration,
-* generation settings,
-* latency,
-* memory usage.
+Record:
 
-## Completion checkpoint
-
-Explain:
-
-* training vs inference,
-* model architecture vs model weights,
-* why models require memory,
-* basic CPU/GPU inference differences.
+- model,
+- model size,
+- hardware,
+- memory usage,
+- generation parameters,
+- latency,
+- tokens per second.
 
 ---
 
@@ -543,81 +783,53 @@ Explain:
 
 ## Concepts
 
-* inference runtime,
-* model management,
-* local model server,
-* HTTP,
-* API requests,
-* responses,
-* generation parameters.
+- inference runtime,
+- model management,
+- local model server,
+- HTTP,
+- JSON,
+- API requests,
+- streaming.
 
-## Expected practical work
+## Practical Work
 
-Run a local model through Ollama and call it through its HTTP API.
-
-Inspect:
+Run a model through Ollama and inspect:
 
 ```text
-Python / client
+Python client
 ↓
-HTTP request
+HTTP
 ↓
 Ollama
 ↓
-model runtime
+runtime
+↓
+model
 ↓
 generated tokens
 ↓
-HTTP response
+response
 ```
-
-## Completion checkpoint
-
-Identify:
-
-* which model is loaded,
-* which process serves it,
-* which process calls it,
-* where inference occurs,
-* what the HTTP API is responsible for.
 
 ---
 
-# Phase 07 — Python Integration
+# Phase 07 — Python LLM Integration
 
 **Status:** PLANNED
 
 ## Concepts
 
-* HTTP clients,
-* JSON,
-* streaming,
-* exceptions,
-* timeouts,
-* configuration,
-* application boundaries.
+- HTTP clients,
+- JSON,
+- streaming,
+- exceptions,
+- timeouts,
+- retries,
+- configuration.
 
-## Expected practical work
+## Practical Work
 
 Build a Python CLI that communicates with a local language model.
-
-Include:
-
-* structured requests,
-* error handling,
-* streaming,
-* timeouts,
-* configuration.
-
-## Completion checkpoint
-
-Understand the complete contract between:
-
-```text
-Python application
-↔
-LLM runtime
-```
 
 ---
 
@@ -627,15 +839,14 @@ LLM runtime
 
 ## Concepts
 
-* native inference runtimes,
-* GGUF,
-* model formats,
-* quantized model artifacts,
-* CPU execution,
-* GPU offload,
-* local servers.
+- native inference,
+- GGUF,
+- model formats,
+- quantization,
+- CPU execution,
+- GPU offload.
 
-## Expected practical work
+## Practical Work
 
 Run compatible models through `llama.cpp`.
 
@@ -647,17 +858,6 @@ vs
 llama.cpp
 ```
 
-while keeping model and test prompts controlled where possible.
-
-## Completion checkpoint
-
-Distinguish clearly between:
-
-* model architecture,
-* model weights,
-* model file format,
-* inference runtime.
-
 ---
 
 # Phase 09 — Hardware and Quantization
@@ -666,100 +866,73 @@ Distinguish clearly between:
 
 ## Concepts
 
-* parameter count,
-* numerical precision,
-* FP32,
-* FP16,
-* BF16,
-* INT8,
-* lower-bit quantization,
-* RAM,
-* VRAM,
-* memory bandwidth,
-* GPU offloading.
+- parameter count,
+- FP32,
+- FP16,
+- BF16,
+- INT8,
+- INT4,
+- quantization,
+- RAM,
+- VRAM,
+- memory bandwidth,
+- GPU offload.
 
-## Expected practical work
+## Practical Work
 
-Compare compatible model configurations using fixed prompts and hardware.
+Compare model configurations while controlling:
 
-Record:
+- model,
+- prompt,
+- hardware,
+- context.
 
-* memory consumption,
-* loading behavior,
-* latency,
-* generation speed,
-* qualitative output changes.
+Measure:
 
-## Completion checkpoint
-
-Explain approximately why model memory requirements change with numerical precision and quantization.
+- memory,
+- latency,
+- generation speed,
+- output differences.
 
 ---
 
-# Phase 10 — Inference Benchmarking and Evaluation
+# Phase 10 — Inference Benchmarking
 
 **Status:** PLANNED
 
 ## Concepts
 
-* latency,
-* time to first token,
-* tokens per second,
-* throughput,
-* warm-up,
-* repeatability,
-* evaluation datasets,
-* output quality.
+- latency,
+- time to first token,
+- tokens per second,
+- throughput,
+- warm-up,
+- repeatability,
+- quality evaluation.
 
-## Expected practical work
+## Practical Work
 
-Build a reproducible inference benchmark.
-
-Control:
-
-* model,
-* hardware,
-* prompts,
-* context,
-* sampling settings,
-* number of runs.
-
-## Completion checkpoint
-
-Distinguish performance benchmarking from model-quality evaluation.
+Build a reproducible local inference benchmark.
 
 ---
 
-# Phase 11 — Embeddings
+# Phase 11 — Embedding Models
 
 **Status:** PLANNED
 
+This phase concerns semantic embedding models used for retrieval rather than internal Transformer token embeddings.
+
 ## Concepts
 
-* vector representations,
-* embedding models,
-* vector dimensions,
-* cosine similarity,
-* normalization,
-* semantic similarity.
+- vector representations,
+- embedding models,
+- cosine similarity,
+- normalization,
+- semantic similarity.
 
-## Expected practical work
+## Practical Work
 
-Encode a small text collection and compare vector similarities.
-
-## Completion checkpoint
-
-Understand the difference between:
-
-```text
-text generation
-```
-
-and:
-
-```text
-text → vector representation
-```
+Encode a text collection and compare semantic similarity.
 
 ---
 
@@ -769,28 +942,15 @@ text → vector representation
 
 ## Concepts
 
-* retrieval,
-* similarity ranking,
-* top-k,
-* document representations,
-* relevance,
-* retrieval evaluation.
+- query embedding,
+- document embedding,
+- similarity search,
+- top-k,
+- retrieval evaluation.
 
-## Expected practical work
+## Practical Work
 
 Build semantic search over a small document collection.
-
-Measure whether relevant documents appear in the top results.
-
-## Completion checkpoint
-
-Explain:
-
-* query embedding,
-* document embedding,
-* similarity search,
-* top-k retrieval,
-* relevance evaluation.
 
 ---
 
@@ -800,17 +960,18 @@ Explain:
 
 ## Concepts
 
-* document ingestion,
-* chunking,
-* embeddings,
-* indexing,
-* retrieval,
-* context construction,
-* grounded generation,
-* citations,
-* hallucination analysis.
+- ingestion,
+- chunking,
+- embeddings,
+- indexing,
+- retrieval,
+- reranking,
+- context construction,
+- grounded generation,
+- citations,
+- RAG evaluation.
 
-## Expected practical work
+## Practical Work
 
 Build:
 
@@ -830,23 +991,7 @@ LLM
 answer
 ```
 
-Evaluate both retrieval and generated answers.
-
-## Completion checkpoint
-
-Distinguish:
-
-```text
-retrieval failure
-```
-
-from:
-
-```text
-generation failure
-```
-
-and detect unsupported generated claims.
+Evaluate retrieval and generation separately.
 
 ---
 
@@ -856,31 +1001,23 @@ and detect unsupported generated claims.
 
 ## Concepts
 
-* tool schemas,
-* structured arguments,
-* validation,
-* execution boundaries,
-* allowlists,
-* application authorization.
+- tool schemas,
+- structured arguments,
+- validation,
+- execution boundaries,
+- permissions,
+- authorization.
 
-## Expected practical work
+## Practical Work
 
-Expose a small set of application functions to a model.
+Expose controlled application functions to a model.
 
-Validate arguments before execution.
-
-## Completion checkpoint
-
-Understand that:
+Important principle:
 
 ```text
 model requests action
-```
-
-is different from:
-
-```text
-application authorizes and executes action
+≠
+application automatically authorizes action
 ```
 
 ---
@@ -891,84 +1028,58 @@ application authorizes and executes action
 
 ## Concepts
 
-* state,
-* planning,
-* actions,
-* observations,
-* tool loops,
-* retries,
-* budgets,
-* stopping conditions,
-* traces.
+- state,
+- actions,
+- observations,
+- tool loops,
+- planning,
+- retries,
+- budgets,
+- termination,
+- tracing.
 
-## Expected practical work
+## Practical Work
 
-Implement a bounded agent loop with observable execution.
-
-## Completion checkpoint
-
-Explain:
-
-* agent state,
-* action selection,
-* execution,
-* observation,
-* termination,
-* failure handling.
+Implement a bounded agent loop.
 
 ---
 
-# Phase 16 — Multimodal Models
+# Phase 16 — Multimodal AI
 
 **Status:** PLANNED
 
 ## Concepts
 
-* image inputs,
-* text inputs,
-* image representations,
-* multimodal context,
-* vision-language models,
-* resource requirements.
+- image input,
+- text input,
+- multimodal context,
+- vision-language models,
+- multimodal embeddings.
 
-## Expected practical work
+## Practical Work
 
-Evaluate a compatible multimodal model using a small image-and-text task.
-
-## Completion checkpoint
-
-Connect previous computer-vision concepts with language-model inference.
+Evaluate a compatible multimodal model.
 
 ---
 
-# Phase 17 — Fine-Tuning / LoRA / QLoRA
+# Phase 17 — Fine-Tuning, LoRA and QLoRA
 
 **Status:** PLANNED
 
 ## Concepts
 
-* pretrained models,
-* adaptation,
-* supervised fine-tuning,
-* adapters,
-* LoRA,
-* QLoRA,
-* datasets,
-* training objectives,
-* evaluation.
+- pretrained models,
+- adaptation,
+- supervised fine-tuning,
+- LoRA,
+- QLoRA,
+- PEFT,
+- datasets,
+- evaluation.
 
-## Expected practical work
+## Practical Work
 
-Run a small controlled adaptation and compare it against an unchanged baseline.
-
-## Completion checkpoint
-
-Understand:
-
-* why fine-tuning is used,
-* what parameters are updated,
-* role of training-data quality,
-* why independent evaluation is required.
+Run a small controlled adaptation and compare it against a baseline.
 
 ---
 
@@ -978,62 +1089,46 @@ Understand:
 
 ## Concepts
 
-* service APIs,
-* model lifecycle,
-* concurrency,
-* streaming,
-* cancellation,
-* queues,
-* resource management,
-* observability,
-* failure handling.
+- FastAPI,
+- service APIs,
+- streaming,
+- concurrency,
+- cancellation,
+- queues,
+- resource management,
+- logging,
+- metrics,
+- observability,
+- failure handling.
 
-## Expected practical work
+## Practical Work
 
 Build an inference service with:
 
-* streaming,
-* request cancellation,
-* bounded concurrency,
-* structured errors,
-* logging,
-* metrics.
-
-## Completion checkpoint
-
-Understand how inference behavior affects backend architecture.
+- streaming,
+- cancellation,
+- bounded concurrency,
+- structured errors,
+- logs,
+- metrics.
 
 ---
 
-# Phase 19 — Flutter Integration
+# Phase 19 — Client Integration
 
 **Status:** PLANNED
 
 ## Concepts
 
-* Dart HTTP clients,
-* asynchronous requests,
-* streaming UI,
-* application state,
-* connection failures.
+- HTTP clients,
+- asynchronous requests,
+- streaming UI,
+- application state,
+- network failures.
 
-## Expected practical work
+## Practical Work
 
 Build a client for an evaluated AI backend.
-
-## Completion checkpoint
-
-Understand:
-
-```text
-Flutter application
-↔
-AI backend
-↔
-model runtime
-```
-
-and the asynchronous state transitions between them.
 
 ---
 
@@ -1043,68 +1138,46 @@ and the asynchronous state transitions between them.
 
 ## Concepts
 
-* application packaging,
-* dependencies,
-* model artifacts,
-* compatibility,
-* installation,
-* updates,
-* offline operation.
+- packaging,
+- dependencies,
+- model artifacts,
+- compatibility,
+- installation,
+- updates,
+- offline operation.
 
-## Expected practical work
+## Practical Work
 
-Package a prototype and install it on another machine without relying on network access.
-
-## Completion checkpoint
-
-Account for:
-
-* model files,
-* runtime dependencies,
-* hardware requirements,
-* licenses,
-* updates,
-* storage requirements.
+Install and run a prototype on another machine without requiring network access.
 
 ---
 
-# Phase 21 — Production and Product Engineering
+# Phase 21 — Production AI Engineering
 
 **Status:** PLANNED
 
 ## Concepts
 
-* product requirements,
-* acceptance criteria,
-* reliability,
-* privacy,
-* security,
-* observability,
-* evaluation,
-* maintenance,
-* recovery.
+- product requirements,
+- acceptance criteria,
+- reliability,
+- privacy,
+- security,
+- observability,
+- evaluation,
+- monitoring,
+- regression testing,
+- maintenance,
+- recovery.
 
-## Expected practical work
+## Practical Work
 
 Turn one previous prototype into a production-oriented system.
 
-Define:
-
-* functional requirements,
-* quality requirements,
-* evaluation criteria,
-* threat model,
-* failure behavior,
-* monitoring,
-* regression tests,
-* recovery behavior.
-
-## Completion checkpoint
-
-Be able to justify the complete system:
+Be able to justify:
 
 ```text
-product requirement
+requirement
 ↓
 data
 ↓
@@ -1123,4 +1196,348 @@ deployment
 monitoring
 ```
 
-and clearly distinguish an experimental demo from a supported product.
+---
+
+# Parallel Professional Tracks
+
+Not every important skill should become a sequential roadmap phase.
+
+Some areas should develop alongside the main path.
+
+---
+
+## Data Engineering
+
+**Priority:** A / B
+
+Learn progressively:
+
+- SQL,
+- PostgreSQL,
+- data modelling,
+- ETL / ELT,
+- data validation,
+- pipelines,
+- Redis,
+- queues.
+
+Later if required:
+
+- Kafka,
+- Spark,
+- data lakes,
+- warehouses,
+- lakehouses.
+
+---
+
+## Software Engineering for AI
+
+**Priority:** A
+
+Continuously practice:
+
+- clean architecture,
+- typing,
+- testing,
+- packaging,
+- configuration,
+- logging,
+- error handling,
+- profiling,
+- async programming,
+- concurrency,
+- caching,
+- CI/CD,
+- documentation.
+
+AI systems are software systems.
+
+---
+
+## AI Evaluation
+
+**Priority:** A
+
+Learn throughout the roadmap:
+
+```text
+classification metrics
+↓
+model evaluation
+↓
+retrieval evaluation
+↓
+RAG evaluation
+↓
+LLM evaluation
+↓
+agent evaluation
+```
+
+Evaluation is not a final optional step.
+
+---
+
+## AI Security
+
+**Priority:** B
+
+Learn progressively:
+
+- prompt injection,
+- tool permissions,
+- data leakage,
+- secrets,
+- sandboxing,
+- model supply-chain risk,
+- adversarial inputs,
+- agent security.
+
+---
+
+## Automation
+
+**Priority:** B
+
+Learn:
+
+- REST APIs,
+- JSON,
+- webhooks,
+- authentication,
+- OAuth,
+- schedulers,
+- queues,
+- event-driven systems,
+- human-in-the-loop workflows.
+
+Automation frameworks can be learned after the underlying concepts.
+
+---
+
+## MLOps / LLMOps
+
+**Priority:** B
+
+Learn when systems become large enough to justify it:
+
+- experiment tracking,
+- model versioning,
+- prompt versioning,
+- evaluation pipelines,
+- tracing,
+- observability,
+- deployment,
+- monitoring,
+- drift,
+- model routing.
+
+---
+
+# Specialization Tracks
+
+These are valuable but are not currently part of the core sequential path.
+
+They should be studied when required by a project or professional direction.
+
+---
+
+## Time Series
+
+**Priority:** B
+
+Relevant areas:
+
+- forecasting,
+- anomaly detection,
+- telemetry,
+- sensor data,
+- predictive maintenance,
+- signal processing.
+
+---
+
+## Edge AI
+
+**Priority:** B
+
+Relevant areas:
+
+- embedded inference,
+- ONNX,
+- TensorRT,
+- TensorFlow Lite,
+- NPUs,
+- quantization,
+- latency,
+- memory constraints.
+
+---
+
+## Speech AI
+
+**Priority:** C / B when required
+
+- speech-to-text,
+- text-to-speech,
+- audio embeddings,
+- voice models,
+- audio classification.
+
+---
+
+## Reinforcement Learning
+
+**Priority:** C
+
+Understand conceptually:
+
+- environment,
+- state,
+- action,
+- reward,
+- policy,
+- Q-learning,
+- policy gradients,
+- PPO.
+
+Deep specialization can come later.
+
+---
+
+## Robotics
+
+**Priority:** C
+
+Potential areas:
+
+- perception,
+- localization,
+- SLAM,
+- planning,
+- control,
+- robot learning.
+
+---
+
+## Graph AI
+
+**Priority:** C
+
+Potential areas:
+
+- graphs,
+- graph databases,
+- knowledge graphs,
+- graph embeddings,
+- GNNs.
+
+---
+
+## Digital Twins and Scientific ML
+
+**Priority:** C
+
+Potential areas:
+
+- simulation,
+- surrogate models,
+- physics-informed ML,
+- neural operators,
+- engineering AI.
+
+---
+
+## Generative Media
+
+**Priority:** C
+
+Potential areas:
+
+- image generation,
+- diffusion,
+- audio generation,
+- video generation,
+- multimodal generation.
+
+---
+
+# 80/20 Professional Path
+
+If only a subset of this roadmap could be learned, prioritize:
+
+```text
+1. Python + software engineering
+2. Machine Learning fundamentals
+3. PyTorch + Deep Learning
+4. Transformers and LLM internals
+5. Local and API-based LLM inference
+6. Embeddings and semantic search
+7. RAG
+8. Tool calling
+9. AI backend engineering
+10. Evaluation
+11. Deployment and observability
+12. Agents
+```
+
+This path provides the strongest combination of:
+
+- fundamentals,
+- employability,
+- engineering capability,
+- AI product development,
+- transferable knowledge.
+
+---
+
+# Final Goal
+
+The target capability is not:
+
+```text
+"I know many AI libraries."
+```
+
+The target capability is:
+
+```text
+"I can understand a problem,
+identify which AI components are useful,
+reject unnecessary complexity,
+build the system,
+evaluate it,
+deploy it,
+and explain the engineering trade-offs."
+```
+
+The final mental model should allow reasoning across:
+
+```text
+DATA
+↓
+ML / DL
+↓
+LLM
+↓
+EMBEDDINGS
+↓
+RETRIEVAL
+↓
+RAG
+↓
+TOOLS
+↓
+AGENTS
+↓
+BACKEND
+↓
+APPLICATION
+↓
+DEPLOYMENT
+↓
+EVALUATION
+↓
+PRODUCTION
+```
