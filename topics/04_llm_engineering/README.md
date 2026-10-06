@@ -443,8 +443,83 @@ LLM Engineering
 ├── Self-Attention ✅
 ├── Causal Self-Attention ✅
 ├── Multi-Head Attention ✅
+├── Attention Output Projection ✅
+├── Residual Connection ✅
 │
-└── Attention Output + Residual Connection ← NEXT
+└── Layer Normalization ← NEXT
+```
+
+---
+
+## Experiment 19 — Attention Output Projection and Residual Connection
+
+Folder:
+
+```text
+07_attention_output_residual/
+```
+
+Status:
+
+```text
+COMPLETE
+```
+
+Extended the multi-head attention experiment with:
+
+```text
+concatenated heads
+↓
+output projection W_O
+↓
+attention update
+```
+
+and a direct residual path:
+
+```text
+original representation
++
+attention update
+=
+updated representation
+```
+
+Verified shape progression:
+
+```text
+original X
+[3, 8]
+
+↓ multi-head attention
+
+head outputs
+[2, 3, 4]
+
+↓ concatenate
+
+[3, 8]
+
+↓ output projection
+
+[3, 8]
+
+↓ add original X
+
+residual output
+[3, 8]
+```
+
+For token `"e"`, manual element-wise addition matched the computed residual representation.
+
+Key mental model:
+
+```text
+new representation
+=
+previous representation
++
+learned contextual transformation
 ```
 
 ---
@@ -454,12 +529,6 @@ LLM Engineering
 The next progression is:
 
 ```text
-multi-head attention
-↓
-attention output projection
-↓
-residual connection
-↓
 layer normalization
 ↓
 feed-forward network

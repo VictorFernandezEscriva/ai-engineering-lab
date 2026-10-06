@@ -701,42 +701,111 @@ The current attention patterns are not linguistically meaningful because the mod
 
 ---
 
-## Experiment 19 — Attention Output and Residual Connection
+## Experiment 19 — Attention Output Projection and Residual Connection
+
+**Status:** COMPLETE
+
+Extended causal multi-head attention with the final attention output projection:
+
+```text
+concatenated heads
+[3, 8]
+
+↓ W_O
+
+projected attention
+[3, 8]
+```
+
+The projection allows information from the different heads to be mixed while preserving `d_model`.
+
+A residual connection was then introduced:
+
+```text
+original X
++
+projected attention
+=
+residual output
+```
+
+Verified shape progression:
+
+```text
+original X
+[3, 8]
+
+↓ multi-head attention
+
+head outputs
+[2, 3, 4]
+
+↓ concatenate
+
+[3, 8]
+
+↓ output projection
+
+[3, 8]
+
+↓ residual addition
+
+[3, 8]
+```
+
+Manual inspection of token `"e"` verified that:
+
+```text
+original representation
++
+attention update
+=
+residual representation
+```
+
+using element-wise addition.
+
+Key conclusion:
+
+```text
+new representation
+=
+previous representation
++
+learned transformation
+```
+
+Residual connections preserve a direct information path through deep Transformer architectures.
+
+---
+
+## Experiment 20 — Layer Normalization
 
 **Status:** NEXT
 
 Goal:
 
-Understand how the concatenated multi-head attention result is transformed and then combined with the original input representation.
+Understand why Transformer representations are normalized and how LayerNorm operates across the feature dimensions of each token.
 
 Planned progression:
 
 ```text
-original input X
-↓
-multi-head attention
-↓
-attention output projection
-↓
-+
-original X
-↓
 residual representation
+↓
+LayerNorm
+↓
+normalized representation
 ```
 
-The experiment will explain why Transformer blocks preserve access to the original token representation instead of replacing it entirely with the attention result.
+The experiment will inspect one token manually and verify how its mean and variance change under normalization.
 
 ---
 
 ## Remaining LLM Fundamentals
 
-After multi-head attention:
+After the attention residual connection:
 
 ```text
-Attention Output Projection
-↓
-Residual Connections
-↓
 Layer Normalization
 ↓
 Feed-Forward Network

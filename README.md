@@ -178,7 +178,9 @@ AI Engineering
     ├── Self-Attention ✅
     ├── Causal Self-Attention ✅
     ├── Multi-Head Attention ✅
-    └── Attention Output + Residual Connection ← NEXT
+    ├── Attention Output Projection ✅
+    ├── Residual Connection ✅
+    └── Layer Normalization ← NEXT
 ```
 
 The current objective is to understand the internal mechanics of a GPT-like language model before moving into higher-level LLM applications.
@@ -324,6 +326,7 @@ Implemented so far:
 04_self_attention
 05_causal_attention
 06_multi_head_attention
+07_attention_output_residual
 ```
 
 These experiments progressively build the internal representation pipeline of an autoregressive Transformer.
