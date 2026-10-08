@@ -444,52 +444,15 @@ LLM Engineering
 ├── Causal Self-Attention ✅
 ├── Multi-Head Attention ✅
 ├── Attention Output Projection ✅
-├── Attention Residual ✅
+├── Residual Connections ✅
 ├── Layer Normalization ✅
 ├── Feed-Forward Network ✅
-├── FFN Residual ✅
 ├── Complete Transformer Block ✅
 ├── Stacked Transformer Blocks ✅
+├── Language-Model Head ✅
+├── Vocabulary Logits ✅
 │
-└── Language-Model Head + Vocabulary Logits ← NEXT
-```
-
----
-
-## Experiment 22 — Complete Transformer Block
-
-Folder:
-
-```text
-10_transformer_block/
-```
-
-Status:
-
-```text
-COMPLETE
-```
-
-Combined the attention and feed-forward mechanisms into a reusable Transformer block:
-
-```text
-X
-↓
-Causal Multi-Head Attention
-↓
-Output Projection
-↓
-Residual
-↓
-LayerNorm
-↓
-Feed-Forward Network
-↓
-Residual
-↓
-LayerNorm
-↓
-X'
+└── Softmax + Next-Token Probabilities ← NEXT
 ```
 
 ---
@@ -508,73 +471,89 @@ Status:
 COMPLETE
 ```
 
-Stacked three independently parameterized Transformer blocks:
-
-```text
-embeddings
-↓
-Block 1
-↓
-Block 2
-↓
-Block 3
-↓
-final contextual representations
-```
-
-Verified that Block 1 and Block 2 do not share the same Query projection parameter:
-
-```text
-same parameter object:
-False
-
-identical parameter values:
-False
-```
-
-Tracked token `"e"` across depth and verified that its representation changed after every block.
-
-Verified:
-
-```text
-BLOCK 1 OUTPUT DIFFERENT FROM INPUT:
-True
-
-BLOCK 2 OUTPUT DIFFERENT FROM BLOCK 1:
-True
-
-BLOCK 3 OUTPUT DIFFERENT FROM BLOCK 2:
-True
-```
-
-Every layer preserved:
+Stacked independently parameterized Transformer blocks while preserving:
 
 ```text
 [sequence_length, d_model]
 ```
 
-with:
+---
+
+## Experiment 24 — Language-Model Head and Vocabulary Logits
+
+Folder:
 
 ```text
-ALL LAYERS PRESERVE [sequence_length, d_model]:
+12_lm_head_logits/
+```
+
+Status:
+
+```text
+COMPLETE
+```
+
+Introduced:
+
+```text
+LM Head
+=
+Linear(d_model, vocabulary_size)
+```
+
+Verified:
+
+```text
+[3, 8]
+↓
+LM Head
+[3, 10]
+```
+
+Each sequence position produces one logit for every vocabulary token.
+
+For:
+
+```text
+hel
+```
+
+the rows conceptually represent:
+
+```text
+"h"   → next-token logits
+"he"  → next-token logits
+"hel" → next-token logits
+```
+
+During generation:
+
+```python
+next_token_logits = logits[-1]
+```
+
+selects only the final-context prediction:
+
+```text
+[10]
+```
+
+A vocabulary logit for `"l"` was manually reproduced using the dot product between the contextual representation and the corresponding LM-head weight vector:
+
+```text
+MANUAL LOGIT MATCH:
 True
 ```
 
-Key mental model:
+Key distinction:
 
 ```text
-representation
-↓
-Transformer Block
-↓
-refined representation
-↓
-Transformer Block
-↓
-refined representation
-```
+Transformer
+→ contextual representations
 
-Each block normally has its own trainable parameters.
+LM Head
+→ vocabulary scores
+```
 
 ---
 
@@ -583,26 +562,26 @@ Each block normally has its own trainable parameters.
 The next progression is:
 
 ```text
-final Transformer representations
-↓
-language-model head
-↓
 vocabulary logits
 ↓
 softmax
 ↓
 next-token probabilities
 ↓
+shifted targets
+↓
 CrossEntropyLoss
 ↓
-training
+backpropagation
+↓
+optimizer updates
+↓
+training loop
 ↓
 sampling
 ↓
 generated text
 ```
-
-The next experiment will finally connect the internal Transformer representation to concrete vocabulary-token predictions.
 
 ---
 

@@ -1096,58 +1096,150 @@ This introduces Transformer depth while preserving the model representation widt
 
 ## Experiment 24 — Language-Model Head and Vocabulary Logits
 
+**Status:** COMPLETE
+
+Connected final Transformer representations to the vocabulary using:
+
+```text
+Linear(d_model, vocabulary_size)
+```
+
+For:
+
+```text
+d_model = 8
+vocabulary_size = 10
+```
+
+the LM Head performs:
+
+```text
+[8]
+→
+[10]
+```
+
+per token position.
+
+For the complete sequence:
+
+```text
+[3, 8]
+→
+[3, 10]
+```
+
+Verified that every sequence position produces a complete set of vocabulary logits.
+
+Because causal attention restricts available context:
+
+```text
+position 0 → prediction after "h"
+
+position 1 → prediction after "he"
+
+position 2 → prediction after "hel"
+```
+
+During generation, the final row is selected:
+
+```python
+next_token_logits = logits[-1]
+```
+
+resulting in:
+
+```text
+[10]
+```
+
+next-token scores for the complete prompt.
+
+A vocabulary logit for token `"l"` was manually reproduced as a dot product between:
+
+```text
+contextual representation [8]
+```
+
+and:
+
+```text
+LM-head token weight [8]
+```
+
+The result matched PyTorch:
+
+```text
+MANUAL LOGIT MATCH:
+True
+```
+
+Key conclusion:
+
+```text
+Transformer
+→ contextual representation
+
+LM Head
+→ vocabulary logits
+```
+
+---
+
+## Experiment 25 — Softmax and Next-Token Probabilities
+
 **Status:** NEXT
 
 Goal:
 
-Connect final Transformer representations to actual vocabulary-token predictions.
+Convert raw vocabulary logits into an interpretable probability distribution.
 
 Planned flow:
 
 ```text
-final token representation
-[d_model]
-↓
-Linear(d_model, vocabulary_size)
-↓
-vocabulary logits
-[vocabulary_size]
+next-token logits
+[10]
+
+↓ softmax
+
+next-token probabilities
+[10]
 ```
 
-For the full sequence:
+The experiment will verify that:
 
 ```text
-[sequence_length, d_model]
-↓
-LM Head
-↓
-[sequence_length, vocabulary_size]
+all probabilities > 0
 ```
 
-The experiment will inspect the logits for one token position and determine which vocabulary token currently receives the largest score.
+and:
+
+```text
+sum(probabilities) ≈ 1
+```
+
+It will also compare the token with the highest logit to the token with the highest probability.
 
 ---
 
 ## Remaining LLM Fundamentals
 
-After Stacked Transformer Blocks:
+After Vocabulary Logits:
 
 ```text
-Language-Model Head
-↓
-Vocabulary Logits
-↓
 Softmax
 ↓
 Next-Token Probabilities
 ↓
-Next-Token Targets
+Shifted Next-Token Targets
 ↓
 CrossEntropyLoss
 ↓
-Training Loop
+Backpropagation
 ↓
 Optimizer Updates
+↓
+Training Loop
 ↓
 Sampling
 ↓
