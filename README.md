@@ -183,7 +183,8 @@ AI Engineering
     ├── Layer Normalization ✅
     ├── Feed-Forward Network ✅
     ├── Complete Transformer Block ✅
-    └── Stacked Transformer Blocks ← NEXT
+    ├── Stacked Transformer Blocks ✅
+    └── Language-Model Head + Vocabulary Logits ← NEXT
 ```
 
 The current objective is to understand the internal mechanics of a GPT-like language model before moving into higher-level LLM applications.
@@ -333,6 +334,7 @@ Implemented so far:
 08_layer_normalization
 09_feed_forward_network
 10_transformer_block
+11_stacked_transformer_blocks
 ```
 
 These experiments progressively build the internal representation pipeline of an autoregressive Transformer.

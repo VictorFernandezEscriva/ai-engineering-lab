@@ -449,79 +449,10 @@ LLM Engineering
 ├── Feed-Forward Network ✅
 ├── FFN Residual ✅
 ├── Complete Transformer Block ✅
+├── Stacked Transformer Blocks ✅
 │
-└── Stacked Transformer Blocks ← NEXT
+└── Language-Model Head + Vocabulary Logits ← NEXT
 ```
-
----
-
-## Experiment 19 — Attention Output Projection and Residual Connection
-
-Folder:
-
-```text
-07_attention_output_residual/
-```
-
-Status:
-
-```text
-COMPLETE
-```
-
-Introduced `W_O` after concatenating the attention heads and added the first residual connection.
-
----
-
-## Experiment 20 — Layer Normalization
-
-Folder:
-
-```text
-08_layer_normalization/
-```
-
-Status:
-
-```text
-COMPLETE
-```
-
-Verified LayerNorm manually and confirmed that it normalizes each token independently across its feature dimension.
-
----
-
-## Experiment 21 — Feed-Forward Network
-
-Folder:
-
-```text
-09_feed_forward_network/
-```
-
-Status:
-
-```text
-COMPLETE
-```
-
-Implemented:
-
-```text
-8
-↓
-Linear
-↓
-32
-↓
-GELU
-↓
-Linear
-↓
-8
-```
-
-Verified that the same parameters are shared between token positions while the forward computation remains position-wise.
 
 ---
 
@@ -539,13 +470,7 @@ Status:
 COMPLETE
 ```
 
-Combined the previously isolated mechanisms inside a reusable:
-
-```python
-TransformerBlock(nn.Module)
-```
-
-Complete educational flow:
+Combined the attention and feed-forward mechanisms into a reusable Transformer block:
 
 ```text
 X
@@ -567,31 +492,89 @@ LayerNorm
 X'
 ```
 
-Verified shape preservation:
+---
+
+## Experiment 23 — Stacked Transformer Blocks
+
+Folder:
 
 ```text
-[3, 8]
-→
-[3, 8]
+11_stacked_transformer_blocks/
 ```
 
-through the complete block.
-
-For token `"e"` the second residual was manually verified:
+Status:
 
 ```text
-SECOND RESIDUAL MANUAL MATCH:
+COMPLETE
+```
+
+Stacked three independently parameterized Transformer blocks:
+
+```text
+embeddings
+↓
+Block 1
+↓
+Block 2
+↓
+Block 3
+↓
+final contextual representations
+```
+
+Verified that Block 1 and Block 2 do not share the same Query projection parameter:
+
+```text
+same parameter object:
+False
+
+identical parameter values:
+False
+```
+
+Tracked token `"e"` across depth and verified that its representation changed after every block.
+
+Verified:
+
+```text
+BLOCK 1 OUTPUT DIFFERENT FROM INPUT:
+True
+
+BLOCK 2 OUTPUT DIFFERENT FROM BLOCK 1:
+True
+
+BLOCK 3 OUTPUT DIFFERENT FROM BLOCK 2:
 True
 ```
 
-The final LayerNorm produced:
+Every layer preserved:
 
 ```text
-mean ≈ 0
-variance ≈ 1
+[sequence_length, d_model]
 ```
 
-The architecture is now packaged as a reusable block that can be stacked.
+with:
+
+```text
+ALL LAYERS PRESERVE [sequence_length, d_model]:
+True
+```
+
+Key mental model:
+
+```text
+representation
+↓
+Transformer Block
+↓
+refined representation
+↓
+Transformer Block
+↓
+refined representation
+```
+
+Each block normally has its own trainable parameters.
 
 ---
 
@@ -600,24 +583,26 @@ The architecture is now packaged as a reusable block that can be stacked.
 The next progression is:
 
 ```text
-stacked Transformer blocks
+final Transformer representations
 ↓
 language-model head
 ↓
 vocabulary logits
 ↓
+softmax
+↓
+next-token probabilities
+↓
 CrossEntropyLoss
 ↓
-next-token training
-↓
-optimizer updates
+training
 ↓
 sampling
 ↓
 generated text
 ```
 
-The next experiment will show how several Transformer blocks refine the same sequence representation successively.
+The next experiment will finally connect the internal Transformer representation to concrete vocabulary-token predictions.
 
 ---
 

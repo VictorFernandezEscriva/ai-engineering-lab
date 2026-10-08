@@ -1021,13 +1021,11 @@ These mechanisms now form a reusable Transformer block.
 
 ## Experiment 23 — Stacked Transformer Blocks
 
-**Status:** NEXT
+**Status:** COMPLETE
 
-Goal:
+Introduced model depth by stacking multiple independently parameterized Transformer blocks.
 
-Understand how a language model increases depth by applying several Transformer blocks sequentially.
-
-Planned flow:
+Architecture:
 
 ```text
 token + position embeddings
@@ -1041,32 +1039,111 @@ Transformer Block 3
 final contextual representations
 ```
 
-Each block will normally contain its own trainable parameters.
+Verified that different blocks own different parameters:
 
-The experiment will verify that:
+```text
+Block 1 and Block 2 share Query parameter object:
+False
+
+Block 1 and Block 2 Query values identical:
+False
+```
+
+Tracked token `"e"` through the stack and observed a different representation after every block.
+
+Verified:
+
+```text
+Block 1 output != input
+Block 2 output != Block 1 output
+Block 3 output != Block 2 output
+```
+
+All checks returned:
+
+```text
+True
+```
+
+Every block preserved:
 
 ```text
 [sequence_length, d_model]
 ```
 
-is preserved through the full stack while the numerical representations evolve from layer to layer.
+The experiment verified:
+
+```text
+ALL LAYERS PRESERVE [sequence_length, d_model]:
+True
+```
+
+Key conclusion:
+
+```text
+each block receives the previous block's output
+```
+
+and:
+
+```text
+each block normally owns independent trainable parameters
+```
+
+This introduces Transformer depth while preserving the model representation width.
+
+---
+
+## Experiment 24 — Language-Model Head and Vocabulary Logits
+
+**Status:** NEXT
+
+Goal:
+
+Connect final Transformer representations to actual vocabulary-token predictions.
+
+Planned flow:
+
+```text
+final token representation
+[d_model]
+↓
+Linear(d_model, vocabulary_size)
+↓
+vocabulary logits
+[vocabulary_size]
+```
+
+For the full sequence:
+
+```text
+[sequence_length, d_model]
+↓
+LM Head
+↓
+[sequence_length, vocabulary_size]
+```
+
+The experiment will inspect the logits for one token position and determine which vocabulary token currently receives the largest score.
 
 ---
 
 ## Remaining LLM Fundamentals
 
-After the Complete Transformer Block:
+After Stacked Transformer Blocks:
 
 ```text
-Stacked Transformer Blocks
-↓
 Language-Model Head
 ↓
 Vocabulary Logits
 ↓
-CrossEntropyLoss
+Softmax
+↓
+Next-Token Probabilities
 ↓
 Next-Token Targets
+↓
+CrossEntropyLoss
 ↓
 Training Loop
 ↓
@@ -1079,18 +1156,18 @@ Generated Text
 
 Additional concepts:
 
-- pre-norm vs post-norm Transformer organization,
-- context window,
 - greedy decoding,
 - temperature,
 - top-k,
 - top-p,
-- model parameters,
+- context window,
 - training vs inference,
+- model parameter count,
 - KV cache,
 - RoPE,
 - multi-query attention,
-- grouped-query attention.
+- grouped-query attention,
+- pre-norm vs post-norm architectures.
 
 ---
 
