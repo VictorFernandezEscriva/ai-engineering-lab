@@ -451,30 +451,10 @@ LLM Engineering
 ├── Stacked Transformer Blocks ✅
 ├── Language-Model Head ✅
 ├── Vocabulary Logits ✅
+├── Softmax ✅
+├── Next-Token Probabilities ✅
 │
-└── Softmax + Next-Token Probabilities ← NEXT
-```
-
----
-
-## Experiment 23 — Stacked Transformer Blocks
-
-Folder:
-
-```text
-11_stacked_transformer_blocks/
-```
-
-Status:
-
-```text
-COMPLETE
-```
-
-Stacked independently parameterized Transformer blocks while preserving:
-
-```text
-[sequence_length, d_model]
+└── Shifted Targets + CrossEntropyLoss ← NEXT
 ```
 
 ---
@@ -493,66 +473,96 @@ Status:
 COMPLETE
 ```
 
-Introduced:
+Mapped final Transformer representations from:
 
 ```text
-LM Head
-=
-Linear(d_model, vocabulary_size)
+[sequence_length, d_model]
 ```
 
-Verified:
+to:
 
 ```text
-[3, 8]
-↓
-LM Head
-[3, 10]
+[sequence_length, vocabulary_size]
 ```
 
-Each sequence position produces one logit for every vocabulary token.
+using the language-model head.
 
-For:
+---
+
+## Experiment 25 — Softmax and Next-Token Probabilities
+
+Folder:
 
 ```text
-hel
+13_softmax_probabilities/
 ```
 
-the rows conceptually represent:
+Status:
 
 ```text
-"h"   → next-token logits
-"he"  → next-token logits
-"hel" → next-token logits
+COMPLETE
 ```
 
-During generation:
-
-```python
-next_token_logits = logits[-1]
-```
-
-selects only the final-context prediction:
+Converted the verified next-token logits:
 
 ```text
 [10]
 ```
 
-A vocabulary logit for `"l"` was manually reproduced using the dot product between the contextual representation and the corresponding LM-head weight vector:
+into a probability distribution:
 
 ```text
-MANUAL LOGIT MATCH:
+[10]
+```
+
+Verified:
+
+```text
+PROBABILITY SUM:
+1.0
+```
+
+and:
+
+```text
+ARGMAX LOGIT MATCHES ARGMAX PROBABILITY:
 True
+```
+
+Implemented stable Softmax manually:
+
+```text
+logits
+↓
+subtract maximum
+↓
+exponential
+↓
+divide by sum
+```
+
+and verified:
+
+```text
+MANUAL SOFTMAX MATCH:
+True
+```
+
+For token `"l"`:
+
+```text
+logit       ≈ -0.3606
+probability ≈ 7.17 %
 ```
 
 Key distinction:
 
 ```text
-Transformer
-→ contextual representations
+logits
+→ unrestricted vocabulary scores
 
-LM Head
-→ vocabulary scores
+Softmax
+→ relative vocabulary probabilities
 ```
 
 ---
@@ -562,13 +572,9 @@ LM Head
 The next progression is:
 
 ```text
-vocabulary logits
+model logits for every position
 ↓
-softmax
-↓
-next-token probabilities
-↓
-shifted targets
+shifted next-token targets
 ↓
 CrossEntropyLoss
 ↓

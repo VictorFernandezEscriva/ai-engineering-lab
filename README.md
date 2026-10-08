@@ -185,7 +185,8 @@ AI Engineering
     ├── Complete Transformer Block ✅
     ├── Stacked Transformer Blocks ✅
     ├── Language-Model Head + Vocabulary Logits ✅
-    └── Softmax + Next-Token Probabilities ← NEXT
+    ├── Softmax + Next-Token Probabilities ✅
+    └── Shifted Targets + CrossEntropyLoss ← NEXT
 ```
 
 The current objective is to understand the internal mechanics of a GPT-like language model before moving into higher-level LLM applications.
@@ -337,6 +338,7 @@ Implemented so far:
 10_transformer_block
 11_stacked_transformer_blocks
 12_lm_head_logits
+13_softmax_probabilities
 ```
 
 These experiments progressively build the internal representation pipeline of an autoregressive Transformer.

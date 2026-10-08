@@ -1188,49 +1188,136 @@ LM Head
 
 ## Experiment 25 — Softmax and Next-Token Probabilities
 
-**Status:** NEXT
+**Status:** COMPLETE
 
-Goal:
+Converted verified vocabulary logits into next-token probabilities using Softmax.
 
-Convert raw vocabulary logits into an interpretable probability distribution.
-
-Planned flow:
+Starting logits:
 
 ```text
-next-token logits
-[10]
-
-↓ softmax
-
-next-token probabilities
 [10]
 ```
 
-The experiment will verify that:
+Softmax output:
 
 ```text
-all probabilities > 0
+[10]
+```
+
+Verified:
+
+```text
+PROBABILITY SUM:
+1.0
+```
+
+The token with the highest logit and highest probability was:
+
+```text
+'d'
 ```
 
 and:
 
 ```text
-sum(probabilities) ≈ 1
+ARGMAX LOGIT MATCHES ARGMAX PROBABILITY:
+True
 ```
 
-It will also compare the token with the highest logit to the token with the highest probability.
+Implemented numerically stable Softmax manually:
+
+```text
+logits
+↓
+subtract max(logits)
+↓
+exponential
+↓
+divide by exponential sum
+```
+
+The manual calculation matched PyTorch:
+
+```text
+MANUAL SOFTMAX MATCH:
+True
+```
+
+For vocabulary token `"l"`:
+
+```text
+logit       ≈ -0.3606
+probability ≈ 0.0717
+            ≈ 7.17 %
+```
+
+Key conclusion:
+
+```text
+Softmax
+→ converts relative vocabulary scores
+→ into a probability distribution
+```
+
+while preserving the ranking of the logits.
+
+---
+
+## Experiment 26 — Shifted Targets and CrossEntropyLoss
+
+**Status:** NEXT
+
+Goal:
+
+Teach the model what the correct next token actually is and quantify prediction error.
+
+For a sequence such as:
+
+```text
+hello
+```
+
+the training relationship is:
+
+```text
+input:
+h e l l
+
+target:
+e l l o
+```
+
+Each input position predicts the token immediately to its right.
+
+Planned flow:
+
+```text
+logits
+[sequence_length, vocabulary_size]
+
++
+
+target token IDs
+[sequence_length]
+
+↓
+
+CrossEntropyLoss
+
+↓
+
+single scalar loss
+```
+
+The experiment will also verify manually why a low probability assigned to the correct token produces a larger loss.
 
 ---
 
 ## Remaining LLM Fundamentals
 
-After Vocabulary Logits:
+After Next-Token Probabilities:
 
 ```text
-Softmax
-↓
-Next-Token Probabilities
-↓
 Shifted Next-Token Targets
 ↓
 CrossEntropyLoss
