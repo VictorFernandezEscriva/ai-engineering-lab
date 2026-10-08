@@ -928,47 +928,136 @@ FFN
 
 ## Experiment 22 — FFN Residual and Complete Transformer Block
 
-**Status:** NEXT
+**Status:** COMPLETE
 
-Goal:
+Combined the Transformer mechanisms studied so far into one reusable `TransformerBlock`.
 
-Complete the remaining Transformer sublayer and combine the mechanisms studied so far into one explicit Transformer block.
-
-Planned structure:
+Implemented:
 
 ```text
 X
 ↓
-Multi-Head Causal Attention
+Causal Multi-Head Attention
 ↓
 Output Projection
 ↓
-Residual Addition
+First Residual Connection
 ↓
 LayerNorm
 ↓
 Feed-Forward Network
 ↓
-Residual Addition
+Second Residual Connection
 ↓
 LayerNorm
 ↓
 Transformer Block Output
 ```
 
-The experiment will verify both residual paths and establish the complete flow through one Transformer block.
+The complete block preserved:
+
+```text
+[sequence_length, d_model]
+```
+
+through every external stage.
+
+Verified:
+
+```text
+Input                    [3, 8]
+Attention Output         [3, 8]
+First Residual           [3, 8]
+FFN Output               [3, 8]
+Second Residual          [3, 8]
+Transformer Block Output [3, 8]
+```
+
+For token `"e"`:
+
+```text
+normalized attention
++
+FFN update
+=
+second residual
+```
+
+was verified manually:
+
+```text
+SECOND RESIDUAL MANUAL MATCH:
+True
+```
+
+The final representation had:
+
+```text
+mean ≈ 0
+variance ≈ 1
+```
+
+after the second LayerNorm.
+
+Key conclusion:
+
+```text
+attention
+→ communication between positions
+
+FFN
+→ nonlinear computation within positions
+
+residuals
+→ preserve direct information paths
+
+LayerNorm
+→ normalizes intermediate representations
+```
+
+These mechanisms now form a reusable Transformer block.
+
+---
+
+## Experiment 23 — Stacked Transformer Blocks
+
+**Status:** NEXT
+
+Goal:
+
+Understand how a language model increases depth by applying several Transformer blocks sequentially.
+
+Planned flow:
+
+```text
+token + position embeddings
+↓
+Transformer Block 1
+↓
+Transformer Block 2
+↓
+Transformer Block 3
+↓
+final contextual representations
+```
+
+Each block will normally contain its own trainable parameters.
+
+The experiment will verify that:
+
+```text
+[sequence_length, d_model]
+```
+
+is preserved through the full stack while the numerical representations evolve from layer to layer.
 
 ---
 
 ## Remaining LLM Fundamentals
 
-After the Feed-Forward Network:
+After the Complete Transformer Block:
 
 ```text
-Second Residual Connection
-↓
-Complete Transformer Block
-↓
 Stacked Transformer Blocks
 ↓
 Language-Model Head
@@ -977,7 +1066,11 @@ Vocabulary Logits
 ↓
 CrossEntropyLoss
 ↓
-Next-Token Training
+Next-Token Targets
+↓
+Training Loop
+↓
+Optimizer Updates
 ↓
 Sampling
 ↓
@@ -988,15 +1081,16 @@ Additional concepts:
 
 - pre-norm vs post-norm Transformer organization,
 - context window,
+- greedy decoding,
 - temperature,
 - top-k,
 - top-p,
-- greedy decoding,
 - model parameters,
 - training vs inference,
 - KV cache,
-- modern positional methods such as RoPE,
-- grouped and multi-query attention conceptually.
+- RoPE,
+- multi-query attention,
+- grouped-query attention.
 
 ---
 

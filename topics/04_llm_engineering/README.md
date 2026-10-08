@@ -444,11 +444,13 @@ LLM Engineering
 ├── Causal Self-Attention ✅
 ├── Multi-Head Attention ✅
 ├── Attention Output Projection ✅
-├── Residual Connection ✅
+├── Attention Residual ✅
 ├── Layer Normalization ✅
 ├── Feed-Forward Network ✅
+├── FFN Residual ✅
+├── Complete Transformer Block ✅
 │
-└── FFN Residual + Transformer Block ← NEXT
+└── Stacked Transformer Blocks ← NEXT
 ```
 
 ---
@@ -467,25 +469,7 @@ Status:
 COMPLETE
 ```
 
-Extended multi-head attention with:
-
-```text
-concatenated heads
-↓
-output projection W_O
-↓
-attention update
-```
-
-followed by:
-
-```text
-original representation
-+
-attention update
-=
-residual representation
-```
+Introduced `W_O` after concatenating the attention heads and added the first residual connection.
 
 ---
 
@@ -503,28 +487,7 @@ Status:
 COMPLETE
 ```
 
-LayerNorm was applied independently across the feature dimensions of each token.
-
-Verified for token `"e"`:
-
-```text
-before:
-
-mean     = -0.315053
-variance =  1.859519
-
-after:
-
-mean     ≈ 0
-variance ≈ 1
-```
-
-Manual normalization matched PyTorch:
-
-```text
-MANUAL NORMALIZATION MATCH:
-True
-```
+Verified LayerNorm manually and confirmed that it normalizes each token independently across its feature dimension.
 
 ---
 
@@ -542,10 +505,9 @@ Status:
 COMPLETE
 ```
 
-Implemented a position-wise Transformer feed-forward network:
+Implemented:
 
 ```text
-d_model
 8
 ↓
 Linear
@@ -559,65 +521,77 @@ Linear
 8
 ```
 
-Verified tensor progression:
+Verified that the same parameters are shared between token positions while the forward computation remains position-wise.
+
+---
+
+## Experiment 22 — Complete Transformer Block
+
+Folder:
+
+```text
+10_transformer_block/
+```
+
+Status:
+
+```text
+COMPLETE
+```
+
+Combined the previously isolated mechanisms inside a reusable:
+
+```python
+TransformerBlock(nn.Module)
+```
+
+Complete educational flow:
+
+```text
+X
+↓
+Causal Multi-Head Attention
+↓
+Output Projection
+↓
+Residual
+↓
+LayerNorm
+↓
+Feed-Forward Network
+↓
+Residual
+↓
+LayerNorm
+↓
+X'
+```
+
+Verified shape preservation:
 
 ```text
 [3, 8]
-↓
-[3, 32]
-↓
-GELU
-↓
-[3, 32]
-↓
+→
 [3, 8]
 ```
 
-The same FFN parameters are shared across all token positions.
+through the complete block.
 
-However, each token is processed independently during a forward pass.
-
-Verified:
+For token `"e"` the second residual was manually verified:
 
 ```text
-PROCESSING TOKEN ALONE MATCHES BATCHED RESULT:
+SECOND RESIDUAL MANUAL MATCH:
 True
 ```
 
-Changing only token `"h"` produced:
+The final LayerNorm produced:
 
 ```text
-h output unchanged: False
-e output unchanged: True
-l output unchanged: True
+mean ≈ 0
+variance ≈ 1
 ```
 
-This demonstrates that the FFN does not directly mix token positions.
-
-During training, however, gradients from multiple token positions contribute to the same shared FFN parameters.
-
-Therefore:
-
-```text
-shared parameters
-→ shared learning
-```
-
-does not mean:
-
-```text
-direct token interaction during the FFN forward pass
-```
-
-Key distinction:
-
-```text
-ATTENTION
-→ exchanges information between token positions
-
-FFN
-→ transforms each token representation independently
-```
+The architecture is now packaged as a reusable block that can be stacked.
 
 ---
 
@@ -626,12 +600,6 @@ FFN
 The next progression is:
 
 ```text
-FFN residual connection
-↓
-normalization
-↓
-complete Transformer block
-↓
 stacked Transformer blocks
 ↓
 language-model head
@@ -642,12 +610,14 @@ CrossEntropyLoss
 ↓
 next-token training
 ↓
+optimizer updates
+↓
 sampling
 ↓
 generated text
 ```
 
-After the next experiment, the individual components required for a complete educational Transformer block will have been implemented.
+The next experiment will show how several Transformer blocks refine the same sequence representation successively.
 
 ---
 
