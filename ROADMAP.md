@@ -1265,7 +1265,7 @@ while preserving the ranking of the logits.
 
 ## Experiment 26 — Shifted Targets and CrossEntropyLoss
 
-**Status:** NEXT
+**Status:** COMPLETE
 
 Goal:
 
@@ -1311,6 +1311,48 @@ single scalar loss
 
 The experiment will also verify manually why a low probability assigned to the correct token produces a larger loss.
 
+## Experiment 27 — Backpropagation and Gradients
+
+**Status:** NEXT
+
+Goal:
+
+Understand how the scalar language-model loss produces gradients for trainable parameters throughout the complete model.
+
+Planned flow:
+
+```text
+forward pass
+↓
+logits
+↓
+CrossEntropyLoss
+↓
+loss.backward()
+↓
+gradients
+```
+
+The experiment will inspect gradients for:
+
+```text
+LM Head
+Transformer parameters
+token embeddings
+```
+
+and verify an essential distinction:
+
+```text
+backward()
+→ calculates gradients
+
+optimizer.step()
+→ changes parameters
+```
+
+The optimizer update will remain a separate experiment.
+
 ---
 
 ## Remaining LLM Fundamentals
@@ -1318,10 +1360,6 @@ The experiment will also verify manually why a low probability assigned to the c
 After Next-Token Probabilities:
 
 ```text
-Shifted Next-Token Targets
-↓
-CrossEntropyLoss
-↓
 Backpropagation
 ↓
 Optimizer Updates

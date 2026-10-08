@@ -453,8 +453,9 @@ LLM Engineering
 ├── Vocabulary Logits ✅
 ├── Softmax ✅
 ├── Next-Token Probabilities ✅
-│
-└── Shifted Targets + CrossEntropyLoss ← NEXT
+├── Shifted Next-Token Targets ✅
+├── CrossEntropyLoss ✅
+└── Backpropagation + Gradients ← NEXT
 ```
 
 ---
@@ -564,6 +565,73 @@ logits
 Softmax
 → relative vocabulary probabilities
 ```
+
+## Experiment 26 — Shifted Targets and CrossEntropyLoss
+
+Folder:
+
+```text
+14_shifted_targets_cross_entropy/
+```
+
+Status:
+
+```text
+COMPLETE
+```
+
+Created causal next-token training pairs:
+
+```text
+"h"   → "e"
+"he"  → "l"
+"hel" → "l"
+```
+
+with target IDs:
+
+```text
+[4, 7, 7]
+```
+
+Verified position losses:
+
+```text
+[2.4629, 3.1496, 2.6347]
+```
+
+and mean CrossEntropyLoss:
+
+```text
+2.7490768432617188
+```
+
+Manual negative log-likelihood calculations matched PyTorch:
+
+```text
+MEAN LOSS MATCH:
+True
+
+MANUAL LOSSES MATCH CROSS-ENTROPY:
+True
+
+FINAL-POSITION LOSS MATCH:
+True
+```
+
+Key progression:
+
+```text
+logits
++
+correct next-token targets
+↓
+CrossEntropyLoss
+↓
+scalar training objective
+```
+
+The next experiment will propagate this scalar error backward through the model.
 
 ---
 
