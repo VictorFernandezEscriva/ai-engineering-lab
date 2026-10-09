@@ -457,7 +457,8 @@ LLM Engineering
 ├── CrossEntropyLoss ✅
 ├── Backpropagation ✅
 ├── Gradients ✅
-└── Optimizer Update ← NEXT
+├── Optimizer Update ✅
+└── Training Loop ← NEXT
 ```
 
 ---
@@ -684,6 +685,69 @@ optimizer.step()
 ```
 
 The next experiment will perform the first actual weight update.
+
+## Experiment 28 — Optimizer Update
+
+Folder:
+
+```text
+16_optimizer_update/
+```
+
+Status:
+
+```text
+COMPLETE
+```
+
+Used SGD to convert previously calculated gradients into actual parameter updates.
+
+Verified one exact LM-head parameter:
+
+```text
+before:
+0.04597398638725281
+
+gradient:
+0.8159642815589905
+
+after:
+-0.03562244400382042
+```
+
+The manually calculated SGD update matched PyTorch:
+
+```text
+MANUAL SGD UPDATE MATCH:
+True
+```
+
+Verified the distinction:
+
+```text
+backward()
+→ gradients
+
+optimizer.step()
+→ parameter changes
+```
+
+The gradient remained present after the optimizer step:
+
+```text
+GRADIENT STILL EXISTS AFTER OPTIMIZER STEP:
+True
+```
+
+The loss on the same training example decreased:
+
+```text
+2.7490451
+→
+2.0913255
+```
+
+The next experiment combines all training operations into a repeated training loop.
 
 ---
 

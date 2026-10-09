@@ -1355,7 +1355,7 @@ The optimizer update will remain a separate experiment.
 
 ## Experiment 28 — Optimizer Update
 
-**Status:** NEXT
+**Status:** COMPLETE
 
 Goal:
 
@@ -1379,6 +1379,34 @@ updated parameters
 
 The experiment will compare exact parameter values before and after the optimizer step and verify that the next forward pass produces a different loss.
 
+## Experiment 29 — Language-Model Training Loop
+
+**Status:** NEXT
+
+Goal:
+
+Combine the complete learning process into a repeated training loop.
+
+The experiment will integrate:
+
+```text
+forward pass
+↓
+CrossEntropyLoss
+↓
+zero_grad()
+↓
+backward()
+↓
+optimizer.step()
+↓
+repeat
+```
+
+It will track loss over multiple training steps and inspect how the model's next-token predictions change as its parameters learn from the training text.
+
+This marks the transition from isolated training mechanics to an actually trained tiny language model.
+
 ---
 
 ## Remaining LLM Fundamentals
@@ -1386,8 +1414,6 @@ The experiment will compare exact parameter values before and after the optimize
 After Next-Token Probabilities:
 
 ```text
-Optimizer Updates
-↓
 Training Loop
 ↓
 Sampling

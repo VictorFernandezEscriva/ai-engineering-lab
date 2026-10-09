@@ -188,7 +188,8 @@ AI Engineering
     ├── Softmax + Next-Token Probabilities ✅
     ├── Shifted Targets + CrossEntropyLoss ✅
     ├── Backpropagation + Gradients ✅
-    └── Optimizer Update ← NEXT
+    ├── Optimizer Update ✅
+    └── Training Loop ← NEXT
 ```
 
 The current objective is to understand the internal mechanics of a GPT-like language model before moving into higher-level LLM applications.
@@ -343,6 +344,7 @@ Implemented so far:
 13_softmax_probabilities
 14_shifted_targets_cross_entropy
 15_backpropagation_gradients
+16_optimizer_update
 ```
 
 These experiments progressively build the internal representation pipeline of an autoregressive Transformer.
