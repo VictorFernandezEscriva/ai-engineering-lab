@@ -455,7 +455,9 @@ LLM Engineering
 ├── Next-Token Probabilities ✅
 ├── Shifted Next-Token Targets ✅
 ├── CrossEntropyLoss ✅
-└── Backpropagation + Gradients ← NEXT
+├── Backpropagation ✅
+├── Gradients ✅
+└── Optimizer Update ← NEXT
 ```
 
 ---
@@ -632,6 +634,56 @@ scalar training objective
 ```
 
 The next experiment will propagate this scalar error backward through the model.
+
+## Experiment 27 — Backpropagation and Gradients
+
+Folder:
+
+```text
+15_backpropagation_gradients/
+```
+
+Status:
+
+```text
+COMPLETE
+```
+
+Propagated the language-model loss backward through the complete model.
+
+Verified gradient creation for:
+
+```text
+token embeddings
+Transformer Block 1 attention
+Transformer Block 3 FFN
+LM Head
+```
+
+Verified the CrossEntropy gradient with respect to the logits:
+
+```text
+LOGIT GRADIENT MATCH:
+True
+```
+
+Crucially, all inspected model parameters remained unchanged after:
+
+```python
+loss.backward()
+```
+
+Key distinction:
+
+```text
+backward()
+→ calculate gradients
+
+optimizer.step()
+→ update parameters
+```
+
+The next experiment will perform the first actual weight update.
 
 ---
 

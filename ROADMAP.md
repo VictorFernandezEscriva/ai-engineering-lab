@@ -1313,7 +1313,7 @@ The experiment will also verify manually why a low probability assigned to the c
 
 ## Experiment 27 — Backpropagation and Gradients
 
-**Status:** NEXT
+**Status:** COMPLETE
 
 Goal:
 
@@ -1353,6 +1353,32 @@ optimizer.step()
 
 The optimizer update will remain a separate experiment.
 
+## Experiment 28 — Optimizer Update
+
+**Status:** NEXT
+
+Goal:
+
+Use the gradients calculated by backpropagation to modify trainable model parameters.
+
+Planned flow:
+
+```text
+forward
+↓
+loss
+↓
+backward
+↓
+gradients
+↓
+optimizer.step()
+↓
+updated parameters
+```
+
+The experiment will compare exact parameter values before and after the optimizer step and verify that the next forward pass produces a different loss.
+
 ---
 
 ## Remaining LLM Fundamentals
@@ -1360,8 +1386,6 @@ The optimizer update will remain a separate experiment.
 After Next-Token Probabilities:
 
 ```text
-Backpropagation
-↓
 Optimizer Updates
 ↓
 Training Loop
