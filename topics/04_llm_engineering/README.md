@@ -458,7 +458,8 @@ LLM Engineering
 ├── Backpropagation ✅
 ├── Gradients ✅
 ├── Optimizer Update ✅
-└── Training Loop ← NEXT
+├── Training Loop ✅
+└── Autoregressive Generation + Sampling ← NEXT
 ```
 
 ---
@@ -748,6 +749,95 @@ The loss on the same training example decreased:
 ```
 
 The next experiment combines all training operations into a repeated training loop.
+
+## Experiment 29 — Language-Model Training Loop
+
+Folder:
+
+```text
+17_training_loop/
+```
+
+Status:
+
+```text
+COMPLETE
+```
+
+Combined the complete training process:
+
+```text
+forward
+↓
+CrossEntropyLoss
+↓
+zero_grad
+↓
+backward
+↓
+optimizer.step
+↓
+repeat
+```
+
+Training on:
+
+```text
+hello
+```
+
+created the relationships:
+
+```text
+"h"    → "e"
+"he"   → "l"
+"hel"  → "l"
+"hell" → "o"
+```
+
+Loss decreased from:
+
+```text
+2.8116908
+```
+
+to:
+
+```text
+0.0117776
+```
+
+after 100 SGD updates.
+
+All greedy training predictions became correct:
+
+```text
+EXPECTED:
+'ello'
+
+PREDICTED:
+'ello'
+```
+
+Verified:
+
+```text
+ALL TRAINING PREDICTIONS CORRECT:
+True
+```
+
+Final correct-target probabilities were approximately:
+
+```text
+"h"    → "e" → 98.13 %
+"he"   → "l" → 99.38 %
+"hel"  → "l" → 99.25 %
+"hell" → "o" → 98.57 %
+```
+
+The experiment demonstrates successful optimization and memorization of the tiny training sequence, not general language understanding.
+
+The next experiment will use the trained model autoregressively.
 
 ---
 

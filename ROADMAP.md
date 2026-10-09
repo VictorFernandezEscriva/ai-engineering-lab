@@ -1381,7 +1381,7 @@ The experiment will compare exact parameter values before and after the optimize
 
 ## Experiment 29 — Language-Model Training Loop
 
-**Status:** NEXT
+**Status:** COMPLETE
 
 Goal:
 
@@ -1407,6 +1407,56 @@ It will track loss over multiple training steps and inspect how the model's next
 
 This marks the transition from isolated training mechanics to an actually trained tiny language model.
 
+## Experiment 30 — Autoregressive Generation and Sampling
+
+**Status:** NEXT
+
+Goal:
+
+Use a trained causal language model to generate a sequence one token at a time.
+
+The generation loop will follow:
+
+```text
+current context
+↓
+model
+↓
+final-position logits
+↓
+token selection
+↓
+append selected token
+↓
+new context
+↓
+repeat
+```
+
+The experiment will connect previously learned concepts:
+
+```text
+causal attention
+final-position logits
+Softmax probabilities
+greedy selection
+sampling
+```
+
+and demonstrate the distinction between:
+
+```text
+training
+```
+
+and:
+
+```text
+inference / generation
+```
+
+Rather than splitting greedy decoding and probabilistic sampling into separate microscopic experiments, they will be studied together in the autoregressive generation workflow.
+
 ---
 
 ## Remaining LLM Fundamentals
@@ -1414,9 +1464,11 @@ This marks the transition from isolated training mechanics to an actually traine
 After Next-Token Probabilities:
 
 ```text
-Training Loop
+Autoregressive Generation
 ↓
-Sampling
+Greedy Decoding
+↓
+Probabilistic Sampling
 ↓
 Generated Text
 ```

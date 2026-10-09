@@ -189,7 +189,8 @@ AI Engineering
     ├── Shifted Targets + CrossEntropyLoss ✅
     ├── Backpropagation + Gradients ✅
     ├── Optimizer Update ✅
-    └── Training Loop ← NEXT
+    ├── Training Loop ✅
+    └── Autoregressive Generation + Sampling ← NEXT
 ```
 
 The current objective is to understand the internal mechanics of a GPT-like language model before moving into higher-level LLM applications.
@@ -345,6 +346,7 @@ Implemented so far:
 14_shifted_targets_cross_entropy
 15_backpropagation_gradients
 16_optimizer_update
+17_training_loop
 ```
 
 These experiments progressively build the internal representation pipeline of an autoregressive Transformer.
