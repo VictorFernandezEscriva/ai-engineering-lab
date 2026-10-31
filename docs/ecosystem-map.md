@@ -6,6 +6,8 @@ It is an ecosystem of mathematical foundations, models, software systems, infras
 
 This document provides the high-level map used throughout the repository.
 
+For the status-aware field hierarchy, current learning position and technology index, see the [AI Engineering Map](ai-engineering-map.md). This existing overview retains the broader ecosystem concepts; the [roadmap](../ROADMAP.md) selects a learning order and the [model/runtime/application guide](model-runtime-application.md) explains execution boundaries.
+
 It is not a strict learning order.
 
 The learning sequence is defined in:

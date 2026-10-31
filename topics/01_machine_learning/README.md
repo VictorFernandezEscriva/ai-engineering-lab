@@ -26,6 +26,17 @@ The experiments are deliberately small and synthetic so that the learning proces
 
 Deep learning is a subfield of machine learning based on neural networks and is covered separately in the next topic.
 
+## Topic Map
+
+```text
+ML → supervised learning → features / labels → classification → evaluation
+   ├── ✅ Studied: decision trees, train/test splits, capacity and generalization
+   └── ⬜ Future: regression, unsupervised learning, feature engineering,
+                 validation / cross-validation and broader classical models
+```
+
+The completed foundation experiments are a scoped study, not completion of ML. scikit-learn is the implementation tool; model behavior and evaluation are the concepts. Neural-network methods continue in [Deep Learning](../02_deep_learning/README.md). See the [field map](../../docs/ai-engineering-map.md#machine-learning) and [learning route](../../ROADMAP.md).
+
 ## Available material
 
 * [Experiment 01 — Decision Tree Failure Classification](01_decision_tree/README.md)

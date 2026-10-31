@@ -28,6 +28,18 @@ error analysis
 
 The topic also introduces PyTorch image datasets and DataLoaders using MNIST.
 
+## Topic Map
+
+```text
+Images as tensors → local filters → feature maps → learned CNNs
+    → datasets / mini-batches → classification → held-out error analysis
+    ├── ✅ Studied: fixed filters, shape CNNs, MNIST and per-class evaluation
+    └── ⬜ Future: augmentation, transfer learning, detection, segmentation,
+                 vision transformers and multimodal vision-language models
+```
+
+The Computer Vision Foundations phase remains complete within its recorded scope, not across the whole field. PyTorch / torchvision provide implementation and dataset tools. Vision-language systems connect this branch to [LLM Engineering](../04_llm_engineering/README.md). See the [field map](../../docs/ai-engineering-map.md#computer-vision) and [learning route](../../ROADMAP.md).
+
 ## Available Material
 
 * [Experiment 05 — Manual Convolution Kernel](01_convolution/README.md)

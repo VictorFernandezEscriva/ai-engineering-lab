@@ -20,4 +20,8 @@ Use validation data to select settings and reserve test data for final evaluatio
 
 ## Growing the lab
 
-Organize by technical domain. Keep future subjects in the [roadmap](../ROADMAP.md) until they have real study material. Larger integrations go in [projects](../projects/README.md). Extend the glossary only when concepts appear in actual notes or code. Finish a study pass by answering its “Check yourself” questions without copying definitions.
+Organize by technical domain. Keep future subjects in the [roadmap](../ROADMAP.md) until they have real study material. Learn the underlying concepts here before combining them into larger systems in independent repositories. This lab does not plan or catalog those repositories. Extend the glossary only when concepts appear in actual notes or code. Finish a study pass by answering its “Check yourself” questions without copying definitions.
+
+Use the [AI Engineering Map](ai-engineering-map.md) to locate a concept in the field and the roadmap to choose the next step. The lab contains theory, concept explanations, small focused experiments and small exercises. Complex areas such as RAG, coding agents, MCP, LangGraph, n8n, voice and multimodal AI can have small controlled lab experiments. Group related operations around a meaningful question rather than creating an experiment for every line of code.
+
+**Fundamentals first, framework second:** understand the primitive, build a minimal version, understand its limitations, then compare a framework when it answers a real question. **ZERO EXTRA COST:** prefer open-source software, local models, local execution and free official resources; paid services are not prerequisites.

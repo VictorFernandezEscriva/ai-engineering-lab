@@ -44,6 +44,19 @@ prediction
 
 These concepts form part of the foundation used later in larger neural networks, computer vision systems and language models.
 
+## Topic Map
+
+```text
+Neural networks: tensors → layers / activations → logits → loss
+    → gradients / backpropagation → optimizer → training → evaluation
+    ├── ✅ Here: binary classifiers, normalization and threshold metrics
+    ├── ✅ In CV: CNNs, mini-batches and multiclass training
+    ├── ✅ In LLM: causal Transformer components through a training loop
+    └── ⬜ Future: systematic regularization, schedules and larger-data training
+```
+
+The foundation phase is complete within its documented scope. PyTorch is the framework used to expose numerical mechanisms; it is not the field itself. The “not covered yet” list below describes this topic's two local experiments; some concepts continue in [CV](../03_computer_vision/README.md) and [LLM](../04_llm_engineering/README.md). See the [field map](../../docs/ai-engineering-map.md#deep-learning) and [learning route](../../ROADMAP.md).
+
 ## Available material
 
 * [Experiment 03 — First PyTorch Binary Classifier](01_binary_classifier/README.md)

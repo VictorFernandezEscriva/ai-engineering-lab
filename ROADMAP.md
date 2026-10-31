@@ -8,6 +8,12 @@ Topics are grouped by technical domain, while this document describes learning o
 
 Future work remains documented here until implementation begins.
 
+The [AI Engineering Map](docs/ai-engineering-map.md) describes the territory: what exists and how the branches relate. This roadmap describes the selected route through it. Neither requires mastering every branch before building useful systems.
+
+**Lab scope:** theory, concept explanations, small focused exercises and small controlled experiments that explain concepts from first principles. Learn the underlying concepts here before combining them into larger systems in independent repositories. This lab does not plan or catalog those repositories. Complex areas such as RAG, coding agents, MCP, workflow frameworks, voice and multimodal AI can have small educational experiments here.
+
+**ZERO EXTRA COST:** prefer open-source software, local models, local execution and free official datasets/resources. No paid API, credits, hosted inference or paid infrastructure is required. Adapt experiment scale to available hardware.
+
 The learning process follows:
 
 ```text
@@ -56,23 +62,23 @@ Transformer / LLM Internals
 ↓
 Local Inference
 ↓
-LLM APIs
+Python ↔ Local LLM
 ↓
-Hardware and Quantization
+Structured Outputs
 ↓
-Embeddings
+Function / Tool Calling
 ↓
-Semantic Search
+Agentic AI Fundamentals
+↓
+Embeddings and Semantic Retrieval
 ↓
 RAG
 ↓
-Tool Calling
+Advanced Agentic Systems / Agentic RAG
 ↓
-Agents
+Multimodal / Voice
 ↓
-Multimodal AI
-↓
-Fine-Tuning
+Fine-Tuning / LoRA / QLoRA
 ↓
 AI Backend Engineering
 ↓
@@ -80,6 +86,27 @@ Application Integration
 ↓
 Production AI Engineering
 ```
+
+## Route After Phase 04
+
+**Current:** Phase 04 is `IN PROGRESS`; Experiments 13–29 are recorded as complete. **Experiment 30 — Autoregressive Generation and Sampling remains `NEXT`.** Its practical generation workflow has not been completed.
+
+Existing phase numbers and completed experiment history are retained. The numbers identify study blocks; the planned visiting order below brings tool and agent primitives forward. It does not require finishing every topic in one block before beginning another.
+
+| Route block | Existing phases / sections | Focus and readiness to continue |
+|---|---|---|
+| 1. Finish the current LLM workflow | Phase 04, Experiment 30 | Connect final-position logits, token selection and repeated generation; distinguish training from inference |
+| 2. Run and call a local model | Phases 05–07 | Loading, local APIs, Python integration, chat messages and structured outputs; handle malformed responses and failures |
+| 3. Learn bounded action loops | Phase 14, then Phase 15 foundations | Function/tool calling, validated execution, state and termination; test denied actions and recovery |
+| 4. Retrieve evidence | Phases 11–12, then Phase 13 | Retrieval embeddings, semantic search and RAG; evaluate retrieval and generation separately |
+| 5. Extend agentic systems | Phase 15 advanced blocks, after retrieval/RAG | Context engineering, MCP, framework comparisons, subagents and agentic RAG; measure added complexity against a simpler baseline |
+| 6. Add modalities | Phase 16 and the Speech / Voice track | Multimodal inputs, speech recognition, response generation and speech synthesis; evaluate latency and turn handling |
+| 7. Adapt models when justified | Phase 17 | Fine-tuning / LoRA / QLoRA, data quality and independent evaluation; compare with the unchanged model |
+| 8. Study system engineering | Phases 18–21 | Services, clients, offline packaging and production concerns through small controlled exercises |
+
+**Parallel tracks:** Phases 08–10 deepen runtime, hardware, quantization and benchmarking after an initial local run. Revisit them when compatibility or memory limits require it. Evaluation, safety, data engineering, testing and software engineering accompany every block. Reinforcement learning and advanced GPU/distributed topics remain later specializations, not immediate prerequisites.
+
+Use sensible learning blocks rather than creating one experiment per API call or line of code. Future names in this document do not create experiment folders or imply completed work.
 
 ---
 
@@ -1490,11 +1517,13 @@ Additional concepts:
 
 ---
 
-## Phase 04 Final Project
+## Phase 04 Synthesis Exercise
 
-Build a small educational GPT-like model from scratch using PyTorch.
+Connect the studied components in a small controlled GPT-like exercise using PyTorch, with a tiny dataset and an explicit question about training versus generation.
 
-The project should include:
+This synthesis is educational lab work, not a plan for an external repository. Keep its scope bounded and its limitations visible.
+
+The exercise should connect:
 
 ```text
 tokenization
@@ -1598,9 +1627,22 @@ response
 - retries,
 - configuration.
 
+Extend these interface primitives with:
+
+- Python ↔ LLM request/response boundaries,
+- chat messages and system / user / assistant roles,
+- prompt construction,
+- structured outputs and JSON Schema,
+- output parsing and validation,
+- function/tool-call requests before their execution in Phase 14.
+
+Pydantic is a possible validation tool to learn after understanding the contract. A parseable response does not by itself prove a correct answer or authorize an action.
+
 ## Practical Work
 
 Build a Python CLI that communicates with a local language model.
+
+Keep the lab exercise small: one local request workflow with streaming or structured-response validation and bounded retries. Continue to [Phase 14 — Tool Calling](#phase-14--tool-calling), then the basic [Phase 15 agent loop](#phase-15--agents), before the retrieval branch if following the selected route.
 
 ---
 
@@ -1685,6 +1727,8 @@ Measure:
 
 Build a reproducible local inference benchmark.
 
+In the lab, isolate a benchmark question with fixed prompts, controlled settings and repeated measurements.
+
 ---
 
 # Phase 11 — Embedding Models
@@ -1722,6 +1766,8 @@ Encode a text collection and compare semantic similarity.
 ## Practical Work
 
 Build semantic search over a small document collection.
+
+Start with exact in-memory similarity so ranking is visible. FAISS, SQLite-based approaches and other local vector indexes are optional later comparisons, not required dependencies. Study chunking, metadata and retrieval evaluation through a small semantic-search experiment before extending scope.
 
 ---
 
@@ -1764,11 +1810,15 @@ answer
 
 Evaluate retrieval and generation separately.
 
+Also study parsing, metadata, abstention and citation support. Hybrid retrieval, query rewriting and reranking can be compared after a baseline exposes a concrete retrieval failure. A small end-to-end RAG experiment belongs in the lab to understand ingestion, retrieval and grounding with controlled data and explicit evaluation.
+
 ---
 
 # Phase 14 — Tool Calling
 
 **Status:** PLANNED
+
+**Selected route:** visit after Phase 07 structured interfaces and before the minimal agent loop. Phase identifiers are preserved; this block need not wait for every retrieval phase.
 
 ## Concepts
 
@@ -1778,6 +1828,8 @@ Evaluate retrieval and generation separately.
 - execution boundaries,
 - permissions,
 - authorization.
+
+Distinguish generating a function/tool-call request from validating arguments, checking permission, executing a function and returning its result. Structured output is an interface contract, not automatic authority.
 
 ## Practical Work
 
@@ -1797,6 +1849,8 @@ application automatically authorizes action
 
 **Status:** PLANNED
 
+**Selected route:** basic blocks follow Phase 14; advanced blocks can follow semantic retrieval and RAG. Every block below remains future work. These are grouped learning questions, not ten pre-created experiment directories.
+
 ## Concepts
 
 - state,
@@ -1813,6 +1867,31 @@ application automatically authorizes action
 
 Implement a bounded agent loop.
 
+## Agentic AI Learning Blocks
+
+| Block | Concepts and small lab work | Evidence before extending |
+|---|---|---|
+| Minimal loop and tool execution | Combine a local model, a controlled tool set, actions, observations, state, budgets and stopping conditions; build the loop from scratch | Trace a complete task, a tool failure and budget termination |
+| State, memory and context | Distinguish current state, short-term context and persisted long-term memory; compare context construction and recovery strategies | Explain what survives between steps/runs and check that stale state does not silently become authority |
+| Permissions and human approval | Validate tool arguments, enforce allowlists and sandbox boundaries, handle approvals and denied actions | Exercise permission denial, untrusted input and recovery; authorization stays in application code |
+| Planning, retries and evaluation | Compare a fixed workflow with planning, reflection / retry loops and error recovery on a small task set | Measure success, errors, time and tool usage; retries/reflection must show benefit, not merely extra steps |
+| Protocols and frameworks | After the primitive loop, inspect MCP tool/context interfaces, then compare a small LangChain / LangGraph workflow; study workflow triggers/retries before n8n | Explain protocol versus framework versus workflow platform, and what each adds over the minimal implementation |
+| Advanced orchestration | Study subagents, multi-agent orchestration, persistent state and agentic RAG after a retrieval baseline exists | Compare against a single-agent or deterministic baseline and track state, permissions, termination and evaluation |
+
+**Fundamentals first, framework second:** understand the primitive → build a minimal version → understand its limitations → then learn the framework. Agent loop from scratch → LangChain / LangGraph; workflow / automation fundamentals → n8n. MCP is a protocol to study, not a replacement for permissions or an agent implementation. Small controlled MCP, memory, LangGraph and n8n experiments can belong here. Choose free local execution options within the cost policy; no framework is mandatory.
+
+### Minimal Coding-Agent Experiment
+
+**Planned small educational experiment inside the lab.** A local model would receive a failing test in a tiny deliberately broken toy workspace and a controlled tool set: `read_file(path)`, `write_file(path, content)` and `run_tests()`.
+
+The Python host would represent and validate each tool request, enforce permissions, execute the action and return its result to the model. The loop would maintain conversation/state, allow bounded retries and stop on verified completion, budget exhaustion or an unrecoverable error. The model would inspect files, propose a change and rerun the test through those tools rather than receiving unrestricted execution access.
+
+The learning question is how tool calling becomes iterative tool use: request → host execution → result → next action. Record a successful toy task, a denied action and a failed/retried action, including termination behavior. Group these related mechanisms into one meaningful experiment. No source code, toy workspace or future directory is created by this documentation task.
+
+Research agents, subagents and multi-agent orchestration remain learning concepts in the advanced blocks above; bounded experiments can study their mechanisms without planning external systems.
+
+See the [Agentic AI field map](docs/ai-engineering-map.md#agentic-ai).
+
 ---
 
 # Phase 16 — Multimodal AI
@@ -1827,9 +1906,13 @@ Implement a bounded agent loop.
 - vision-language models,
 - multimodal embeddings.
 
+Extend later to image generation, audio, speech-to-text, text-to-speech, multimodal prompting and video concepts. Voice overlaps multimodal and agentic AI but does not inherently require an agent loop.
+
 ## Practical Work
 
 Evaluate a compatible multimodal model.
+
+Use a bounded task and evaluation set. A small voice exercise may connect recognition → LLM response generation → speech synthesis, measuring streaming latency and turn detection before tool actions. Small multimodal and voice experiments belong here when they explain a concept or a controlled workflow.
 
 ---
 
@@ -1851,6 +1934,8 @@ Evaluate a compatible multimodal model.
 ## Practical Work
 
 Run a small controlled adaptation and compare it against a baseline.
+
+Include instruction tuning, training data quality and model merging concepts as later topics. Scope any local training to available memory; no paid compute is required by the route.
 
 ---
 
@@ -1943,7 +2028,7 @@ Install and run a prototype on another machine without requiring network access.
 
 ## Practical Work
 
-Turn one previous prototype into a production-oriented system.
+Use small controlled exercises to study production concerns such as evaluation, logging, caching, async execution, queues, packaging and regression tests. Each exercise should answer a clear engineering question and document its limits; this phase does not plan an external integrated system.
 
 Be able to justify:
 
@@ -2244,14 +2329,16 @@ If only a subset of this roadmap could be learned, prioritize:
 3. PyTorch + Deep Learning
 4. Transformers and LLM internals
 5. Local and API-based LLM inference
-6. Embeddings and semantic search
-7. RAG
-8. Tool calling
+6. Structured outputs, tool calling and a bounded agent loop
+7. Embeddings and semantic search
+8. RAG, then advanced agents when justified
 9. AI backend engineering
 10. Evaluation
 11. Deployment and observability
-12. Agents
+12. Further agentic / multimodal specialization as needed
 ```
+
+This is a prioritization guide, not permission to defer evaluation or safety until the end. Apply both throughout, and use the [selected route](#route-after-phase-04) to distinguish basic agent primitives from later orchestration.
 
 This path provides the strongest combination of:
 

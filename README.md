@@ -11,31 +11,42 @@ The objective is not to collect disconnected tutorials or simply call existing A
 
 The objective is to understand how AI systems work internally and how their components connect:
 
-```text
-data
-↓
-machine learning
-↓
-deep learning
-↓
-transformers
-↓
-language models
-↓
-inference
-↓
-embeddings
-↓
-retrieval
-↓
-tools
-↓
-agents
-↓
-applications
-↓
-production systems
+## AI Engineering Universe
+
+This compact map shows major relationships; it is not a checklist of fields to master in sequence. Evaluation, safety and data quality apply across all branches.
+
+```mermaid
+flowchart TD
+    F[Foundations and data] --> ML[Machine Learning]
+    ML --> DL[Deep Learning]
+    DL --> CV[Computer Vision]
+    DL --> LLM[NLP / Transformers / LLMs]
+    LLM --> LI[Local inference]
+    LI --> API[Structured interfaces / tool calling]
+    API --> A[Agentic AI]
+    LLM --> ER[Embeddings / semantic retrieval]
+    ER --> R[RAG]
+    R --> AR[Agentic RAG]
+    A --> AR
+    CV --> MM[Multimodal / voice]
+    LLM --> MM
+    A --> MM
+    LLM --> MA[Model adaptation]
+    F -.-> E[Evaluation and safety across all branches]
+    DL -.-> E
+    LI -.-> E
+    API -.-> E
+    ER -.-> E
+    R -.-> E
+    A -.-> E
+    MM -.-> E
+    MA -.-> E
+    E --> P[Production AI engineering]
 ```
+
+[See the detailed AI Engineering Map](docs/ai-engineering-map.md).
+
+**The map describes the territory: what exists and how concepts relate. [ROADMAP.md](ROADMAP.md) describes our selected route: the order in which concepts will be learned.** Tools and frameworks support the concepts; they do not replace them.
 
 The learning process follows:
 
@@ -63,6 +74,10 @@ Experiments are deliberately small so that individual mechanisms remain visible.
 
 The existence of an experiment does not imply mastery of an entire field or production readiness.
 
+**Lab scope:** theory, concept explanations, small focused exercises and small controlled experiments that explain mechanisms from first principles. This includes small retrieval, RAG, MCP, memory, coding-agent, workflow, voice and multimodal exercises when they answer a clear learning question.
+
+Larger systems combining many learned concepts belong in independent repositories. This lab does not plan or catalog those repositories. Learn the underlying concepts here first through bounded experiments.
+
 ---
 
 ## Repository Structure
@@ -71,14 +86,12 @@ The existence of an experiment does not imply mastery of an entire field or prod
 AiEngineeringLab/
 │
 ├── docs/
+│   ├── ai-engineering-map.md
 │   ├── ecosystem-map.md
 │   ├── glossary.md
 │   ├── learning-method.md
 │   ├── model-runtime-application.md
 │   └── verification.md
-│
-├── projects/
-│   └── README.md
 │
 ├── tools/
 │   └── hardware_report.py
@@ -112,15 +125,9 @@ self-attention
 causal attention
 ```
 
-### `projects/`
-
-Index of larger standalone AI Engineering projects.
-
-Project source code lives in independent repositories rather than inside this laboratory.
-
 ### `docs/`
 
-Cross-topic documentation explaining concepts that span multiple experiments.
+Cross-topic documentation explaining concepts that span multiple experiments. Start with the [AI Engineering Map](docs/ai-engineering-map.md), [learning method](docs/learning-method.md) and [glossary](docs/glossary.md).
 
 ### `tools/`
 
@@ -136,7 +143,7 @@ It is not the repository directory structure.
 
 ---
 
-# Current Progress
+## Current Progress
 
 | Domain | Status |
 |---|---|
@@ -158,7 +165,9 @@ It is not the repository directory structure.
 
 ---
 
-# Current Learning Position
+## Current Learning Position
+
+**Phase 04 is IN PROGRESS. Experiment 29 — Language-Model Training Loop is COMPLETE; Experiment 30 — Autoregressive Generation and Sampling remains NEXT.** The [last completed experiment](topics/04_llm_engineering/17_training_loop/README.md) documents optimization and memorization of a tiny sequence, not general language understanding.
 
 The current main path is:
 
@@ -233,9 +242,9 @@ The eventual result of this phase will be a small educational GPT-like model imp
 
 ---
 
-# Completed Foundations
+## Completed Foundations
 
-## Machine Learning
+### Machine Learning
 
 Implemented experiments covering:
 
@@ -251,7 +260,7 @@ The experiments demonstrated that stronger training performance does not necessa
 
 ---
 
-## Deep Learning
+### Deep Learning
 
 Implemented PyTorch experiments covering:
 
@@ -290,7 +299,7 @@ updated parameters
 
 ---
 
-## Computer Vision
+### Computer Vision
 
 Implemented experiments covering:
 
@@ -319,7 +328,7 @@ The focus was not the score itself, but understanding the complete training and 
 
 ---
 
-# LLM Engineering Experiments
+## LLM Engineering Experiments
 
 Current experiments live under:
 
@@ -351,45 +360,13 @@ Implemented so far:
 
 These experiments progressively build the internal representation pipeline of an autoregressive Transformer.
 
-The next experiment introduces:
-
-```text
-multi-head attention
-```
+The next experiment is **Experiment 30 — Autoregressive Generation and Sampling (NEXT)**. It has no completed result or implementation directory yet. See the [LLM topic map and progress](topics/04_llm_engineering/README.md).
 
 ---
 
-# Standalone Engineering Projects
+## AI Ecosystem Map
 
-Larger projects are developed in independent repositories.
-
-This repository keeps only an index under:
-
-```text
-projects/README.md
-```
-
-Examples of future standalone projects include:
-
-- MiniGPT from scratch,
-- local LLM CLI,
-- inference benchmark,
-- semantic search engine,
-- RAG system,
-- tool-using assistant,
-- local/offline AI application.
-
-This separation keeps the laboratory focused on learning mechanisms while standalone repositories demonstrate larger engineering systems.
-
----
-
-# AI Ecosystem Map
-
-The high-level map of AI technologies and systems is maintained in:
-
-```text
-docs/ecosystem-map.md
-```
+The [detailed AI Engineering Map](docs/ai-engineering-map.md) adds a hierarchy, progress markers and a technology index. The existing [ecosystem overview](docs/ecosystem-map.md) provides complementary relationships.
 
 It distinguishes between:
 
@@ -405,7 +382,7 @@ It distinguishes between:
 
 ---
 
-# Model, Runtime and Application
+## Model, Runtime and Application
 
 A model is not an application and model weights do not execute themselves.
 
@@ -427,13 +404,13 @@ docs/model-runtime-application.md
 
 ---
 
-# Learning Principles
+## Learning Principles
 
 The repository follows several rules.
 
-## Understand before abstracting
+### Understand before abstracting
 
-Start with visible mechanisms before relying on frameworks that hide them.
+Understand the primitive → build a minimal version → understand its limitations → then learn the framework. Start with visible mechanisms before relying on frameworks that hide them.
 
 For example:
 
@@ -451,23 +428,23 @@ manual self-attention
 Transformer abstractions
 ```
 
-## Change one variable at a time
+### Change one variable at a time
 
 Experiments should isolate a specific question whenever possible.
 
-## Separate evidence from assumptions
+### Separate evidence from assumptions
 
 A result is only evidence for the conditions actually tested.
 
-## Understand tensor shapes
+### Understand tensor shapes
 
 Tensor shapes should always have a physical or conceptual interpretation.
 
-## Evaluate, do not only train
+### Evaluate, do not only train
 
 Training metrics alone do not demonstrate useful generalization.
 
-## Prefer transferable concepts
+### Prefer transferable concepts
 
 Frameworks change.
 
@@ -488,7 +465,11 @@ are more durable.
 
 ---
 
-# Setup
+## ZERO EXTRA COST
+
+Prefer open-source software, local models, local execution and free official datasets/resources. No paid API, credits, hosted inference or paid SaaS is required. Keep exercises within available hardware and document resource limits.
+
+## Setup
 
 Create a virtual environment:
 
@@ -538,13 +519,9 @@ Large model artifacts and generated caches should not be committed to Git.
 
 ---
 
-# Verification
+## Verification
 
-Execution evidence and verification notes are documented in:
-
-```text
-docs/verification.md
-```
+Individual experiment READMEs retain their results and limitations. The dated [verification log](docs/verification.md) records earlier checks; it is not a complete list of subsequent experiments. This documentation correction adds no new execution result.
 
 Fixed random seeds improve reproducibility but do not guarantee identical results across:
 
@@ -555,13 +532,18 @@ Fixed random seeds improve reproducibility but do not guarantee identical result
 
 ---
 
-# Roadmap
+## Roadmap
 
-The complete progression is documented in:
+The complete progression is documented in [ROADMAP.md](ROADMAP.md), with a [route guide after Phase 04](ROADMAP.md#route-after-phase-04):
 
 ```text
-ROADMAP.md
+LLM fundamentals → local inference → Python / local LLM interfaces
+→ structured outputs / tool calling → agentic fundamentals
+→ embeddings / semantic retrieval → RAG → advanced agents / agentic RAG
+→ multimodal / voice → model adaptation → production engineering
 ```
+
+A future **Minimal Coding-Agent Experiment** will study controlled iterative tool use in a tiny deliberately broken toy workspace. It remains a small lab exercise, not a planned external repository. Hardware, benchmarking, evaluation, safety and software engineering are parallel tracks.
 
 The roadmap intentionally separates:
 
@@ -579,7 +561,7 @@ Not every AI technology requires the same depth of study.
 
 ---
 
-# License
+## License
 
 No open-source license is provided for this repository.
 

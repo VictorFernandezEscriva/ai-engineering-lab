@@ -38,6 +38,21 @@ Each experiment isolates one mechanism before combining them into a small educat
 
 ---
 
+## Topic Map
+
+```text
+✅ Tokenization → token IDs → token embeddings + positional information
+    → ✅ Attention: Q / K / V → causal masking → multiple heads
+    → ✅ Projection / residuals / LayerNorm / FFN → Transformer stack
+    → ✅ LM Head / logits → Softmax → next-token loss → training
+    → ⬜ Autoregressive generation + sampling [Experiment 30: NEXT]
+    → ⬜ Local inference → structured interfaces / tool calling → agents
+```
+
+**Phase 04 remains IN PROGRESS.** Experiments 13–29 are documented as complete; Experiment 30 is next, not completed. The token embeddings studied here are internal model representations. Retrieval embedding models for semantic search are a separate planned branch.
+
+PyTorch supports the current mechanism-level experiments. Local runtimes and later MCP / LangChain / LangGraph / n8n study are tools and interfaces, not substitutes for these fundamentals. See the [field map](../../docs/ai-engineering-map.md#nlp-and-llm-fundamentals) and [selected route](../../ROADMAP.md#route-after-phase-04).
+
 ## Learning Progression
 
 ### Experiment 13 — Character Tokenization and Token IDs
@@ -843,7 +858,7 @@ The next experiment will use the trained model autoregressively.
 
 ## Next Steps
 
-The next progression is:
+Experiments 24–29 have already completed the logits-to-training part of this progression. The remaining next step is Experiment 30 — Autoregressive Generation and Sampling:
 
 ```text
 model logits for every position
@@ -925,21 +940,13 @@ multi-head attention
 
 The current implementation is educational.
 
-It does not yet include a complete Transformer block or language model.
+Experiments through 29 now include complete Transformer blocks, a language-model head, next-token loss and a tiny training loop. Their recorded results demonstrate mechanics and memorization, not general language understanding.
 
-The experiments currently do not include:
+Remaining future work includes:
 
-- trained attention patterns,
-- attention output projection,
-- residual connections,
-- layer normalization,
-- feed-forward networks,
+- linguistically meaningful learned attention patterns,
 - dropout,
-- complete Transformer blocks,
-- vocabulary logits,
-- next-token loss,
-- autoregressive training,
-- text generation,
+- autoregressive text generation and sampling,
 - KV caching,
 - modern positional methods such as RoPE.
 
