@@ -1,0 +1,1192 @@
+{
+  "version": 1,
+  "goal": "AI Automation & Agentic Systems Engineer: specialised employment plus possible own business-automation solutions.",
+  "areas": [
+    {
+      "id": "ml",
+      "name": "Machine Learning",
+      "path": "topics/01_machine_learning",
+      "description": "Supervised learning, evaluation and generalization.",
+      "phase": "Phase 01",
+      "planned": false
+    },
+    {
+      "id": "dl",
+      "name": "Deep Learning",
+      "path": "topics/02_deep_learning",
+      "description": "Neural networks, loss, gradients and thresholds.",
+      "phase": "Phase 02",
+      "planned": false
+    },
+    {
+      "id": "cv",
+      "name": "Computer Vision",
+      "path": "topics/03_computer_vision",
+      "description": "Convolution and CNN image classification.",
+      "phase": "Phase 03",
+      "planned": false
+    },
+    {
+      "id": "llm",
+      "name": "LLM Engineering",
+      "path": "topics/04_llm_engineering",
+      "description": "Transformer internals from tokenization to the training loop.",
+      "phase": "Phase 04",
+      "planned": false
+    },
+    {
+      "id": "local",
+      "name": "Local Models & Inference",
+      "phase": "Phase 05",
+      "planned": true,
+      "path": "topics/05_local_models_inference",
+      "description": "Future: local inference, local APIs, Python integration, structured outputs."
+    },
+    {
+      "id": "automation",
+      "name": "AI Automation & Agentic Systems",
+      "phase": "Roadmap Phases 14–15 (no topic directory yet)",
+      "planned": true,
+      "description": "Future specialization: automation, tool calling, agents, MCP, frameworks, evaluation and safety."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ml.supervised_classification",
+      "name": "Supervised classification",
+      "area": "ml",
+      "description": "Learning a mapping from labelled features to classes, and judging it on unseen data.",
+      "prerequisites": [],
+      "related": [],
+      "resources": [
+        {
+          "title": "Machine Learning topic overview",
+          "path": "topics/01_machine_learning/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-ml-01_decision_tree"
+      ],
+      "planned": false
+    },
+    {
+      "id": "ml.decision_tree",
+      "name": "Decision trees",
+      "area": "ml",
+      "description": "A rule-based classifier learned from data; the first concrete model in the lab.",
+      "prerequisites": [
+        "ml.supervised_classification"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Machine Learning topic overview",
+          "path": "topics/01_machine_learning/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-ml-01_decision_tree"
+      ],
+      "planned": false
+    },
+    {
+      "id": "ml.overfitting",
+      "name": "Overfitting and generalization",
+      "area": "ml",
+      "description": "Why training accuracy overstates quality and how the train/test gap shows it.",
+      "prerequisites": [
+        "ml.supervised_classification"
+      ],
+      "related": [
+        "dl.train_test_thresholds"
+      ],
+      "resources": [
+        {
+          "title": "Machine Learning topic overview",
+          "path": "topics/01_machine_learning/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-ml-02_overfitting"
+      ],
+      "planned": false
+    },
+    {
+      "id": "dl.binary_classifier",
+      "name": "Neural binary classifier",
+      "area": "dl",
+      "description": "Weights, bias, logits, sigmoid, loss and gradient descent in a small PyTorch model.",
+      "prerequisites": [
+        "ml.supervised_classification"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Deep Learning topic overview",
+          "path": "topics/02_deep_learning/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-dl-01_binary_classifier"
+      ],
+      "planned": false
+    },
+    {
+      "id": "dl.train_test_thresholds",
+      "name": "Train/test split and decision thresholds",
+      "area": "dl",
+      "description": "Precision, recall, F1 and how the threshold moves the trade-off.",
+      "prerequisites": [
+        "dl.binary_classifier",
+        "ml.overfitting"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Deep Learning topic overview",
+          "path": "topics/02_deep_learning/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-dl-02_train_test_and_thresholds"
+      ],
+      "planned": false
+    },
+    {
+      "id": "cv.convolution",
+      "name": "Convolution and feature maps",
+      "area": "cv",
+      "description": "A kernel slid over an image produces a feature map; manual kernels first.",
+      "prerequisites": [
+        "dl.binary_classifier"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Computer Vision topic overview",
+          "path": "topics/03_computer_vision/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-cv-01_convolution",
+        "ex-cv-02_multiple_filters"
+      ],
+      "planned": false
+    },
+    {
+      "id": "cv.cnn_shapes",
+      "name": "Learned filters: shape CNN",
+      "area": "cv",
+      "description": "A small CNN learns its own filters on synthetic shape images.",
+      "prerequisites": [
+        "cv.convolution"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Computer Vision topic overview",
+          "path": "topics/03_computer_vision/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-cv-03_shapes_cnn",
+        "ex-cv-04_shapes_evaluation"
+      ],
+      "planned": false
+    },
+    {
+      "id": "cv.mnist_pipeline",
+      "name": "MNIST data and DataLoader",
+      "area": "cv",
+      "description": "Image dataset loading, tensors and mini-batches.",
+      "prerequisites": [
+        "cv.convolution"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Computer Vision topic overview",
+          "path": "topics/03_computer_vision/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-cv-05_mnist",
+        "ex-cv-06_mnist_dataloader"
+      ],
+      "planned": false
+    },
+    {
+      "id": "cv.mnist_cnn",
+      "name": "Multiclass CNN and error analysis",
+      "area": "cv",
+      "description": "Multiclass CNN training, held-out evaluation and looking at the mistakes.",
+      "prerequisites": [
+        "cv.cnn_shapes",
+        "cv.mnist_pipeline"
+      ],
+      "related": [
+        "dl.train_test_thresholds"
+      ],
+      "resources": [
+        {
+          "title": "Computer Vision topic overview",
+          "path": "topics/03_computer_vision/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-cv-07_mnist_cnn",
+        "ex-cv-08_mnist_error_analysis"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.tokenization",
+      "name": "Tokenization and token IDs",
+      "area": "llm",
+      "description": "Text to vocabulary to IDs and back (character level).",
+      "prerequisites": [],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-01_tokenization"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.embeddings",
+      "name": "Token embeddings",
+      "area": "llm",
+      "description": "Learned vectors for token IDs.",
+      "prerequisites": [
+        "llm.tokenization"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-02_embeddings"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.positional",
+      "name": "Positional embeddings",
+      "area": "llm",
+      "description": "Injecting order information into token representations.",
+      "prerequisites": [
+        "llm.embeddings"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-03_positional_embeddings"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.self_attention",
+      "name": "Self-attention (Q, K, V)",
+      "area": "llm",
+      "description": "Queries, keys and values compute weighted mixtures of token representations.",
+      "prerequisites": [
+        "llm.positional"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-04_self_attention"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.causal_attention",
+      "name": "Causal self-attention",
+      "area": "llm",
+      "description": "Masking future positions so each token only sees the past.",
+      "prerequisites": [
+        "llm.self_attention"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-05_causal_attention"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.multi_head",
+      "name": "Multi-head attention",
+      "area": "llm",
+      "description": "Several attention heads in parallel over split representations.",
+      "prerequisites": [
+        "llm.causal_attention"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-06_multi_head_attention"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.attention_output",
+      "name": "Attention output projection and residual",
+      "area": "llm",
+      "description": "Projecting head outputs and adding the residual connection.",
+      "prerequisites": [
+        "llm.multi_head"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-07_attention_output_residual"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.layer_norm",
+      "name": "Layer normalization",
+      "area": "llm",
+      "description": "Normalizing activations per token.",
+      "prerequisites": [
+        "llm.attention_output"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-08_layer_normalization"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.ffn",
+      "name": "Feed-forward network",
+      "area": "llm",
+      "description": "The position-wise MLP inside a Transformer block.",
+      "prerequisites": [
+        "llm.layer_norm"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-09_feed_forward_network"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.transformer_block",
+      "name": "Transformer block",
+      "area": "llm",
+      "description": "Attention + FFN + residuals + normalization combined.",
+      "prerequisites": [
+        "llm.ffn"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-10_transformer_block"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.stacked_blocks",
+      "name": "Stacked Transformer blocks",
+      "area": "llm",
+      "description": "Depth: repeating the block.",
+      "prerequisites": [
+        "llm.transformer_block"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-11_stacked_transformer_blocks"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.lm_head",
+      "name": "Language-model head and logits",
+      "area": "llm",
+      "description": "Projecting hidden states to vocabulary logits.",
+      "prerequisites": [
+        "llm.stacked_blocks"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-12_lm_head_logits"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.softmax",
+      "name": "Softmax and next-token probabilities",
+      "area": "llm",
+      "description": "Turning logits into a probability distribution over the vocabulary.",
+      "prerequisites": [
+        "llm.lm_head"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-13_softmax_probabilities"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.cross_entropy",
+      "name": "Shifted targets and cross-entropy",
+      "area": "llm",
+      "description": "Next-token targets and the training loss.",
+      "prerequisites": [
+        "llm.softmax"
+      ],
+      "related": [
+        "dl.binary_classifier"
+      ],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-14_shifted_targets_cross_entropy"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.backprop",
+      "name": "Backpropagation and gradients",
+      "area": "llm",
+      "description": "Inspecting gradients that flow back through the model.",
+      "prerequisites": [
+        "llm.cross_entropy"
+      ],
+      "related": [
+        "dl.binary_classifier"
+      ],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-15_backpropagation_gradients"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.optimizer",
+      "name": "Optimizer update",
+      "area": "llm",
+      "description": "Verifying how an optimizer step changes parameters.",
+      "prerequisites": [
+        "llm.backprop"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-16_optimizer_update"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.training_loop",
+      "name": "Language-model training loop",
+      "area": "llm",
+      "description": "Full loop on a tiny sequence; shows optimization and memorization, not language understanding.",
+      "prerequisites": [
+        "llm.optimizer"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "LLM Engineering topic overview",
+          "path": "topics/04_llm_engineering/README.md"
+        },
+        {
+          "title": "Learning method",
+          "path": "docs/learning-method.md"
+        }
+      ],
+      "exercises": [
+        "ex-llm-17_training_loop"
+      ],
+      "planned": false
+    },
+    {
+      "id": "llm.generation",
+      "name": "Autoregressive generation and sampling",
+      "area": "llm",
+      "description": "Greedy decoding, temperature and sampling. Roadmap Experiment 30 (NEXT); no exercise exists yet.",
+      "prerequisites": [
+        "llm.training_loop"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap — Experiment 30",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "local.inference",
+      "name": "Local model inference",
+      "area": "local",
+      "description": "Loading and running pretrained models locally (Phase 05); no material yet.",
+      "prerequisites": [
+        "llm.generation"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        },
+        {
+          "title": "Model / runtime / application",
+          "path": "docs/model-runtime-application.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "local.python_integration",
+      "name": "Python ↔ local LLM",
+      "area": "local",
+      "description": "Calling a local model from Python (Phases 06–07); no material yet.",
+      "prerequisites": [
+        "local.inference"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "local.structured_outputs",
+      "name": "Structured outputs",
+      "area": "local",
+      "description": "Getting validated structured responses and handling malformed ones (Phase 07); no material yet.",
+      "prerequisites": [
+        "local.python_integration"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.deterministic",
+      "name": "Deterministic automation",
+      "area": "automation",
+      "description": "Rule-based workflows with predictable, testable behaviour. Planned block.",
+      "prerequisites": [],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.api_integration",
+      "name": "API integration",
+      "area": "automation",
+      "description": "Calling and validating external interfaces. Planned block.",
+      "prerequisites": [
+        "auto.deterministic"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.llm_business",
+      "name": "LLMs for business processes",
+      "area": "automation",
+      "description": "Using a language model inside a bounded business workflow. Planned block.",
+      "prerequisites": [
+        "auto.api_integration",
+        "local.python_integration"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.tool_calling",
+      "name": "Tool calling",
+      "area": "automation",
+      "description": "A model requests structured calls that the host validates and executes. Planned block.",
+      "prerequisites": [
+        "auto.llm_business",
+        "local.structured_outputs"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.agents",
+      "name": "Agents",
+      "area": "automation",
+      "description": "Bounded loops of model decisions, tool use and observation. Planned block.",
+      "prerequisites": [
+        "auto.tool_calling"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.orchestration",
+      "name": "Orchestration",
+      "area": "automation",
+      "description": "Coordinating multi-step or multi-agent workflows with state. Planned block.",
+      "prerequisites": [
+        "auto.state_memory",
+        "auto.frameworks"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.eval_security",
+      "name": "Evaluation and security",
+      "area": "automation",
+      "description": "Independent evaluation, permissions, approvals and prompt-injection awareness. Applies across the whole automation area.",
+      "prerequisites": [
+        "auto.tool_calling"
+      ],
+      "related": [
+        "auto.deterministic",
+        "auto.agents"
+      ],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.state_memory",
+      "name": "State and memory",
+      "area": "automation",
+      "description": "What survives between agent steps and runs. Planned.",
+      "prerequisites": [
+        "auto.agents"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.mcp",
+      "name": "MCP",
+      "area": "automation",
+      "description": "Model Context Protocol tool/context interfaces. Planned.",
+      "prerequisites": [
+        "auto.agents"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.frameworks",
+      "name": "LangChain / LangGraph / n8n",
+      "area": "automation",
+      "description": "Frameworks and workflow platforms, after the primitive loop. Planned.",
+      "prerequisites": [
+        "auto.agents",
+        "auto.mcp"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex-ml-01_decision_tree",
+      "title": "Decision tree",
+      "area": "ml",
+      "path": "topics/01_machine_learning/01_decision_tree",
+      "entrypoint": "topics/01_machine_learning/01_decision_tree/main.py",
+      "readme": "topics/01_machine_learning/01_decision_tree/README.md"
+    },
+    {
+      "id": "ex-ml-02_overfitting",
+      "title": "Overfitting",
+      "area": "ml",
+      "path": "topics/01_machine_learning/02_overfitting",
+      "entrypoint": "topics/01_machine_learning/02_overfitting/main.py",
+      "readme": "topics/01_machine_learning/02_overfitting/README.md"
+    },
+    {
+      "id": "ex-dl-01_binary_classifier",
+      "title": "Binary classifier",
+      "area": "dl",
+      "path": "topics/02_deep_learning/01_binary_classifier",
+      "entrypoint": "topics/02_deep_learning/01_binary_classifier/main.py",
+      "readme": "topics/02_deep_learning/01_binary_classifier/README.md"
+    },
+    {
+      "id": "ex-dl-02_train_test_and_thresholds",
+      "title": "Train test and thresholds",
+      "area": "dl",
+      "path": "topics/02_deep_learning/02_train_test_and_thresholds",
+      "entrypoint": "topics/02_deep_learning/02_train_test_and_thresholds/main.py",
+      "readme": "topics/02_deep_learning/02_train_test_and_thresholds/README.md"
+    },
+    {
+      "id": "ex-cv-01_convolution",
+      "title": "Convolution",
+      "area": "cv",
+      "path": "topics/03_computer_vision/01_convolution",
+      "entrypoint": "topics/03_computer_vision/01_convolution/main.py",
+      "readme": "topics/03_computer_vision/01_convolution/README.md"
+    },
+    {
+      "id": "ex-cv-02_multiple_filters",
+      "title": "Multiple filters",
+      "area": "cv",
+      "path": "topics/03_computer_vision/02_multiple_filters",
+      "entrypoint": "topics/03_computer_vision/02_multiple_filters/main.py",
+      "readme": "topics/03_computer_vision/02_multiple_filters/README.md"
+    },
+    {
+      "id": "ex-cv-03_shapes_cnn",
+      "title": "Shapes cnn",
+      "area": "cv",
+      "path": "topics/03_computer_vision/03_shapes_cnn",
+      "entrypoint": "topics/03_computer_vision/03_shapes_cnn/main.py",
+      "readme": "topics/03_computer_vision/03_shapes_cnn/README.md"
+    },
+    {
+      "id": "ex-cv-04_shapes_evaluation",
+      "title": "Shapes evaluation",
+      "area": "cv",
+      "path": "topics/03_computer_vision/04_shapes_evaluation",
+      "entrypoint": "topics/03_computer_vision/04_shapes_evaluation/main.py",
+      "readme": "topics/03_computer_vision/04_shapes_evaluation/README.md"
+    },
+    {
+      "id": "ex-cv-05_mnist",
+      "title": "Mnist",
+      "area": "cv",
+      "path": "topics/03_computer_vision/05_mnist",
+      "entrypoint": "topics/03_computer_vision/05_mnist/main.py",
+      "readme": "topics/03_computer_vision/05_mnist/README.md"
+    },
+    {
+      "id": "ex-cv-06_mnist_dataloader",
+      "title": "Mnist dataloader",
+      "area": "cv",
+      "path": "topics/03_computer_vision/06_mnist_dataloader",
+      "entrypoint": "topics/03_computer_vision/06_mnist_dataloader/main.py",
+      "readme": "topics/03_computer_vision/06_mnist_dataloader/README.md"
+    },
+    {
+      "id": "ex-cv-07_mnist_cnn",
+      "title": "Mnist cnn",
+      "area": "cv",
+      "path": "topics/03_computer_vision/07_mnist_cnn",
+      "entrypoint": "topics/03_computer_vision/07_mnist_cnn/main.py",
+      "readme": "topics/03_computer_vision/07_mnist_cnn/README.md"
+    },
+    {
+      "id": "ex-cv-08_mnist_error_analysis",
+      "title": "Mnist error analysis",
+      "area": "cv",
+      "path": "topics/03_computer_vision/08_mnist_error_analysis",
+      "entrypoint": "topics/03_computer_vision/08_mnist_error_analysis/main.py",
+      "readme": "topics/03_computer_vision/08_mnist_error_analysis/README.md"
+    },
+    {
+      "id": "ex-llm-01_tokenization",
+      "title": "Experiment 13 — Character Tokenization and Token IDs",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/01_tokenization",
+      "entrypoint": "topics/04_llm_engineering/01_tokenization/main.py",
+      "readme": "topics/04_llm_engineering/01_tokenization/README.md"
+    },
+    {
+      "id": "ex-llm-02_embeddings",
+      "title": "Experiment 14 — Token Embeddings",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/02_embeddings",
+      "entrypoint": "topics/04_llm_engineering/02_embeddings/main.py",
+      "readme": "topics/04_llm_engineering/02_embeddings/README.md"
+    },
+    {
+      "id": "ex-llm-03_positional_embeddings",
+      "title": "Experiment 15 — Positional Embeddings",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/03_positional_embeddings",
+      "entrypoint": "topics/04_llm_engineering/03_positional_embeddings/main.py",
+      "readme": "topics/04_llm_engineering/03_positional_embeddings/README.md"
+    },
+    {
+      "id": "ex-llm-04_self_attention",
+      "title": "Experiment 16 — Self-Attention: Query, Key and Value",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/04_self_attention",
+      "entrypoint": "topics/04_llm_engineering/04_self_attention/main.py",
+      "readme": "topics/04_llm_engineering/04_self_attention/README.md"
+    },
+    {
+      "id": "ex-llm-05_causal_attention",
+      "title": "Experiment 17 — Causal Self-Attention",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/05_causal_attention",
+      "entrypoint": "topics/04_llm_engineering/05_causal_attention/main.py",
+      "readme": "topics/04_llm_engineering/05_causal_attention/README.md"
+    },
+    {
+      "id": "ex-llm-06_multi_head_attention",
+      "title": "Experiment 18 — Multi-Head Causal Self-Attention",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/06_multi_head_attention",
+      "entrypoint": "topics/04_llm_engineering/06_multi_head_attention/main.py",
+      "readme": "topics/04_llm_engineering/06_multi_head_attention/README.md"
+    },
+    {
+      "id": "ex-llm-07_attention_output_residual",
+      "title": "Experiment 19 — Attention Output Projection and Residual Connection",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/07_attention_output_residual",
+      "entrypoint": "topics/04_llm_engineering/07_attention_output_residual/main.py",
+      "readme": "topics/04_llm_engineering/07_attention_output_residual/README.md"
+    },
+    {
+      "id": "ex-llm-08_layer_normalization",
+      "title": "Experiment 20 — Layer Normalization",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/08_layer_normalization",
+      "entrypoint": "topics/04_llm_engineering/08_layer_normalization/main.py",
+      "readme": "topics/04_llm_engineering/08_layer_normalization/README.md"
+    },
+    {
+      "id": "ex-llm-09_feed_forward_network",
+      "title": "Experiment 21 — Feed-Forward Network",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/09_feed_forward_network",
+      "entrypoint": "topics/04_llm_engineering/09_feed_forward_network/main.py",
+      "readme": "topics/04_llm_engineering/09_feed_forward_network/README.md"
+    },
+    {
+      "id": "ex-llm-10_transformer_block",
+      "title": "Experiment 22 — Complete Transformer Block",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/10_transformer_block",
+      "entrypoint": "topics/04_llm_engineering/10_transformer_block/main.py",
+      "readme": "topics/04_llm_engineering/10_transformer_block/README.md"
+    },
+    {
+      "id": "ex-llm-11_stacked_transformer_blocks",
+      "title": "Experiment 23 — Stacked Transformer Blocks",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/11_stacked_transformer_blocks",
+      "entrypoint": "topics/04_llm_engineering/11_stacked_transformer_blocks/main.py",
+      "readme": "topics/04_llm_engineering/11_stacked_transformer_blocks/README.md"
+    },
+    {
+      "id": "ex-llm-12_lm_head_logits",
+      "title": "Experiment 24 — Language-Model Head and Vocabulary Logits",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/12_lm_head_logits",
+      "entrypoint": "topics/04_llm_engineering/12_lm_head_logits/main.py",
+      "readme": "topics/04_llm_engineering/12_lm_head_logits/README.md"
+    },
+    {
+      "id": "ex-llm-13_softmax_probabilities",
+      "title": "Experiment 25 — Softmax and Next-Token Probabilities",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/13_softmax_probabilities",
+      "entrypoint": "topics/04_llm_engineering/13_softmax_probabilities/main.py",
+      "readme": "topics/04_llm_engineering/13_softmax_probabilities/README.md"
+    },
+    {
+      "id": "ex-llm-14_shifted_targets_cross_entropy",
+      "title": "Experiment 26 — Shifted Targets and CrossEntropyLoss",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/14_shifted_targets_cross_entropy",
+      "entrypoint": "topics/04_llm_engineering/14_shifted_targets_cross_entropy/main.py",
+      "readme": "topics/04_llm_engineering/14_shifted_targets_cross_entropy/README.md"
+    },
+    {
+      "id": "ex-llm-15_backpropagation_gradients",
+      "title": "Experiment 27 — Backpropagation and Gradients",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/15_backpropagation_gradients",
+      "entrypoint": "topics/04_llm_engineering/15_backpropagation_gradients/main.py",
+      "readme": "topics/04_llm_engineering/15_backpropagation_gradients/README.md"
+    },
+    {
+      "id": "ex-llm-16_optimizer_update",
+      "title": "Experiment 28 — Optimizer Update",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/16_optimizer_update",
+      "entrypoint": "topics/04_llm_engineering/16_optimizer_update/main.py",
+      "readme": "topics/04_llm_engineering/16_optimizer_update/README.md"
+    },
+    {
+      "id": "ex-llm-17_training_loop",
+      "title": "Experiment 29 — Language-Model Training Loop",
+      "area": "llm",
+      "path": "topics/04_llm_engineering/17_training_loop",
+      "entrypoint": "topics/04_llm_engineering/17_training_loop/main.py",
+      "readme": "topics/04_llm_engineering/17_training_loop/README.md"
+    }
+  ],
+  "default_target": "llm.generation",
+  "default_target_source": "ROADMAP.md: Experiment 30 — Autoregressive Generation and Sampling is NEXT. Used only until a target is stored in the personal database.",
+  "default_target_label": "Experiment 30 — Autoregressive Generation and Sampling",
+  "completed_through": {
+    "node": "llm.training_loop",
+    "label": "Experiment 29 — Language-Model Training Loop",
+    "source": "ROADMAP.md (Experiments 13–29 COMPLETE). Nodes with exercise folders count as covered in the lab; this is not mastery."
+  }
+}

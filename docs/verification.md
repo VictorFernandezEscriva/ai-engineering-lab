@@ -6,7 +6,7 @@ The purpose is to separate **observed evidence** from claims made in notes.
 
 ## Current reorganization — 2026-09-21
 
-Environment: Windows 11, Python 3.13.2. NumPy and pandas are available; scikit-learn, PyTorch, torchvision and matplotlib are absent. Original requirements are retained without version pins.
+Environment: Windows 11, Python 3.13.2. NumPy and pandas are available; scikit-learn, PyTorch, torchvision and matplotlib are absent. Original requirements are retained without version pins. *Clarification (2026-11-01): this describes the global interpreter used on that date, not the repository's `.venv`, which has PyTorch 2.14.0+cpu and scikit-learn installed.*
 
 All nine documented experiment commands were attempted from the repository root. Both ML scripts stopped at import with `ModuleNotFoundError: No module named 'sklearn'`. The seven deep-learning and vision scripts stopped with `ModuleNotFoundError: No module named 'torch'`. No training or dataset download occurred in these attempts.
 

@@ -1,0 +1,105 @@
+:root { --bg:#fafafa; --fg:#1d1d1f; --muted:#666; --card:#fff; --line:#ddd; --accent:#2457c5;
+  --pending:#999; --studying:#c77d00; --practiced:#2a7ab8; --validated:#2a8a4a; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#16181c; --fg:#e8e8ea; --muted:#9a9aa2; --card:#1f2228; --line:#363a42; --accent:#7ba3ff; }
+}
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, sans-serif; }
+header { display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; align-items:baseline; padding:.75rem 1rem; border-bottom:1px solid var(--line); }
+header h1 { font-size:1.2rem; margin:0; }
+nav a { margin-right:1rem; }
+a { color:var(--accent); }
+main { max-width:60rem; margin:0 auto; padding:1rem; }
+h2 { font-size:1.15rem; margin:1.5rem 0 .5rem; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:.75rem 1rem; margin:.75rem 0; }
+.muted { color:var(--muted); font-size:.9rem; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(14rem, 1fr)); gap:.75rem; }
+.badge { display:inline-block; padding:0 .5rem; border-radius:999px; font-size:.8rem; color:#fff; background:var(--pending); }
+.badge.studying { background:var(--studying); } .badge.practiced { background:var(--practiced); }
+.badge.validated { background:var(--validated); } .badge.planned { background:transparent; color:var(--muted); border:1px solid var(--line); }
+.node-list { list-style:none; padding:0; margin:0; }
+.node-list li { padding:.35rem 0; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:.25rem .75rem; align-items:baseline; }
+.rel { font-size:.85rem; color:var(--muted); }
+form { display:flex; flex-wrap:wrap; gap:.5rem; margin:.5rem 0; }
+input, select, textarea, button { font:inherit; padding:.35rem .5rem; border:1px solid var(--line); border-radius:6px; background:var(--card); color:var(--fg); }
+input[type=text], textarea { flex:1 1 14rem; }
+button { cursor:pointer; background:var(--accent); color:#fff; border-color:var(--accent); }
+.error { color:#c0392b; }
+code { background:var(--card); border:1px solid var(--line); border-radius:4px; padding:0 .25rem; word-break:break-all; }
+ul.plain { padding-left:1.2rem; }
+
+nav a.active { font-weight:700; text-decoration:none; }
+main { max-width:none; }
+h3 { font-size:1rem; margin:1rem 0 .25rem; }
+.legend { display:flex; flex-wrap:wrap; gap:.4rem 1rem; font-size:.85rem; margin:.5rem 0; }
+.key.st-studying { color:var(--studying); } .key.st-practiced { color:var(--practiced); } .key.st-validated { color:var(--validated); }
+.key.here { color:var(--accent); font-weight:700; } .key.fade { opacity:.6; }
+.badge.here { background:var(--accent); }
+.mapcols { display:flex; gap:1rem; align-items:flex-start; }
+.mapwrap { flex:1 1 auto; min-width:0; overflow:auto; max-height:78vh; border:1px solid var(--line); border-radius:8px; background:var(--card); }
+.panel { flex:0 0 22rem; max-width:100%; max-height:78vh; overflow:auto; border:1px solid var(--line); border-radius:8px; padding:.5rem 1rem; background:var(--bg); }
+@media (max-width: 900px) { .mapcols { flex-direction:column; } .panel { flex-basis:auto; width:100%; max-height:none; } }
+svg.map { display:block; font-family:inherit; }
+.lane { fill:none; stroke:var(--line); } .lane.planned { stroke-dasharray:4 4; }
+.lane-title { fill:var(--fg); font-size:13px; font-weight:700; } .lane-sub { fill:var(--muted); font-size:11px; }
+.edge { fill:none; stroke:var(--line); stroke-width:1.5; } .edge.hot { stroke:var(--accent); stroke-width:2.5; }
+.node { cursor:pointer; outline:none; }
+.node .box { fill:var(--card); stroke:var(--pending); stroke-width:1.5; stroke-dasharray:5 3; }
+.node .label { fill:var(--fg); font-size:12px; } .node .state { fill:var(--muted); font-size:11px; }
+.node.st-studying .box { stroke:var(--studying); stroke-width:2.5; stroke-dasharray:none; } .node.st-studying .state { fill:var(--studying); }
+.node.st-practiced .box { stroke:var(--practiced); stroke-width:2.5; stroke-dasharray:none; } .node.st-practiced .state { fill:var(--practiced); }
+.node.st-validated .box { stroke:var(--validated); stroke-width:3; stroke-dasharray:none; fill:color-mix(in srgb, var(--validated) 14%, var(--card)); } .node.st-validated .state { fill:var(--validated); font-weight:700; }
+
+.node.selected .box, .node:focus .box { stroke:var(--accent); stroke-width:3; }
+.node.linked .box { stroke-width:2.5; }
+.glow { fill:none; stroke:var(--accent); stroke-width:2; stroke-opacity:.6; }
+.here-pill { fill:var(--accent); } .here-text { fill:#fff; font-size:11px; font-weight:700; }
+
+/* ---- polish pass ---- */
+body { font-size:15px; }
+header { padding:.5rem 1rem; }
+main { padding:.6rem 1rem; }
+nav a { text-decoration:none; padding:.15rem .5rem; border-radius:6px; }
+nav a.active { background:var(--card); border:1px solid var(--line); }
+.banner { display:flex; flex-wrap:wrap; gap:.5rem; align-items:stretch; }
+.chip { display:flex; flex-direction:column; padding:.4rem .8rem; border:1px solid var(--line); border-radius:8px; background:var(--card); }
+.chip-k { font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.chip.done { border-left:4px solid var(--validated); } .chip.target { border-left:4px solid var(--accent); }
+.banner .note { flex:1 1 18rem; margin:0; align-self:center; font-size:.8rem; }
+.legend { display:flex; flex-wrap:wrap; align-items:center; gap:.2rem .9rem; font-size:.8rem; margin:.5rem 0; padding:.3rem .6rem; border:1px solid var(--line); border-radius:8px; background:var(--card); }
+.legend-title { text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-size:.7rem; }
+.key b { font-size:1rem; }
+.key.cov b { color:var(--validated); }
+.mapcols { height:calc(100vh - 12.5rem); min-height:26rem; align-items:stretch; }
+.mapwrap { max-height:none; height:100%; }
+.panel { max-height:none; height:100%; flex-basis:23rem; }
+.panel h2 { margin:.4rem 0; font-size:1.1rem; }
+.panel section { border-top:1px solid var(--line); margin-top:.6rem; padding-top:.1rem; }
+.panel h3 { font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:.5rem 0 .2rem; }
+.panel form { margin:.3rem 0; }
+.tags { display:flex; flex-wrap:wrap; gap:.3rem; margin:.2rem 0; }
+.badge.cov { background:transparent; color:var(--validated); border:1px solid var(--validated); }
+button.secondary { background:transparent; color:var(--accent); }
+@media (max-width: 900px) { .mapcols { height:auto; } .mapwrap { height:60vh; } .panel { height:auto; } }
+.lane { fill:color-mix(in srgb, var(--fg) 3%, transparent); stroke:var(--line); }
+.lane-title { font-size:12px; letter-spacing:.02em; } .lane-sub { font-size:10px; }
+.edge { stroke:color-mix(in srgb, var(--fg) 22%, transparent); stroke-width:1.2; }
+.edge.done { stroke:var(--validated); stroke-width:2; stroke-opacity:.75; }
+.edge.hot { stroke:var(--accent); stroke-width:2.5; stroke-opacity:1; }
+.node .label { font-size:11.5px; } .node.covered .label { font-weight:600; }
+.node .glyph { font-size:12px; fill:var(--muted); }
+.node.st-studying .glyph { fill:var(--studying); } .node.st-practiced .glyph { fill:var(--practiced); } .node.st-validated .glyph { fill:var(--validated); font-weight:700; }
+.cover-bar { fill:var(--validated); opacity:.8; }
+.node.planned { opacity:1; } .node.planned .box, .node.planned .cover-bar { opacity:.6; } .node.planned .label { opacity:.85; }
+.here-text { font-size:10px; letter-spacing:.05em; }
+
+/* ---- layout pass: full-width map, drawer details ---- */
+.mapcols { display:block; position:relative; height:calc(100vh - 12.5rem); min-height:24rem; }
+.mapwrap { height:100%; }
+.mapwrap.drawer-open svg.map { margin-right:25rem; }
+.panel.drawer { position:fixed; top:0; right:0; bottom:0; width:min(25rem, 100vw); height:auto; max-height:none; z-index:10;
+  border-radius:0; border-width:0 0 0 1px; box-shadow:-8px 0 24px rgba(0,0,0,.35); padding:.75rem 1rem 1.5rem; }
+.panel .close { position:sticky; top:0; float:right; background:transparent; color:var(--fg); border-color:var(--line); line-height:1; }
+.hint { margin:.4rem 0 0; font-size:.8rem; }
+.edge.next { stroke:var(--accent); stroke-width:2; stroke-dasharray:5 4; stroke-opacity:.9; }
+@media (max-width: 900px) { .mapcols { height:auto; } .mapwrap { height:60vh; } .mapwrap.drawer-open svg.map { margin-right:0; } }
