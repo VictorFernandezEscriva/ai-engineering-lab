@@ -83,19 +83,22 @@ def make_handler(catalog, store):
                     self._error(404, "not found")
 
         def _read_json(self):
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+            except ValueError:
+                length = -1
+            # Consume the declared body before any rejection: closing with unread request data
+            # makes Windows reset the connection and the client never sees the 400 response.
+            raw = self.rfile.read(length) if 0 < length <= MAX_BODY else b""
             if self.headers.get("Content-Type", "").split(";")[0].strip() != "application/json":
                 raise ValidationError("Content-Type must be application/json")
             origin = self.headers.get("Origin")
             if origin and _host_only(origin.split("://", 1)[-1]) not in LOOPBACK_HOSTS:
                 raise ValidationError("cross-origin request refused")
-            try:
-                length = int(self.headers.get("Content-Length", "0"))
-            except ValueError:
-                length = -1
             if not 0 < length <= MAX_BODY:
                 raise ValidationError("invalid body size")
             try:
-                data = json.loads(self.rfile.read(length))
+                data = json.loads(raw)
             except ValueError:
                 raise ValidationError("invalid JSON")
             if not isinstance(data, dict):

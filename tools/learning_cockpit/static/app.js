@@ -25,6 +25,8 @@ async function api(path, body) {
 
 const statusOf = (id) => state.status[id] || "pending";
 const badge = (s) => h("span", { class: "badge " + s }, STATUS_LABEL[s] || s);
+const trackName = (id) => (catalog.tracks.find((t) => t.id === id) || { name: id }).name;
+const trackShort = (id) => (catalog.tracks.find((t) => t.id === id) || { short: id }).short;
 const nodeLink = (id) => h("a", { href: "#/node/" + id }, nodeById[id] ? nodeById[id].name : id);
 const fmt = (iso) => (iso ? new Date(iso).toLocaleString() : "—");
 
@@ -178,9 +180,9 @@ function mapSvg(selectedId) {
   const svg = sv("svg", { class: "map", width: L.width, height: L.height, viewBox: `0 0 ${L.width} ${L.height}`,
     role: "img", "aria-label": "Knowledge map" });
   for (const a of catalog.areas) {
-    svg.append(sv("rect", { class: "lane" + (a.planned ? " planned" : ""), x: L.colX[a.id], y: 4, width: L.colW[a.id], height: L.height - 8, rx: 10 }),
+    svg.append(sv("rect", { class: "lane track-" + a.track + (a.planned ? " planned" : ""), x: L.colX[a.id], y: 4, width: L.colW[a.id], height: L.height - 8, rx: 10 }),
       sv("text", { class: "lane-title", x: L.colX[a.id] + 10, y: 22 }, a.name),
-      sv("text", { class: "lane-sub", x: L.colX[a.id] + 10, y: 37 }, (a.phase || "") + (a.planned ? " · planned" : "")));
+      sv("text", { class: "lane-sub", x: L.colX[a.id] + 10, y: 37 }, (a.phase || "") + " · " + trackShort(a.track) + (a.planned ? " · planned" : "")));
   }
   const linked = new Set(selectedId ? [...nodeById[selectedId].prerequisites, ...catalog.nodes.filter((n) => n.prerequisites.includes(selectedId)).map((n) => n.id)] : []);
   const edges = [];
@@ -223,7 +225,9 @@ function legend() {
     h("span", { class: "legend-title" }, "Map"),
     key("cov", "▬", "lab path completed"),
     key("here", "▾", "current target"),
-    key("fade", "◌", "planned future area"));
+    key("fade", "◌", "planned future area"),
+    h("span", { class: "legend-title" }, "Track"),
+    catalog.tracks.map((t) => h("span", { class: "key trk-" + t.id }, h("b", {}, "■"), " " + t.name)));
 }
 
 function banner() {
@@ -243,6 +247,8 @@ function mapView(selectedId, panel) {
     panel ? null : h("p", { class: "muted hint" }, "Select a concept to inspect it, rate your mastery, add evidence or set it as your current target."));
 }
 
+const resourcesFor = (id) => (catalog.resources || []).filter((r) => r.nodes.includes(id));
+
 async function nodePanel(id) {
   const node = nodeById[id];
   const { evidence } = await api("/api/nodes/" + encodeURIComponent(id));
@@ -257,6 +263,7 @@ async function nodePanel(id) {
       isHere ? h("span", { class: "badge here" }, "current target") : null),
     h("p", {}, node.description),
     h("p", { class: "muted" }, catalog.areas.find((a) => a.id === node.area).name + (node.planned ? " · no exercises yet" : "")),
+    h("p", { class: "muted" }, "Track: " + trackName(node.track || catalog.areas.find((a) => a.id === node.area).track)),
     section("Mastery (your rating)",
       formWith([h("select", { name: "status" }, Object.entries(STATUS_LABEL).map(([v, l]) =>
         h("option", { value: v, selected: v === statusOf(id) }, l)))], "Update",
@@ -271,6 +278,9 @@ async function nodePanel(id) {
       return h("li", {}, ex.title, h("br"), h("code", {}, ex.path), " ", h("code", {}, "python " + ex.entrypoint));
     })) : h("p", { class: "muted" }, "No exercise exists yet.")),
     section("Repository resources", h("ul", { class: "plain" }, node.resources.map((r) => h("li", {}, r.title, " — ", h("code", {}, r.path || r.url))))),
+    resourcesFor(id).length ? section("Learning resources (external, free)", h("ul", { class: "plain" }, resourcesFor(id).map((r) => h("li", {},
+      h("a", { href: r.url, target: "_blank", rel: "noopener noreferrer" }, r.name), " ", h("span", { class: "muted" }, r.provider),
+      h("br"), h("span", { class: "muted" }, r.timing))))) : null,
     section("Evidence",
       evidence.length ? h("ul", { class: "plain" }, evidence.map((ev) => h("li", {},
         h("strong", {}, ev.kind), ": ", ev.text, ev.ref ? [" ", h("code", {}, ev.ref)] : null, " ", h("span", { class: "muted" }, fmt(ev.created_at)))))

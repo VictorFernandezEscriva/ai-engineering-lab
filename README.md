@@ -137,6 +137,8 @@ Reusable engineering utilities supporting the laboratory.
 
 The main learning path, current progress and planned future work.
 
+**Professional direction: AI Automation & Agentic Systems Engineering.** The lab pursues it through two complementary tracks that never replace each other: **Core AI Engineering** (understand how AI systems work: ML, DL, Transformers, LLMs, embeddings, RAG, evaluation, adaptation) and **Applied AI Automation & Agentic Systems** (solve real business problems with process analysis, APIs, webhooks, n8n, structured outputs, tool calling, agents, MCP, LangChain / LangGraph and human approval). Agents are never the default answer; frameworks come after the primitives they implement. See the [ROADMAP](ROADMAP.md), the [AI Engineering map](docs/ai-engineering-map.md) and the [Learning Cockpit](tools/learning_cockpit/README.md).
+
 The roadmap describes progression.
 
 It is not the repository directory structure.
@@ -151,17 +153,15 @@ It is not the repository directory structure.
 | Deep Learning Foundations | Complete |
 | Computer Vision Foundations | Complete |
 | LLM Fundamentals | In progress |
-| Local Model Inference | Planned |
-| LLM APIs and Integration | Planned |
-| Hardware and Quantization | Planned |
-| Embeddings and Semantic Search | Planned |
-| RAG | Planned |
-| Tool Calling | Planned |
-| Agents | Planned |
-| Multimodal AI | Planned |
-| Fine-Tuning | Planned |
-| AI Backend Engineering | Planned |
-| Production AI Engineering | Planned |
+| Local Model Inference (Phase 05) | Planned |
+| LLM Application Interfaces (Phase 06) | Planned |
+| AI Automation Foundations (Phase 07) | Planned |
+| Embeddings and Semantic Retrieval (Phase 08) | Planned |
+| RAG and Knowledge Systems (Phase 09) | Planned |
+| Agentic Systems Fundamentals (Phase 10) | Planned |
+| MCP and Integration (Phase 11) | Planned |
+| Agent Frameworks and Orchestration (Phase 12) | Planned |
+| Multimodal AI, Fine-Tuning, AI Backend, Production AI (Phases 13–17) | Planned |
 
 ---
 
@@ -537,10 +537,12 @@ Fixed random seeds improve reproducibility but do not guarantee identical result
 The complete progression is documented in [ROADMAP.md](ROADMAP.md), with a [route guide after Phase 04](ROADMAP.md#route-after-phase-04):
 
 ```text
-LLM fundamentals → local inference → Python / local LLM interfaces
-→ structured outputs / tool calling → agentic fundamentals
-→ embeddings / semantic retrieval → RAG → advanced agents / agentic RAG
-→ multimodal / voice → model adaptation → production engineering
+Phases 01–05  ML → DL → CV → LLM internals → local models & inference
+Phase 06      LLM application interfaces (structured outputs, first tool call)
+Phase 07      AI automation foundations   ┐ Applied track: 07 → 10 → 11 → 12
+Phase 08–09   Embeddings → RAG            ┘ Core track:    08 → 09
+Phase 10–12   Agent fundamentals → MCP → frameworks & orchestration
+Phase 13–17   Multimodal → adaptation → AI backend → offline packaging → production AI
 ```
 
 A future **Minimal Coding-Agent Experiment** will study controlled iterative tool use in a tiny deliberately broken toy workspace. It remains a small lab exercise, not a planned external repository. Hardware, benchmarking, evaluation, safety and software engineering are parallel tracks.

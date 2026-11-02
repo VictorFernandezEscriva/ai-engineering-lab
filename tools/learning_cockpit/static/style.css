@@ -93,6 +93,15 @@ button.secondary { background:transparent; color:var(--accent); }
 .node.planned { opacity:1; } .node.planned .box, .node.planned .cover-bar { opacity:.6; } .node.planned .label { opacity:.85; }
 .here-text { font-size:10px; letter-spacing:.05em; }
 
+/* ---- learning tracks (lane tint + legend swatch) ---- */
+:root { --t-core:#2457c5; --t-applied:#b5473f; --t-bridge:#7a55c9; --t-cross:#777; }
+.lane.track-core { fill:color-mix(in srgb, var(--t-core) 7%, transparent); }
+.lane.track-applied { fill:color-mix(in srgb, var(--t-applied) 8%, transparent); }
+.lane.track-bridge { fill:color-mix(in srgb, var(--t-bridge) 8%, transparent); }
+.lane.track-cross-cutting { fill:color-mix(in srgb, var(--t-cross) 8%, transparent); }
+.key.trk-core b { color:var(--t-core); } .key.trk-applied b { color:var(--t-applied); }
+.key.trk-bridge b { color:var(--t-bridge); } .key.trk-cross-cutting b { color:var(--t-cross); }
+
 /* ---- layout pass: full-width map, drawer details ---- */
 .mapcols { display:block; position:relative; height:calc(100vh - 12.5rem); min-height:24rem; }
 .mapwrap { height:100%; }

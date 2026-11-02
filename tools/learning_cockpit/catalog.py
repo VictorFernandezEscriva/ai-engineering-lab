@@ -36,9 +36,13 @@ def validate(catalog, root=REPO_ROOT):
     area_ids = _unique(catalog["areas"], "area")
     node_ids = _unique(catalog["nodes"], "node")
     exercise_ids = _unique(catalog["exercises"], "exercise")
+    track_ids = _unique(catalog.get("tracks", []), "track")
+    _unique(catalog.get("resources", []), "resource")
     for area in catalog["areas"]:
         if "path" in area and resolve_repo_path(area["path"], root) is None:
             raise CatalogError(f"area {area['id']}: path does not exist: {area['path']}")
+        if area.get("track") not in track_ids:
+            raise CatalogError(f"area {area['id']}: unknown track")
     for ex in catalog["exercises"]:
         if ex.get("area") not in area_ids:
             raise CatalogError(f"exercise {ex['id']}: unknown area")
@@ -53,6 +57,8 @@ def validate(catalog, root=REPO_ROOT):
             for ref in node.get(key, []):
                 if ref not in valid:
                     raise CatalogError(f"node {nid}: unknown {key} reference {ref}")
+        if node.get("track", next(a for a in catalog["areas"] if a["id"] == node["area"])["track"]) not in track_ids:
+            raise CatalogError(f"node {nid}: unknown track")
         if nid in node.get("prerequisites", []):
             raise CatalogError(f"node {nid}: lists itself as prerequisite")
         for res in node.get("resources", []):
@@ -60,6 +66,12 @@ def validate(catalog, root=REPO_ROOT):
                 raise CatalogError(f"node {nid}: resource path does not exist: {res['path']}")
             if "path" not in res and "url" not in res:
                 raise CatalogError(f"node {nid}: resource needs path or url")
+    for res in catalog.get("resources", []):
+        rid = res["id"]
+        if not str(res.get("url", "")).startswith("https://") or not res.get("name"):
+            raise CatalogError(f"resource {rid}: needs a name and an https url")
+        if not res.get("nodes") or any(n not in node_ids for n in res["nodes"]):
+            raise CatalogError(f"resource {rid}: needs known node references")
     if catalog.get("default_target") not in node_ids:
         raise CatalogError("default_target must be a known node")
     done = catalog.get("completed_through", {})

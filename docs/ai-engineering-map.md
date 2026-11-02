@@ -17,6 +17,49 @@ The foundation phases in ML, DL and CV are recorded as complete. **Phase 04 — 
 
 **Next: Experiment 30 — Autoregressive Generation and Sampling.** It remains `NEXT` in the roadmap; no experiment directory or completed result exists for it yet. Current progress comes from the [topic overviews](../README.md#current-progress) and individual experiment notes, not from the presence of a term in this map. The dated [verification log](verification.md) is historical and is not a complete index of subsequent learning.
 
+## Two Complementary Tracks
+
+The professional direction is **AI Automation & Agentic Systems Engineering**. The map has two tracks that converge in production systems; neither replaces the other.
+
+```text
+                              AI ENGINEERING
+                                    │
+          ┌─────────────────────────┴─────────────────────────┐
+          │                                                   │
+   CORE AI ENGINEERING                              APPLIED AI SYSTEMS
+   (how AI works)                          (how AI solves business problems)
+          │                                                   │
+ ML / DL / CV / Transformers                        Process analysis
+          │                                          Automation foundations
+   Local models & inference                       APIs · webhooks · n8n
+          │                                                   │
+ Structured outputs ◄─────── bridge ───────────────► Integrations
+          │                                                   │
+ Embeddings / retrieval                             Tool calling
+          │                                                   │
+          ├────────────────────► RAG ◄────────────────────────┤
+          │                                                   │
+ Evaluation ◄──────────── cross-cutting ─────────────► Agent loops · state
+          │                                                   │
+ Multimodal · model adaptation                        MCP
+          │                                                   │
+          │                                   LangChain · LangGraph · orchestration
+          │                                                   │
+          └─────────────────────────┬─────────────────────────┘
+                                    │
+                         PRODUCTION AI SYSTEMS
+              (reliability · security · observability · cost)
+```
+
+| Track | Contains | Roadmap phases |
+|---|---|---|
+| **Core AI Engineering** | ML, DL, CV, Transformer internals, LLM generation, embeddings and retrieval, multimodal, model adaptation | 01–04, 08, 13–14 |
+| **Applied AI Automation & Agentic Systems** | process analysis, automation foundations, agent loops, MCP, frameworks, orchestration | 07, 10–12 |
+| **Bridge** | local models, LLM interfaces (structured outputs, tool calling), RAG, backend and production engineering | 05, 06, 09, 15–17 |
+| **Cross-cutting** | problem framing, evaluation, security, privacy, reliability, observability, cost | every phase |
+
+In the Learning Cockpit each lane shows its track, and every node carries one. Phase numbers are sequential; the tracks run in parallel conceptually.
+
 ## How the Branches Connect
 
 ```text
@@ -113,6 +156,28 @@ Further study includes temperature, top-k / top-p sampling and context windows. 
 - **Actions:** function calling / tool calling, argument validation, authorization, execution and returning results.
 - **Reliability:** streaming, error handling, timeouts and bounded retries.
 - **Optional implementation tools to learn:** Pydantic for data validation and FastAPI for a local service interface. A schema does not by itself authorize an action or prove semantic correctness.
+
+## AI Automation Foundations
+
+⬜ **Planned; begins the applied track (Phase 07).** Solving a real business problem starts before any model: understand the process, then decide what AI adds.
+
+```text
+Process discovery → map the current workflow
+  → deterministic steps  |  uncertain / semantic steps
+  → is AI actually appropriate?  → choose the simplest architecture
+  → structured inputs / outputs → integrate APIs and data
+  → failures, retries, timeouts → human approval where necessary
+  → evaluate against a baseline → observe and monitor
+```
+
+- **Fundamentals:** business-process decomposition, deterministic workflows, rules versus AI, HTTP, REST APIs, JSON, webhooks, authentication concepts, data transformation and validation, retries, timeouts, idempotency, error handling, human approval, auditability and workflow evaluation.
+- **Architecture choice:** deterministic code, workflow automation, a single LLM call, RAG, an agent and a multi-agent system solve different problems. An agent is never the default answer; prefer the simplest design that works.
+- **n8n:** a workflow platform, learned locally (self-hosted) after the fundamentals; n8n Cloud and paid tiers are not required.
+- **Small future experiments:** deterministic triage, webhook → validation → routing, API → transform → output, retry / error handling, human approval, a simple local n8n workflow. A passing score on original cases is a baseline, not proof of generalization.
+
+## Cross-cutting Architecture Skills
+
+Required to build systems a company could trust, applied in every phase: requirements and problem framing, process mapping, API integration, data schemas, validation, reliability, error handling, retries, idempotency, human-in-the-loop, evaluation, observability, privacy, security, cost awareness, build-versus-buy reasoning and local-versus-hosted architecture. Each applied experiment asks: what is the baseline, what is success, which failures exist, how is generalization tested, is AI better than deterministic logic, what happens when the model fails, and when must a human intervene?
 
 ## Embeddings and Retrieval
 
@@ -239,8 +304,13 @@ Names below are grouped by purpose. **Fundamentals first, framework second.** Ex
 | LLM applications | Python interfaces, JSON Schema, Pydantic, FastAPI | Planned; structured outputs and tool calling are interface patterns, not frameworks |
 | Retrieval | Retrieval embedding models, FAISS, SQLite-based approaches, other local vector indexes | Planned; understand vectors and ranking before an index library |
 | Agents and workflows | MCP, LangChain, LangGraph, n8n | Planned; protocol / frameworks / automation platform with different roles, following primitive implementations |
+| Automation foundations | HTTP, REST, webhooks, JSON, n8n (self-hosted) | Planned (Phase 07); workflow fundamentals before the platform |
 | Model adaptation | PyTorch, PEFT | Planned adaptation study; training and evaluation principles precede adapter tooling |
 | Engineering | Git, pytest, Docker concepts, CI, logging / observability | Git is used; dedicated testing, container and operations studies remain planned |
+
+## Complementary Learning Resources
+
+Free external courses complement, and do not replace, the lab's experiments. They are registered once in the Learning Cockpit catalog and shown on the relevant concepts: the Hugging Face LLM Course (LLM tooling, tokenizers, adaptation), the Hugging Face Agents Course (after tool calling and a minimal loop), LangChain / LangGraph learning material (after the from-scratch version) and n8n Academy (local instance). See the [roadmap table](../ROADMAP.md#external-learning-resources).
 
 ## Scope and ZERO EXTRA COST
 

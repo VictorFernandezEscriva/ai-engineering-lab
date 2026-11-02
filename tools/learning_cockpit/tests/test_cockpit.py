@@ -79,12 +79,83 @@ class MapAndTopicAlignmentTests(unittest.TestCase):
         roadmap = (REPO_ROOT / "ROADMAP.md").read_text(encoding="utf-8")
         self.assertIn("# Phase 05 — Local Models and Inference", roadmap)
 
-    def test_automation_is_future_curriculum_without_topic_dir(self):
-        area = next(a for a in self.catalog["areas"] if a["id"] == "automation")
-        self.assertTrue(area["planned"])
-        self.assertNotIn("path", area)
-        auto = [n for n in self.catalog["nodes"] if n["area"] == "automation"]
-        self.assertTrue(auto and all(n["planned"] and not n["exercises"] for n in auto))
+    def test_future_phases_are_readme_only_planned_topics(self):
+        expected = {"iface": "06_llm_application_interfaces", "automation": "07_ai_automation_foundations",
+                    "retrieval": "08_embeddings_semantic_retrieval", "rag": "09_rag_knowledge_systems",
+                    "agents": "10_agentic_systems", "mcp": "11_mcp_integration",
+                    "frameworks": "12_agent_frameworks_orchestration"}
+        roadmap = (REPO_ROOT / "ROADMAP.md").read_text(encoding="utf-8")
+        for area_id, directory in expected.items():
+            area = next(a for a in self.catalog["areas"] if a["id"] == area_id)
+            self.assertEqual(area["path"], "topics/" + directory)
+            self.assertTrue(area["planned"])
+            folder = REPO_ROOT / area["path"]
+            self.assertEqual([p.name for p in folder.iterdir()], ["README.md"])  # no experiments, no code
+            self.assertIn("PLANNED", (folder / "README.md").read_text(encoding="utf-8"))
+            self.assertIn(f"# {area['phase']} — ", roadmap)
+            nodes = [n for n in self.catalog["nodes"] if n["area"] == area_id]
+            self.assertTrue(nodes and all(n["planned"] and not n["exercises"] for n in nodes), area_id)
+        for area_id in ("later", "cross"):  # visual groupings, not one lane per phase
+            self.assertNotIn("path", next(a for a in self.catalog["areas"] if a["id"] == area_id))
+        for directory in ("13_multimodal_voice", "14_model_adaptation", "15_ai_backend_client_integration",
+                          "16_packaging_offline_distribution", "17_production_ai_engineering"):
+            folder = REPO_ROOT / "topics" / directory
+            self.assertEqual([p.name for p in folder.iterdir()], ["README.md"])
+            self.assertIn("PLANNED", (folder / "README.md").read_text(encoding="utf-8"))
+            self.assertIn(f"# Phase {directory[:2]} — ", roadmap)
+        numbers = sorted(p.name[:2] for p in (REPO_ROOT / "topics").iterdir() if p.is_dir())
+        self.assertEqual(numbers, [f"{i:02d}" for i in range(1, 18)])
+
+    def test_tracks_cover_core_applied_bridge_and_cross_cutting(self):
+        self.assertEqual({t["id"] for t in self.catalog["tracks"]}, {"core", "applied", "bridge", "cross-cutting"})
+        used = {n.get("track") or next(a for a in self.catalog["areas"] if a["id"] == n["area"])["track"]
+                for n in self.catalog["nodes"]}
+        self.assertEqual(used, {"core", "applied", "bridge", "cross-cutting"})
+        for nid in ("llm.training_loop", "local.inference"):  # Core path is preserved
+            self.assertIn(self.nodes[nid]["track"], ("core", "bridge"))
+        applied = {n["id"] for n in self.catalog["nodes"] if n.get("track") == "applied"}
+        self.assertTrue({"auto.n8n", "agent.loop", "mcp.architecture", "fw.langgraph"} <= applied)
+
+    def test_frameworks_come_after_fundamentals(self):
+        def ancestors(nid, seen=None):
+            seen = set() if seen is None else seen
+            for p in self.nodes[nid]["prerequisites"]:
+                if p not in seen:
+                    seen.add(p)
+                    ancestors(p, seen)
+            return seen
+        self.assertIn("agent.loop", ancestors("fw.langchain"))
+        self.assertIn("agent.loop", ancestors("fw.langgraph"))
+        self.assertIn("auto.reliability", ancestors("fw.n8n_ai"))
+        self.assertIn("agent.loop", ancestors("mcp.architecture"))
+        self.assertIn("iface.tool_calling", ancestors("agent.loop"))
+        self.assertIn("rag.pipeline", ancestors("fw.langchain"))
+
+    def test_resource_registry_maps_courses_to_nodes(self):
+        resources = {r["id"]: r for r in self.catalog["resources"]}
+        self.assertEqual(set(resources), {"hf-llm-course", "hf-agents-course", "langchain-learn", "n8n-learning"})
+        for res in resources.values():
+            self.assertTrue(res["url"].startswith("https://"))
+            self.assertTrue(all(n in self.nodes for n in res["nodes"]))
+            self.assertEqual(res["cost"], "free")
+        self.assertIn("agent.loop", resources["hf-agents-course"]["nodes"])
+        self.assertIn("auto.n8n", resources["n8n-learning"]["nodes"])
+        # one canonical registry: URLs live in the catalog, not on individual nodes
+        urls = {r["url"] for r in resources.values()}
+        for n in self.catalog["nodes"]:
+            self.assertFalse(urls & {r.get("url") for r in n["resources"]}, n["id"])
+
+    def test_invalid_resources_and_tracks_rejected(self):
+        def broken(mutate):
+            c = copy.deepcopy(self.catalog)
+            mutate(c)
+            with self.assertRaises(CatalogError):
+                validate(c)
+        broken(lambda c: c["resources"].append(dict(c["resources"][0])))                       # duplicate id
+        broken(lambda c: c["resources"][0].update(nodes=["nope"]))                              # unknown node
+        broken(lambda c: c["resources"][0].update(url="http://insecure.example"))
+        broken(lambda c: c["areas"][0].update(track="nope"))
+        broken(lambda c: c["nodes"][0].update(track="nope"))
 
     def test_default_target_matches_roadmap_next(self):
         self.assertEqual(self.catalog["default_target"], "llm.generation")
@@ -112,7 +183,10 @@ class MapAndTopicAlignmentTests(unittest.TestCase):
         self.assertTrue(all(p in self.nodes for p, _ in edges))
         cross = {(self.nodes[p]["area"], self.nodes[n]["area"]) for p, n in edges if self.nodes[p]["area"] != self.nodes[n]["area"]}
         self.assertIn(("llm", "local"), cross)
-        self.assertIn(("local", "automation"), cross)
+        self.assertIn(("local", "iface"), cross)
+        self.assertIn(("iface", "automation"), cross)  # applied track branches off the interfaces
+        self.assertIn(("iface", "agents"), cross)
+        self.assertIn(("rag", "frameworks"), cross)
 
 
 class StoreTests(unittest.TestCase):
@@ -257,6 +331,7 @@ class AppTests(unittest.TestCase):
         self.assertEqual(len(catalog["exercises"]), 29)
         self.assertEqual(catalog["default_target"], "llm.generation")
         self.assertEqual(catalog["completed_through"]["node"], "llm.training_loop")
+        self.assertEqual(len(catalog["tracks"]), 4)
         state = json.loads(self.request("GET", "/api/state")[1])
         self.assertEqual(state["status"], {})  # overlay never writes mastery
         node = catalog["nodes"][0]["id"]

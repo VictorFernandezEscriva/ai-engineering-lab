@@ -8,7 +8,8 @@
       "path": "topics/01_machine_learning",
       "description": "Supervised learning, evaluation and generalization.",
       "phase": "Phase 01",
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "dl",
@@ -16,7 +17,8 @@
       "path": "topics/02_deep_learning",
       "description": "Neural networks, loss, gradients and thresholds.",
       "phase": "Phase 02",
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "cv",
@@ -24,7 +26,8 @@
       "path": "topics/03_computer_vision",
       "description": "Convolution and CNN image classification.",
       "phase": "Phase 03",
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm",
@@ -32,22 +35,96 @@
       "path": "topics/04_llm_engineering",
       "description": "Transformer internals from tokenization to the training loop.",
       "phase": "Phase 04",
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "local",
       "name": "Local Models & Inference",
       "phase": "Phase 05",
       "planned": true,
-      "path": "topics/05_local_models_inference",
-      "description": "Future: local inference, local APIs, Python integration, structured outputs."
+      "track": "bridge",
+      "description": "Future: pretrained models, runtimes (Ollama, llama.cpp), hardware, quantization and benchmarking.",
+      "path": "topics/05_local_models_inference"
+    },
+    {
+      "id": "iface",
+      "name": "LLM Application Interfaces",
+      "phase": "Phase 06",
+      "planned": true,
+      "track": "bridge",
+      "description": "Future: Python ↔ local LLM, chat, streaming, structured outputs, first controlled tool call.",
+      "path": "topics/06_llm_application_interfaces"
     },
     {
       "id": "automation",
-      "name": "AI Automation & Agentic Systems",
-      "phase": "Roadmap Phases 14–15 (no topic directory yet)",
+      "name": "AI Automation Foundations",
+      "phase": "Phase 07",
       "planned": true,
-      "description": "Future specialization: automation, tool calling, agents, MCP, frameworks, evaluation and safety."
+      "track": "applied",
+      "description": "Future: process analysis, deterministic workflows, HTTP / webhooks, reliability, human approval, n8n.",
+      "path": "topics/07_ai_automation_foundations"
+    },
+    {
+      "id": "retrieval",
+      "name": "Embeddings & Semantic Retrieval",
+      "phase": "Phase 08",
+      "planned": true,
+      "track": "core",
+      "description": "Future: external embedding models, similarity, semantic search, chunking, retrieval evaluation.",
+      "path": "topics/08_embeddings_semantic_retrieval"
+    },
+    {
+      "id": "rag",
+      "name": "RAG & Knowledge Systems",
+      "phase": "Phase 09",
+      "planned": true,
+      "track": "bridge",
+      "description": "Future: ingestion, retrieval, grounded generation, citations, RAG evaluation.",
+      "path": "topics/09_rag_knowledge_systems"
+    },
+    {
+      "id": "agents",
+      "name": "Agentic Systems Fundamentals",
+      "phase": "Phase 10",
+      "planned": true,
+      "track": "applied",
+      "description": "Future: tool execution, agent loop from scratch, state, permissions, agent evaluation.",
+      "path": "topics/10_agentic_systems"
+    },
+    {
+      "id": "mcp",
+      "name": "MCP & Integration",
+      "phase": "Phase 11",
+      "planned": true,
+      "track": "applied",
+      "description": "Future: MCP architecture, local servers, security boundaries.",
+      "path": "topics/11_mcp_integration"
+    },
+    {
+      "id": "frameworks",
+      "name": "Agent Frameworks & Orchestration",
+      "phase": "Phase 12",
+      "planned": true,
+      "track": "applied",
+      "description": "Future: LangChain, LangGraph, n8n AI workflows, subagents, orchestration.",
+      "path": "topics/12_agent_frameworks_orchestration"
+    },
+    {
+      "id": "later",
+      "name": "Later Core AI & Production",
+      "phase": "Phases 13–17",
+      "planned": true,
+      "track": "core",
+      "description": "Future: multimodal / voice, model adaptation, AI backend, production AI."
+    },
+    {
+      "id": "cross",
+      "name": "Cross-cutting Skills",
+      "phase": "All phases",
+      "planned": true,
+      "track": "cross-cutting",
+      "description": "Applied in every phase: problem framing, evaluation, security, observability and cost."
     }
   ],
   "nodes": [
@@ -71,7 +148,8 @@
       "exercises": [
         "ex-ml-01_decision_tree"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "ml.decision_tree",
@@ -95,7 +173,8 @@
       "exercises": [
         "ex-ml-01_decision_tree"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "ml.overfitting",
@@ -121,7 +200,8 @@
       "exercises": [
         "ex-ml-02_overfitting"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "dl.binary_classifier",
@@ -145,7 +225,8 @@
       "exercises": [
         "ex-dl-01_binary_classifier"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "dl.train_test_thresholds",
@@ -170,7 +251,8 @@
       "exercises": [
         "ex-dl-02_train_test_and_thresholds"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "cv.convolution",
@@ -195,7 +277,8 @@
         "ex-cv-01_convolution",
         "ex-cv-02_multiple_filters"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "cv.cnn_shapes",
@@ -220,7 +303,8 @@
         "ex-cv-03_shapes_cnn",
         "ex-cv-04_shapes_evaluation"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "cv.mnist_pipeline",
@@ -245,7 +329,8 @@
         "ex-cv-05_mnist",
         "ex-cv-06_mnist_dataloader"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "cv.mnist_cnn",
@@ -273,7 +358,8 @@
         "ex-cv-07_mnist_cnn",
         "ex-cv-08_mnist_error_analysis"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.tokenization",
@@ -295,7 +381,8 @@
       "exercises": [
         "ex-llm-01_tokenization"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.embeddings",
@@ -319,7 +406,8 @@
       "exercises": [
         "ex-llm-02_embeddings"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.positional",
@@ -343,7 +431,8 @@
       "exercises": [
         "ex-llm-03_positional_embeddings"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.self_attention",
@@ -367,7 +456,8 @@
       "exercises": [
         "ex-llm-04_self_attention"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.causal_attention",
@@ -391,7 +481,8 @@
       "exercises": [
         "ex-llm-05_causal_attention"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.multi_head",
@@ -415,7 +506,8 @@
       "exercises": [
         "ex-llm-06_multi_head_attention"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.attention_output",
@@ -439,7 +531,8 @@
       "exercises": [
         "ex-llm-07_attention_output_residual"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.layer_norm",
@@ -463,7 +556,8 @@
       "exercises": [
         "ex-llm-08_layer_normalization"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.ffn",
@@ -487,7 +581,8 @@
       "exercises": [
         "ex-llm-09_feed_forward_network"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.transformer_block",
@@ -511,7 +606,8 @@
       "exercises": [
         "ex-llm-10_transformer_block"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.stacked_blocks",
@@ -535,7 +631,8 @@
       "exercises": [
         "ex-llm-11_stacked_transformer_blocks"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.lm_head",
@@ -559,7 +656,8 @@
       "exercises": [
         "ex-llm-12_lm_head_logits"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.softmax",
@@ -583,7 +681,8 @@
       "exercises": [
         "ex-llm-13_softmax_probabilities"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.cross_entropy",
@@ -609,7 +708,8 @@
       "exercises": [
         "ex-llm-14_shifted_targets_cross_entropy"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.backprop",
@@ -635,7 +735,8 @@
       "exercises": [
         "ex-llm-15_backpropagation_gradients"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.optimizer",
@@ -659,7 +760,8 @@
       "exercises": [
         "ex-llm-16_optimizer_update"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.training_loop",
@@ -683,7 +785,8 @@
       "exercises": [
         "ex-llm-17_training_loop"
       ],
-      "planned": false
+      "planned": false,
+      "track": "core"
     },
     {
       "id": "llm.generation",
@@ -701,12 +804,14 @@
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "track": "core"
     },
     {
       "id": "local.inference",
       "name": "Local model inference",
       "area": "local",
+      "track": "bridge",
       "description": "Loading and running pretrained models locally (Phase 05); no material yet.",
       "prerequisites": [
         "llm.generation"
@@ -714,45 +819,32 @@
       "related": [],
       "resources": [
         {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
+          "title": "Phase overview",
+          "path": "topics/05_local_models_inference/README.md"
         },
         {
-          "title": "Model / runtime / application",
-          "path": "docs/model-runtime-application.md"
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
       "planned": true
     },
     {
-      "id": "local.python_integration",
-      "name": "Python ↔ local LLM",
+      "id": "local.runtimes",
+      "name": "Runtimes: Ollama & llama.cpp",
       "area": "local",
-      "description": "Calling a local model from Python (Phases 06–07); no material yet.",
+      "track": "bridge",
+      "description": "Local model servers, GGUF and native inference (Phase 05); no material yet.",
       "prerequisites": [
         "local.inference"
       ],
       "related": [],
       "resources": [
         {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
-      "exercises": [],
-      "planned": true
-    },
-    {
-      "id": "local.structured_outputs",
-      "name": "Structured outputs",
-      "area": "local",
-      "description": "Getting validated structured responses and handling malformed ones (Phase 07); no material yet.",
-      "prerequisites": [
-        "local.python_integration"
-      ],
-      "related": [],
-      "resources": [
+          "title": "Phase overview",
+          "path": "topics/05_local_models_inference/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -762,31 +854,133 @@
       "planned": true
     },
     {
-      "id": "auto.deterministic",
-      "name": "Deterministic automation",
+      "id": "local.hardware_quantization",
+      "name": "Hardware, quantization & benchmarking",
+      "area": "local",
+      "track": "core",
+      "description": "RAM / VRAM, quantization, latency and tokens per second (Phase 05); no material yet.",
+      "prerequisites": [
+        "local.runtimes"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/05_local_models_inference/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "iface.python_local_llm",
+      "name": "Python ↔ local LLM",
+      "area": "iface",
+      "track": "bridge",
+      "description": "Calling a local model from Python with chat messages and streaming (Phase 06); no material yet.",
+      "prerequisites": [
+        "local.runtimes"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/06_llm_application_interfaces/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "iface.structured_outputs",
+      "name": "Structured outputs",
+      "area": "iface",
+      "track": "bridge",
+      "description": "JSON Schema and validated responses; handling malformed ones (Phase 06); no material yet.",
+      "prerequisites": [
+        "iface.python_local_llm"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/06_llm_application_interfaces/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "iface.reliability",
+      "name": "Timeouts, retries & errors at the model boundary",
+      "area": "iface",
+      "track": "bridge",
+      "description": "Bounded retries, timeouts and failure handling for model calls (Phase 06); no material yet.",
+      "prerequisites": [
+        "iface.python_local_llm"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/06_llm_application_interfaces/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "iface.tool_calling",
+      "name": "Tool calling foundations",
+      "area": "iface",
+      "track": "bridge",
+      "description": "A model requests a structured call; the host validates, authorizes and executes it (Phase 06); no material yet.",
+      "prerequisites": [
+        "iface.structured_outputs"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/06_llm_application_interfaces/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.process_decomposition",
+      "name": "Business-process decomposition",
       "area": "automation",
-      "description": "Rule-based workflows with predictable, testable behaviour. Planned block.",
+      "track": "applied",
+      "description": "Map a workflow, separate deterministic from semantic steps and decide whether AI is appropriate (Phase 07).",
       "prerequisites": [],
       "related": [],
       "resources": [
         {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
-      "exercises": [],
-      "planned": true
-    },
-    {
-      "id": "auto.api_integration",
-      "name": "API integration",
-      "area": "automation",
-      "description": "Calling and validating external interfaces. Planned block.",
-      "prerequisites": [
-        "auto.deterministic"
-      ],
-      "related": [],
-      "resources": [
+          "title": "Phase overview",
+          "path": "topics/07_ai_automation_foundations/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -796,16 +990,20 @@
       "planned": true
     },
     {
-      "id": "auto.llm_business",
-      "name": "LLMs for business processes",
+      "id": "auto.deterministic_workflows",
+      "name": "Deterministic workflows & rules",
       "area": "automation",
-      "description": "Using a language model inside a bounded business workflow. Planned block.",
+      "track": "applied",
+      "description": "Predictable, testable rule-based automation as the baseline for any AI step (Phase 07).",
       "prerequisites": [
-        "auto.api_integration",
-        "local.python_integration"
+        "auto.process_decomposition"
       ],
       "related": [],
       "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/07_ai_automation_foundations/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -815,16 +1013,20 @@
       "planned": true
     },
     {
-      "id": "auto.tool_calling",
-      "name": "Tool calling",
+      "id": "auto.http_webhooks",
+      "name": "HTTP, REST, JSON & webhooks",
       "area": "automation",
-      "description": "A model requests structured calls that the host validates and executes. Planned block.",
+      "track": "applied",
+      "description": "Calling and receiving interfaces, data transformation and authentication concepts (Phase 07).",
       "prerequisites": [
-        "auto.llm_business",
-        "local.structured_outputs"
+        "auto.deterministic_workflows"
       ],
       "related": [],
       "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/07_ai_automation_foundations/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -834,15 +1036,20 @@
       "planned": true
     },
     {
-      "id": "auto.agents",
-      "name": "Agents",
+      "id": "auto.reliability",
+      "name": "Validation, retries & idempotency",
       "area": "automation",
-      "description": "Bounded loops of model decisions, tool use and observation. Planned block.",
+      "track": "applied",
+      "description": "Input validation, timeouts, retries, idempotency and error handling in workflows (Phase 07).",
       "prerequisites": [
-        "auto.tool_calling"
+        "auto.http_webhooks"
       ],
       "related": [],
       "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/07_ai_automation_foundations/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -852,16 +1059,20 @@
       "planned": true
     },
     {
-      "id": "auto.orchestration",
-      "name": "Orchestration",
+      "id": "auto.human_approval",
+      "name": "Human approval & auditability",
       "area": "automation",
-      "description": "Coordinating multi-step or multi-agent workflows with state. Planned block.",
+      "track": "applied",
+      "description": "Where a person must approve, and how decisions are logged (Phase 07).",
       "prerequisites": [
-        "auto.state_memory",
-        "auto.frameworks"
+        "auto.reliability"
       ],
       "related": [],
       "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/07_ai_automation_foundations/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -871,18 +1082,69 @@
       "planned": true
     },
     {
-      "id": "auto.eval_security",
-      "name": "Evaluation and security",
+      "id": "auto.n8n",
+      "name": "n8n fundamentals (local)",
       "area": "automation",
-      "description": "Independent evaluation, permissions, approvals and prompt-injection awareness. Applies across the whole automation area.",
+      "track": "applied",
+      "description": "Workflow automation platform, self-hosted; it does not replace the fundamentals above (Phase 07).",
       "prerequisites": [
-        "auto.tool_calling"
+        "auto.reliability"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/07_ai_automation_foundations/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "auto.rules_vs_ai",
+      "name": "Rules vs LLM vs RAG vs agent",
+      "area": "automation",
+      "track": "applied",
+      "description": "Choose the simplest architecture that solves the problem; an agent is never the default (Phase 07).",
+      "prerequisites": [
+        "auto.deterministic_workflows",
+        "iface.structured_outputs"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/07_ai_automation_foundations/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "ret.embedding_models",
+      "name": "Embedding models for retrieval",
+      "area": "retrieval",
+      "track": "core",
+      "description": "External sentence / document embedding models, distinct from internal token embeddings (Phase 08).",
+      "prerequisites": [
+        "iface.python_local_llm"
       ],
       "related": [
-        "auto.deterministic",
-        "auto.agents"
+        "llm.embeddings"
       ],
       "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/08_embeddings_semantic_retrieval/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -892,15 +1154,20 @@
       "planned": true
     },
     {
-      "id": "auto.state_memory",
-      "name": "State and memory",
-      "area": "automation",
-      "description": "What survives between agent steps and runs. Planned.",
+      "id": "ret.similarity_search",
+      "name": "Cosine similarity & semantic search",
+      "area": "retrieval",
+      "track": "core",
+      "description": "Vector similarity and nearest-neighbor ranking (Phase 08).",
       "prerequisites": [
-        "auto.agents"
+        "ret.embedding_models"
       ],
       "related": [],
       "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/08_embeddings_semantic_retrieval/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -910,15 +1177,20 @@
       "planned": true
     },
     {
-      "id": "auto.mcp",
-      "name": "MCP",
-      "area": "automation",
-      "description": "Model Context Protocol tool/context interfaces. Planned.",
+      "id": "ret.chunking_indexes",
+      "name": "Chunking, metadata & local indexes",
+      "area": "retrieval",
+      "track": "core",
+      "description": "Splitting documents, metadata and local indexes such as FAISS (Phase 08).",
       "prerequisites": [
-        "auto.agents"
+        "ret.similarity_search"
       ],
       "related": [],
       "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/08_embeddings_semantic_retrieval/README.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -928,16 +1200,628 @@
       "planned": true
     },
     {
-      "id": "auto.frameworks",
-      "name": "LangChain / LangGraph / n8n",
-      "area": "automation",
-      "description": "Frameworks and workflow platforms, after the primitive loop. Planned.",
+      "id": "ret.evaluation",
+      "name": "Retrieval evaluation & reranking",
+      "area": "retrieval",
+      "track": "core",
+      "description": "Measuring whether the right evidence is retrieved (Phase 08).",
       "prerequisites": [
-        "auto.agents",
-        "auto.mcp"
+        "ret.chunking_indexes"
       ],
       "related": [],
       "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/08_embeddings_semantic_retrieval/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "rag.pipeline",
+      "name": "RAG pipeline",
+      "area": "rag",
+      "track": "bridge",
+      "description": "Ingestion, retrieval and context construction for grounded generation (Phase 09).",
+      "prerequisites": [
+        "ret.chunking_indexes",
+        "iface.structured_outputs"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/09_rag_knowledge_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "rag.grounding",
+      "name": "Citations, abstention & grounding",
+      "area": "rag",
+      "track": "bridge",
+      "description": "Answering only from evidence, citing it and abstaining when it is missing (Phase 09).",
+      "prerequisites": [
+        "rag.pipeline"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/09_rag_knowledge_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "rag.evaluation",
+      "name": "RAG evaluation & failure modes",
+      "area": "rag",
+      "track": "bridge",
+      "description": "Evaluate retrieval and generation separately; analyze failures (Phase 09).",
+      "prerequisites": [
+        "rag.grounding",
+        "ret.evaluation"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/09_rag_knowledge_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "rag.hybrid",
+      "name": "Hybrid retrieval & query rewriting",
+      "area": "rag",
+      "track": "core",
+      "description": "Compare improvements against a baseline that exposed a concrete failure (Phase 09).",
+      "prerequisites": [
+        "rag.evaluation"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/09_rag_knowledge_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "agent.tool_execution",
+      "name": "Validated tool execution",
+      "area": "agents",
+      "track": "applied",
+      "description": "Argument validation, authorization and execution boundaries (Phase 10).",
+      "prerequisites": [
+        "iface.tool_calling"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/10_agentic_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "agent.loop",
+      "name": "Agent loop from scratch",
+      "area": "agents",
+      "track": "applied",
+      "description": "State, actions, observations, termination and budgets (Phase 10).",
+      "prerequisites": [
+        "agent.tool_execution"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/10_agentic_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "agent.state_memory",
+      "name": "State, memory & context engineering",
+      "area": "agents",
+      "track": "applied",
+      "description": "What survives between steps and runs (Phase 10).",
+      "prerequisites": [
+        "agent.loop"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/10_agentic_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "agent.permissions",
+      "name": "Permissions, sandboxing & approval",
+      "area": "agents",
+      "track": "applied",
+      "description": "Allowlists, path restrictions, sandboxes and human approval (Phase 10).",
+      "prerequisites": [
+        "agent.loop",
+        "auto.human_approval"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/10_agentic_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "agent.coding_agent",
+      "name": "Minimal coding-agent experiment",
+      "area": "agents",
+      "track": "applied",
+      "description": "Tiny controlled repository with read_file, write_file and run_tests (Phase 10).",
+      "prerequisites": [
+        "agent.permissions"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/10_agentic_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "agent.evaluation",
+      "name": "Agent evaluation",
+      "area": "agents",
+      "track": "applied",
+      "description": "Success, errors, cost and denied actions measured against a baseline (Phase 10).",
+      "prerequisites": [
+        "agent.permissions",
+        "agent.state_memory"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/10_agentic_systems/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "mcp.architecture",
+      "name": "MCP architecture",
+      "area": "mcp",
+      "track": "applied",
+      "description": "Client / server model, tools, resources, prompts and transports (Phase 11).",
+      "prerequisites": [
+        "agent.loop"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/11_mcp_integration/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "mcp.local_server",
+      "name": "Local MCP server & safe tools",
+      "area": "mcp",
+      "track": "applied",
+      "description": "Minimal server exposing one or two safe tools (Phase 11).",
+      "prerequisites": [
+        "mcp.architecture"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/11_mcp_integration/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "mcp.security",
+      "name": "MCP security boundaries",
+      "area": "mcp",
+      "track": "applied",
+      "description": "Permissions, tool discovery and trust boundaries (Phase 11).",
+      "prerequisites": [
+        "mcp.local_server",
+        "agent.permissions"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/11_mcp_integration/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "fw.langchain",
+      "name": "LangChain",
+      "area": "frameworks",
+      "track": "applied",
+      "description": "Framework for application composition, after the from-scratch loop and pipeline (Phase 12).",
+      "prerequisites": [
+        "agent.loop",
+        "rag.pipeline"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/12_agent_frameworks_orchestration/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "fw.langgraph",
+      "name": "LangGraph & state graphs",
+      "area": "frameworks",
+      "track": "applied",
+      "description": "Stateful, durable workflows and agents (Phase 12).",
+      "prerequisites": [
+        "fw.langchain",
+        "agent.state_memory"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/12_agent_frameworks_orchestration/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "fw.n8n_ai",
+      "name": "n8n AI workflows",
+      "area": "frameworks",
+      "track": "applied",
+      "description": "AI steps, tools and agents inside n8n workflows (Phase 12).",
+      "prerequisites": [
+        "auto.n8n",
+        "agent.loop"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/12_agent_frameworks_orchestration/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "fw.multi_agent",
+      "name": "Subagents & orchestration",
+      "area": "frameworks",
+      "track": "applied",
+      "description": "Handoffs, routers and multi-agent patterns, compared with a single-agent baseline (Phase 12).",
+      "prerequisites": [
+        "fw.langgraph",
+        "agent.evaluation"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/12_agent_frameworks_orchestration/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "fw.agentic_rag",
+      "name": "Agentic RAG & workflow vs agent",
+      "area": "frameworks",
+      "track": "bridge",
+      "description": "Compare agentic RAG and plain workflows on the same task (Phase 12).",
+      "prerequisites": [
+        "fw.langgraph",
+        "rag.evaluation"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "Phase overview",
+          "path": "topics/12_agent_frameworks_orchestration/README.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "later.multimodal_voice",
+      "name": "Multimodal AI & voice",
+      "area": "later",
+      "track": "core",
+      "description": "Vision-language models, audio, speech and voice systems (Phase 13).",
+      "prerequisites": [
+        "local.hardware_quantization"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "AI Engineering map",
+          "path": "docs/ai-engineering-map.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "later.adaptation",
+      "name": "Fine-tuning, LoRA, QLoRA & PEFT",
+      "area": "later",
+      "track": "core",
+      "description": "Model adaptation compared against an unchanged baseline (Phase 14).",
+      "prerequisites": [
+        "local.hardware_quantization"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "AI Engineering map",
+          "path": "docs/ai-engineering-map.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "later.backend",
+      "name": "AI backend & client integration",
+      "area": "later",
+      "track": "bridge",
+      "description": "Inference services, streaming, cancellation and clients (Phases 15–16).",
+      "prerequisites": [
+        "iface.reliability"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "AI Engineering map",
+          "path": "docs/ai-engineering-map.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "later.production",
+      "name": "Production AI, MLOps & LLMOps",
+      "area": "later",
+      "track": "bridge",
+      "description": "Reliability, monitoring, regression testing and offline deployment (Phase 17).",
+      "prerequisites": [
+        "later.backend",
+        "rag.evaluation",
+        "agent.evaluation"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "AI Engineering map",
+          "path": "docs/ai-engineering-map.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "xc.problem_framing",
+      "name": "Problem framing & build-vs-buy",
+      "area": "cross",
+      "track": "cross-cutting",
+      "description": "Requirements, process mapping, cost awareness and local-vs-hosted reasoning.",
+      "prerequisites": [],
+      "related": [],
+      "resources": [
+        {
+          "title": "AI Engineering map",
+          "path": "docs/ai-engineering-map.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "xc.evaluation",
+      "name": "Evaluation: baseline, success & failure modes",
+      "area": "cross",
+      "track": "cross-cutting",
+      "description": "Baseline, success criteria, generalization, AI vs deterministic logic, model-failure behavior.",
+      "prerequisites": [
+        "xc.problem_framing"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "AI Engineering map",
+          "path": "docs/ai-engineering-map.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "xc.security_privacy",
+      "name": "Security & privacy",
+      "area": "cross",
+      "track": "cross-cutting",
+      "description": "Prompt injection, untrusted data, tool permissions, secrets and privacy.",
+      "prerequisites": [
+        "xc.evaluation"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "AI Engineering map",
+          "path": "docs/ai-engineering-map.md"
+        },
+        {
+          "title": "Roadmap",
+          "path": "ROADMAP.md"
+        }
+      ],
+      "exercises": [],
+      "planned": true
+    },
+    {
+      "id": "xc.observability",
+      "name": "Observability & logging",
+      "area": "cross",
+      "track": "cross-cutting",
+      "description": "Logging, tracing and monitoring of AI workflows.",
+      "prerequisites": [
+        "xc.security_privacy"
+      ],
+      "related": [],
+      "resources": [
+        {
+          "title": "AI Engineering map",
+          "path": "docs/ai-engineering-map.md"
+        },
         {
           "title": "Roadmap",
           "path": "ROADMAP.md"
@@ -1188,5 +2072,91 @@
     "node": "llm.training_loop",
     "label": "Experiment 29 — Language-Model Training Loop",
     "source": "ROADMAP.md (Experiments 13–29 COMPLETE). Nodes with exercise folders count as covered in the lab; this is not mastery."
-  }
+  },
+  "tracks": [
+    {
+      "id": "core",
+      "name": "Core AI Engineering",
+      "description": "Understand how AI systems work.",
+      "short": "Core"
+    },
+    {
+      "id": "applied",
+      "name": "Applied AI Automation & Agentic Systems",
+      "description": "Design, build and evaluate AI-powered automations and agents for real processes.",
+      "short": "Applied"
+    },
+    {
+      "id": "bridge",
+      "name": "Bridge",
+      "description": "Belongs to both tracks; where they meet.",
+      "short": "Bridge"
+    },
+    {
+      "id": "cross-cutting",
+      "name": "Cross-cutting",
+      "description": "Skills applied in every phase.",
+      "short": "Cross-cutting"
+    }
+  ],
+  "resources": [
+    {
+      "id": "hf-llm-course",
+      "name": "Hugging Face LLM Course",
+      "type": "course",
+      "provider": "Hugging Face",
+      "cost": "free",
+      "url": "https://huggingface.co/learn/llm-course/es/chapter1/1",
+      "nodes": [
+        "llm.tokenization",
+        "local.inference",
+        "later.adaptation"
+      ],
+      "timing": "Complementary industry-tooling reference (tokenizers, pretrained models, datasets, adaptation); do not redo Transformer theory already built in Phase 04."
+    },
+    {
+      "id": "hf-agents-course",
+      "name": "Hugging Face Agents Course",
+      "type": "course",
+      "provider": "Hugging Face",
+      "cost": "free",
+      "url": "https://huggingface.co/learn/agents-course/es/unit0/introduction",
+      "nodes": [
+        "agent.loop",
+        "agent.evaluation",
+        "fw.langchain",
+        "fw.agentic_rag"
+      ],
+      "timing": "Unit 1 onward, after structured outputs, tool calling and the minimal agent loop. Replace any paid provider with a local model."
+    },
+    {
+      "id": "langchain-learn",
+      "name": "LangChain / LangGraph learn",
+      "type": "documentation",
+      "provider": "LangChain",
+      "cost": "free",
+      "url": "https://docs.langchain.com/oss/python/learn",
+      "nodes": [
+        "rag.pipeline",
+        "agent.state_memory",
+        "fw.langchain",
+        "fw.langgraph",
+        "fw.multi_agent"
+      ],
+      "timing": "After the from-scratch version of the same concept; fundamentals before framework tutorials."
+    },
+    {
+      "id": "n8n-learning",
+      "name": "n8n Academy / Education",
+      "type": "course",
+      "provider": "n8n",
+      "cost": "free",
+      "url": "https://n8n.io/education/",
+      "nodes": [
+        "auto.n8n",
+        "fw.n8n_ai"
+      ],
+      "timing": "N8N101 workflow fundamentals → N8N102 APIs, webhooks and integrations → N8N103 AI workflows, agents, testing and best practices. Use a local / self-hosted instance; n8n Cloud is not required."
+    }
+  ]
 }

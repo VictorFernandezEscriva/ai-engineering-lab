@@ -44,7 +44,9 @@ Nodes on the completed lab path are deliberately *not* auto-rated: coverage is a
 
 **YOU ARE HERE** marks the *current learning target*. It is independent of mastery: a node can be the target while `pending`. It is read from the personal database (`plan.next_node_id`, set from a node panel or the dashboard). Until one is stored, the map uses `default_target` from the catalog (`llm.generation`), which mirrors `ROADMAP.md` (Experiment 29 complete, Experiment 30 next). That default is a single node id, not a copy of the roadmap, and nothing synchronizes the two: if the roadmap moves on, update `default_target` or set the target in the UI. The map is never validated visually by the tests; check it in a browser.
 
-Area numbering follows the repository convention `topics/NN_*` = `ROADMAP.md` Phase NN. AI Automation & Agentic Systems is future curriculum (roadmap Phases 14–15); it has no topic directory yet.
+Area numbering follows the repository convention `topics/NN_*` = `ROADMAP.md` Phase NN. Phases 05–12 are planned areas with README-only topic directories. The "Later Core AI & Production" lane (Phases 13–17) and the "Cross-cutting Skills" lane have no topic directory yet.
+
+Each area and node carries a learning **track** (`core`, `applied`, `bridge`, `cross-cutting`, defined in the catalog `tracks` list); lanes are tinted by track and the node drawer states it. External courses live in one catalog registry, `resources` (id, name, type, provider, url, cost, mapped `nodes`, `timing`), and appear in the drawer of every mapped node as plain links; nothing is fetched or tracked.
 
 ## Sources of truth
 
@@ -71,7 +73,7 @@ An existing `progress.db` is opened, never replaced. A database written by a new
 
 ## Editing the curriculum
 
-Edit `catalog/catalog.json`. It is validated on every start and in the tests: unique ids, known prerequisite/related/exercise references, no prerequisite cycles, and every referenced path must exist. Resources currently point only at files inside this repository; an entry may use `url` instead of `path`.
+Edit `catalog/catalog.json`. It is validated on every start and in the tests: unique ids, known prerequisite/related/exercise references, no prerequisite cycles, and every referenced path must exist. Per-node `resources` point at files inside this repository; external courses belong only in the top-level `resources` registry (https URLs, known node ids).
 
 ## Security notes
 
@@ -85,7 +87,7 @@ Loopback only; three fixed static files; no endpoint reads arbitrary paths or ru
 - Evidence cannot be edited or deleted from the UI yet.
 - Tested only on Python 3.13.2, Windows 11.
 - Exercises are **not executed** by the cockpit; the exercise `main.py` files need PyTorch, scikit-learn, etc., which are listed in the root `requirements.txt`.
-- The external incident-triage experiment is not integrated, and its future location is undecided until the roadmap assigns the automation/agents phase.
+- The external incident-triage experiment is not integrated, and it may eventually become the first experiment of Phase 07 (AI Automation Foundations) and has not been moved.
 
 ## Possible later additions
 
