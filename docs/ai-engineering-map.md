@@ -60,6 +60,91 @@ The professional direction is **AI Automation & Agentic Systems Engineering**. T
 
 In the Learning Cockpit each lane shows its track, and every node carries one. Phase numbers are sequential; the tracks run in parallel conceptually.
 
+## Global Map: the 17 Phases
+
+The same structure the Learning Cockpit draws as its Overview. Phase numbers are the study order in [ROADMAP.md](../ROADMAP.md); arrows are the prerequisite relationships between phases derived from the concept graph (transitive edges omitted), not a checklist. Concept-level detail lives in each phase README and in the Cockpit's Detailed map.
+
+```mermaid
+flowchart TD
+    P01[01 Machine Learning] --> P02[02 Deep Learning]
+    P02 --> P03[03 Computer Vision]
+    P02 --> P04[04 LLM Engineering]
+    P04 --> P05[05 Local Models and Inference]
+    P05 --> P06[06 LLM Application Interfaces]
+    P06 --> P07[07 AI Automation Foundations]
+    P06 --> P08[08 Embeddings and Semantic Retrieval]
+    P08 --> P09[09 RAG and Knowledge Systems]
+    P06 --> P10[10 Agentic Systems]
+    P07 --> P10
+    P10 --> P11[11 MCP and Agent Interoperability]
+    P10 --> P12[12 Agent Frameworks and Orchestration]
+    P11 --> P12
+    P09 --> P12
+    P03 --> P13[13 Multimodal and Voice]
+    P05 --> P13
+    P05 --> P14[14 Model Adaptation]
+    P06 --> P15[15 AI Backend and Client Integration]
+    P15 --> P16[16 Packaging and Offline Distribution]
+    P15 --> P17[17 Production AI Engineering]
+    P16 --> P17
+    P09 --> P17
+    P10 --> P17
+    X[Cross-cutting: problem framing, evaluation, security, observability, architecture, data quality] -.-> P17
+```
+
+### Core track (how AI works)
+
+```mermaid
+flowchart LR
+    ML[01 ML] --> DL[02 DL] --> LLM[04 LLM internals]
+    DL --> CV[03 CV]
+    LLM --> LOC[05 Local inference]
+    LOC --> IFACE[06 Interfaces]
+    IFACE --> EMB[08 Embeddings]
+    EMB --> RAG[09 RAG]
+    CV --> MM[13 Multimodal]
+    LOC --> MM
+    LOC --> ADA[14 Model adaptation]
+```
+
+### Applied track (how AI solves business processes)
+
+```mermaid
+flowchart LR
+    IFACE[06 Interfaces] --> AUTO[07 Automation foundations]
+    IFACE --> AG[10 Agents]
+    AUTO --> AG
+    AG --> MCP[11 MCP and interoperability]
+    AG --> FW[12 Frameworks and orchestration]
+    MCP --> FW
+    RAG[09 RAG] --> FW
+```
+
+### Enterprise and production (convergence)
+
+```mermaid
+flowchart LR
+    IFACE[06 Interfaces] --> BE[15 Backend]
+    BE --> PK[16 Packaging]
+    BE --> PROD[17 Production AI]
+    RAG[09 RAG] --> PROD
+    FW[12 Frameworks] --> PROD
+    PROD --> AZ[Azure and Microsoft mapping: Foundry, AI Search, Agent Framework, Monitor, Entra, Key Vault]
+```
+
+| Phase | Domain | Track | Overview |
+|---|---|---|---|
+| 01–03 | ML, Deep Learning, Computer Vision | Core | [01](../topics/01_machine_learning/README.md) · [02](../topics/02_deep_learning/README.md) · [03](../topics/03_computer_vision/README.md) |
+| 04 | LLM Engineering | Core | [04](../topics/04_llm_engineering/README.md) |
+| 05 · 06 | Local models · LLM interfaces | Bridge | [05](../topics/05_local_models_inference/README.md) · [06](../topics/06_llm_application_interfaces/README.md) |
+| 07 | AI Automation Foundations | Applied | [07](../topics/07_ai_automation_foundations/README.md) |
+| 08 · 09 | Embeddings and retrieval · RAG | Core · Bridge | [08](../topics/08_embeddings_semantic_retrieval/README.md) · [09](../topics/09_rag_knowledge_systems/README.md) |
+| 10–12 | Agents · MCP and interoperability · Frameworks | Applied | [10](../topics/10_agentic_systems/README.md) · [11](../topics/11_mcp_integration/README.md) · [12](../topics/12_agent_frameworks_orchestration/README.md) |
+| 13 · 14 | Multimodal / voice · Model adaptation | Core | [13](../topics/13_multimodal_voice/README.md) · [14](../topics/14_model_adaptation/README.md) |
+| 15–17 | Backend · Packaging · Production AI | Bridge | [15](../topics/15_ai_backend_client_integration/README.md) · [16](../topics/16_packaging_offline_distribution/README.md) · [17](../topics/17_production_ai_engineering/README.md) |
+
+**One document, one responsibility:** README (orientation) · ROADMAP (the single ordered route) · this map (the territory) · [learning method](learning-method.md) · [professional capabilities](professional-capabilities.md) · topic README (one phase) · experiment README (theory, hypothesis, implementation, results) · `catalog.json` (machine-readable curriculum, derived views) · SQLite (personal progress).
+
 ## How the Branches Connect
 
 ```text
@@ -308,6 +393,8 @@ Names below are grouped by purpose. **Fundamentals first, framework second.** Ex
 | Model adaptation | PyTorch, PEFT | Planned adaptation study; training and evaluation principles precede adapter tooling |
 | Engineering | Git, pytest, Docker concepts, CI, logging / observability | Git is used; dedicated testing, container and operations studies remain planned |
 
+Planned additions (all `PLANNED`, tiered as hands-on / compare / awareness / enterprise-mapping in [Professional capabilities and technology tiers](professional-capabilities.md)): vLLM and LiteLLM (serving, gateways); DSPy; BM25, pgvector, Qdrant and Azure AI Search (retrieval); LlamaIndex; A2A and AG-UI (interoperability); Microsoft Agent Framework, PydanticAI, OpenAI Agents SDK, CrewAI; Playwright; Redis, RabbitMQ, Kafka; Docker and Kubernetes; GitHub Actions and OpenTelemetry concepts.
+
 ## Complementary Learning Resources
 
 Free external courses complement, and do not replace, the lab's experiments. They are registered once in the Learning Cockpit catalog and shown on the relevant concepts: the Hugging Face LLM Course (LLM tooling, tokenizers, adaptation), the Hugging Face Agents Course (after tool calling and a minimal loop), LangChain / LangGraph learning material (after the from-scratch version) and n8n Academy (local instance). See the [roadmap table](../ROADMAP.md#external-learning-resources).
@@ -325,5 +412,5 @@ Learn the underlying concepts in small controlled lab experiments first. Optiona
 - [Root overview and current position](../README.md)
 - [Ordered learning route](../ROADMAP.md)
 - [ML](../topics/01_machine_learning/README.md), [DL](../topics/02_deep_learning/README.md), [CV](../topics/03_computer_vision/README.md), [LLM](../topics/04_llm_engineering/README.md) topic progress
-- [Existing ecosystem overview](ecosystem-map.md) and [execution-stack boundaries](model-runtime-application.md)
+- [Ecosystem Map (technologies and frameworks)](ecosystem-map.md) and [execution-stack boundaries](model-runtime-application.md)
 - [Learning method](learning-method.md), [living glossary](glossary.md) and [historical verification log](verification.md)

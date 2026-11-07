@@ -11,6 +11,40 @@ The objective is not to collect disconnected tutorials or simply call existing A
 
 The objective is to understand how AI systems work internally and how their components connect:
 
+## Start here
+
+**What this teaches:** how modern AI systems work (Core AI Engineering) and how to apply them to real business processes (Applied AI Automation & Agentic Systems), through small experiments with evidence. **Professional direction:** AI Automation & Agentic Systems Engineer, on strong Core AI foundations.
+
+**Where the learner is:** Phase 04 (LLM Engineering) is in progress. Experiment 29 (training loop) is complete; **Experiment 30 — Autoregressive Generation and Sampling is next**, then Phase 05 (Local Models & Inference). Nothing beyond Phase 04 has started.
+
+| Phases | Domain | Track | Status |
+|---|---|---|---|
+| [01](topics/01_machine_learning/README.md) · [02](topics/02_deep_learning/README.md) · [03](topics/03_computer_vision/README.md) | ML · Deep Learning · Computer Vision | A — Core | foundations complete |
+| [04](topics/04_llm_engineering/README.md) | LLM Engineering | A — Core | in progress |
+| [05](topics/05_local_models_inference/README.md) · [06](topics/06_llm_application_interfaces/README.md) | Local models · LLM interfaces | Bridge | planned |
+| [07](topics/07_ai_automation_foundations/README.md) | AI Automation Foundations | B — Applied | planned |
+| [08](topics/08_embeddings_semantic_retrieval/README.md) · [09](topics/09_rag_knowledge_systems/README.md) | Embeddings & retrieval · RAG | Core · Bridge | planned |
+| [10](topics/10_agentic_systems/README.md) · [11](topics/11_mcp_integration/README.md) · [12](topics/12_agent_frameworks_orchestration/README.md) | Agents · MCP & interoperability · Frameworks | B — Applied | planned |
+| [13](topics/13_multimodal_voice/README.md) · [14](topics/14_model_adaptation/README.md) | Multimodal / voice · Model adaptation | A — Core | planned |
+| [15](topics/15_ai_backend_client_integration/README.md) · [16](topics/16_packaging_offline_distribution/README.md) · [17](topics/17_production_ai_engineering/README.md) | Backend · Packaging · Production AI | Bridge | planned |
+
+One ordered journey, two tracks that converge in production.
+
+```text
+Start here
+│
+├── ROADMAP                      Ordered learning path
+├── AI Engineering Map           Global knowledge map (concepts and phases)
+├── Ecosystem Map                Technologies, frameworks, protocols
+├── Learning Method              How experiments, mastery and evidence work
+├── Professional Capabilities    Job-role mapping and technology tiers
+└── Learning Cockpit             Interactive atlas and progress
+```
+
+Links: [ROADMAP](ROADMAP.md) · [AI Engineering Map](docs/ai-engineering-map.md#global-map-the-17-phases) · [Ecosystem Map](docs/ecosystem-map.md) · [Learning Method](docs/learning-method.md) · [Professional Capabilities](docs/professional-capabilities.md) · [Cockpit](tools/learning_cockpit/README.md).
+
+**Open the Learning Cockpit** (local, loopback only, no accounts): `python tools/learning_cockpit/app.py` and visit `http://127.0.0.1:8765/`. It shows the same 17 phases as an interactive atlas: phase → concept → theory → experiment → your own evidence. See the [Cockpit README](tools/learning_cockpit/README.md).
+
 ## AI Engineering Universe
 
 This compact map shows major relationships; it is not a checklist of fields to master in sequence. Evaluation, safety and data quality apply across all branches.
@@ -90,6 +124,7 @@ AiEngineeringLab/
 │   ├── ecosystem-map.md
 │   ├── glossary.md
 │   ├── learning-method.md
+│   ├── professional-capabilities.md
 │   ├── model-runtime-application.md
 │   └── verification.md
 │
@@ -127,7 +162,7 @@ causal attention
 
 ### `docs/`
 
-Cross-topic documentation explaining concepts that span multiple experiments. Start with the [AI Engineering Map](docs/ai-engineering-map.md), [learning method](docs/learning-method.md) and [glossary](docs/glossary.md).
+Cross-topic documentation explaining concepts that span multiple experiments. Start with the [AI Engineering Map](docs/ai-engineering-map.md), [learning method](docs/learning-method.md), [professional capabilities and technology tiers](docs/professional-capabilities.md) and [glossary](docs/glossary.md).
 
 ### `tools/`
 
@@ -366,7 +401,7 @@ The next experiment is **Experiment 30 — Autoregressive Generation and Samplin
 
 ## AI Ecosystem Map
 
-The [detailed AI Engineering Map](docs/ai-engineering-map.md) adds a hierarchy, progress markers and a technology index. The existing [ecosystem overview](docs/ecosystem-map.md) provides complementary relationships.
+The [detailed AI Engineering Map](docs/ai-engineering-map.md) adds a hierarchy, progress markers and a technology index. The [Ecosystem Map](docs/ecosystem-map.md) is the complementary technology and framework landscape.
 
 It distinguishes between:
 

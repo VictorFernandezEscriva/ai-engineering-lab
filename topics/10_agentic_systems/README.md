@@ -6,11 +6,11 @@
 
 ## Purpose
 
-Build the agent loop from scratch and learn what makes it safe and evaluable: tools, state, termination, permissions and human approval.
+Build a bounded agent from scratch: tools, state, memory, planning, permissions, checkpoints and evaluation.
 
 ## Why it matters
 
-Agents are one option, not the default. Understanding the bare loop is what lets you judge frameworks, set permissions and decide when a deterministic workflow is better.
+Frameworks are only understandable once the loop, its state and its failure modes are. Agents are never the default answer.
 
 ## Prerequisites
 
@@ -19,33 +19,39 @@ Agents are one option, not the default. Understanding the bare loop is what lets
 
 ## Core concepts
 
-- Validated tool execution
-- Agent loop from scratch: state, actions, observations, termination
-- Short-term memory and long-term memory concepts
-- Planning, retry / reflection loops and error recovery
-- Human approval, permissions and sandboxing
-- Context engineering
+- Tool schemas, tool execution, observation / result loop
+- Agent loop from scratch; state; termination
+- Short-term and long-term memory concepts
+- Planning, task decomposition, ReAct, plan-and-execute, routing, reflection / retry
+- Context engineering and compaction
+- Human-in-the-loop, approvals, permissions, sandboxing
+- Background / long-running agents, checkpoints, resume and recovery
 - Agent evaluation
+- Patterns: single agent + tools, router, supervisor, handoff, planner / executor, parallel fan-out / fan-in, subagents, specialized agents
+- Integrations: files, REST APIs, SQL / database, search / retrieval, business systems
+- Agent skills: reusable instructions, tool bundles, progressive context loading (later concept)
+
+Early experiments never get unrestricted shell or system access.
 
 ## Small future Lab experiments
 
-Ideas only; no experiment directory or code exists yet.
+Ideas only; no experiment directory or code exists yet. Larger experiments follow the Lab-wide incremental-delivery rule (milestone → acceptance criterion → implementation → tests → evidence).
 
 - Agent loop from scratch
-- Agent with 2–3 controlled tools
+- Agent with two or three controlled tools
 - Memory / state experiment
-- Minimal Coding-Agent Experiment: a tiny controlled repository with `read_file(path)`, `write_file(path, content)` and `run_tests()`
+- Checkpoint and resume
+- Pattern comparison against a single-agent baseline
+- Minimal Coding-Agent Experiment
 - Agent evaluation
 
-Every applied experiment should state its baseline, what success means, the failure modes, how generalization is tested, whether AI beats deterministic logic, what happens when the model fails, and when a human intervenes.
+Every applied experiment states its problem, baseline, success metric, what changed, evidence of improvement, remaining failure modes and the simplest architecture that works.
 
 ## Relevant technologies
 
-- Python
-- Local models
-- pytest for the toy workspace
+- **Plain Python + local model** — hands-on: no framework in this phase
 
-ZERO EXTRA COST: local models, open-source tools and free official resources only.
+See [Professional capabilities and technology tiers](../../docs/professional-capabilities.md) for tiers. ZERO EXTRA COST: local models, open-source tools and free official resources only; enterprise and paid services are studied conceptually unless explicitly authorized.
 
 ## Selected learning resources
 

@@ -148,6 +148,85 @@ Security and reliability topics appear from the first interface onward: input va
 
 Cross-cutting skills: requirements and problem framing, process mapping, API integration, data schemas, validation, reliability, error handling, human-in-the-loop, evaluation, observability, privacy, security, cost awareness, build-vs-buy reasoning and local-vs-hosted architecture.
 
+## Professional competency layer (curriculum targets, not claimed skills)
+
+Real AI-agent job descriptions repeat the same capabilities. They are **targets** of this curriculum; the lab does not claim the learner has them. Each is taught inside existing phases, not in a new one.
+
+| Competency | Where it is taught |
+|---|---|
+| Complex tool integration | 06 tool calling · 10 validated tool execution · 11 MCP |
+| Multiple data sources | 08–09 retrieval · 10 files / REST / SQL / search integrations |
+| Agent orchestration | 10 patterns · 12 LangGraph, Microsoft Agent Framework, n8n |
+| Third-party API integration | 07 REST / OpenAPI / OAuth, pagination, rate limits, idempotency |
+| Prompt engineering as product work | 06 prompt contracts, evaluation sets, versioning · 17 regression |
+| Incremental delivery | Lab-wide rule (see below) · 17 Git / PR discipline |
+| Testing and evaluation | 06 golden sets · 08–09 retrieval / RAG evaluation · 10 agent evaluation · 17 pipelines |
+| Backend engineering | 15 FastAPI, Pydantic, async, PostgreSQL, queues |
+| State management | 10 state / memory / checkpoints · 12 explicit graph state |
+| Event-driven architectures | 15 pub/sub, brokers, background jobs, sagas (concepts) |
+| Deterministic + generative hybrid systems | 07 decision hierarchy · 12 workflow versus agent |
+| CI/CD | 17 GitHub Actions concepts, automated tests, rollback, canary |
+| Containerization | 16 Docker, Compose, Kubernetes fundamentals |
+| Cloud architecture | 15–17 Azure mapping (conceptual, no paid resources) |
+| Observability | 17 tracing, metrics, cost · cross-cutting from Phase 06 |
+| MCP | 11 |
+| Technical communication | every experiment README · 17 decision records and runbooks |
+
+The full map, including the Microsoft / Azure concept mapping, is in [Professional capabilities and technology tiers](docs/professional-capabilities.md).
+
+## Technology tiers (avoid curriculum explosion)
+
+```text
+CONCEPT / CAPABILITY
+→ curriculum node (Cockpit)
+
+IMPORTANT TECHNOLOGY WE WILL PRACTICE
+→ technology metadata, and a node only when pedagogically justified
+
+ALTERNATIVE / ECOSYSTEM TOOL
+→ technology reference: comparison or awareness
+```
+
+"Agent state management" is a concept (node); **LangGraph** is a hands-on technology that implements it; **CrewAI** is comparison / awareness unless later evidence justifies deeper study. The Cockpit keeps a `technologies` registry with one of these tiers per technology (`hands-on`, `compare`, `awareness`, `enterprise-mapping`) instead of one node per product.
+
+## Incremental delivery (Lab-wide engineering rule)
+
+Larger future experiments are decomposed so every meaningful commit / PR-sized increment either delivers user value or creates a deliberate, verified technical milestone.
+
+```text
+problem
+↓
+small milestone
+↓
+acceptance criterion
+↓
+implementation
+↓
+tests / evaluation
+↓
+evidence
+↓
+next milestone
+```
+
+For non-trivial experiments: clear scope, acceptance criteria, small commits, tests, README / result evidence, known limitations and a next step. Tiny exercises do not need manufactured commits.
+
+## Outcome-oriented engineering
+
+Every relevant automation or AI experiment answers:
+
+```text
+What problem are we solving?
+What is the baseline?
+What metric defines success?
+What changed?
+What evidence shows improvement?
+What failure modes remain?
+What is the simplest architecture that works?
+```
+
+This builds a track record of engineering outcomes rather than demos.
+
 ---
 
 ## Route After Phase 04
@@ -491,1136 +570,62 @@ Can explain:
 
 # Phase 04 — Transformer and LLM Fundamentals
 
-**Status:** IN PROGRESS
+**Status:** IN PROGRESS (Experiments 13–29 COMPLETE; Experiment 30 is the current target)
 
 ## Goal
 
 Understand how an autoregressive language model works internally before focusing on higher-level LLM applications.
 
-The objective is not merely to call an API.
-
-The objective is to understand:
-
-```text
-text
-↓
-tokenizer
-↓
-token IDs
-↓
-embeddings
-↓
-Transformer
-↓
-logits
-↓
-next-token probabilities
-↓
-generated text
-```
-
----
-
-## Experiment 13 — Tokenization
-
-**Status:** COMPLETE
-
-Studied:
-
-```text
-text
-↓
-character tokens
-↓
-token IDs
-```
-
-Verified:
-
-- vocabulary construction,
-- token-to-ID mapping,
-- ID-to-token mapping,
-- encoding,
-- decoding.
-
-Key distinction:
-
-```text
-token
-≠
-token ID
-```
-
----
-
-## Experiment 14 — Token Embeddings
-
-**Status:** COMPLETE
-
-Studied:
-
-```text
-token ID
-↓
-embedding-table lookup
-↓
-trainable vector
-```
-
-Verified:
-
-```text
-vocabulary size = 10
-embedding dimension = 4
-
-embedding table:
-[10, 4]
-```
-
-and:
-
-```text
-8 token IDs
-↓
-8 embeddings
-
-[8]
-→
-[8, 4]
-```
-
-Key distinction:
-
-```text
-token ID
-=
-index
-
-embedding
-=
-trainable representation
-```
-
----
-
-## Experiment 15 — Positional Embeddings
-
-**Status:** COMPLETE
-
-Studied:
-
-```text
-token embedding
-+
-position embedding
-=
-position-aware representation
-```
-
-Verified:
-
-```text
-same token
-+
-different position
-=
-different combined representation
-```
-
-Key mental model:
-
-```text
-token embedding
-→ WHAT
-
-position embedding
-→ WHERE
-```
-
----
-
-## Experiment 16 — Self-Attention
-
-**Status:** COMPLETE
-
-Implemented one attention head manually.
-
-Studied:
-
-```text
-X
-↓
-Q, K, V
-```
-
-then:
-
-```text
-Q @ Kᵀ
-↓
-attention scores
-↓
-softmax
-↓
-attention weights
-```
-
-and:
-
-```text
-attention weights
-@
-Values
-↓
-contextual representations
-```
-
-Key interpretation:
-
-```text
-Q + K
-→ determine where information should come from
-
-V
-→ contains the information being mixed
-```
-
----
-
-## Experiment 17 — Causal Self-Attention
-
-**Status:** COMPLETE
-
-Introduced autoregressive masking.
-
-Without causal masking:
-
-```text
-h → h,e,l
-e → h,e,l
-l → h,e,l
-```
-
-With causal masking:
-
-```text
-h → h
-e → h,e
-l → h,e,l
-```
-
-Verified:
-
-```text
-future score
-↓
--inf
-↓
-softmax
-↓
-attention weight = 0
-```
-
-Important distinction:
-
-```text
-ATTENTION
-→ determines what contextual information is used
-```
-
-while:
-
-```text
-LANGUAGE-MODEL HEAD
-→ produces scores over the complete vocabulary
-```
-
----
-
-## Experiment 18 — Multi-Head Attention
-
-**Status:** COMPLETE
-
-Implemented two-head causal self-attention.
-
-Verified configuration:
-
-```text
-d_model = 8
-num_heads = 2
-head_dimension = 4
-```
-
-The model dimension was divided across the attention heads:
-
-```text
-8 model dimensions
-↓
-2 heads
-↓
-4 dimensions per head
-```
-
-Verified tensor progression:
-
-```text
-input
-[3, 8]
-
-↓ Q / K / V
-
-[3, 8]
-
-↓ split heads
-
-[2, 3, 4]
-
-↓ causal attention
-
-attention weights
-[2, 3, 3]
-
-↓ head outputs
-
-[2, 3, 4]
-
-↓ concatenate
-
-[3, 8]
-```
-
-The two heads produced different causal attention distributions over the same sequence.
-
-Key conclusion:
-
-```text
-one sequence
-↓
-multiple attention heads
-↓
-different contextual views
-↓
-concatenated representation
-```
-
-The current attention patterns are not linguistically meaningful because the model has not yet been trained.
-
----
-
-## Experiment 19 — Attention Output Projection and Residual Connection
-
-**Status:** COMPLETE
-
-Extended causal multi-head attention with the final attention output projection:
-
-```text
-concatenated heads
-[3, 8]
-
-↓ W_O
-
-projected attention
-[3, 8]
-```
-
-The projection allows information from the different heads to be mixed while preserving `d_model`.
-
-A residual connection was then introduced:
-
-```text
-original X
-+
-projected attention
-=
-residual output
-```
-
-Verified shape progression:
-
-```text
-original X
-[3, 8]
-
-↓ multi-head attention
-
-head outputs
-[2, 3, 4]
-
-↓ concatenate
-
-[3, 8]
-
-↓ output projection
-
-[3, 8]
-
-↓ residual addition
-
-[3, 8]
-```
-
-Manual inspection of token `"e"` verified that:
-
-```text
-original representation
-+
-attention update
-=
-residual representation
-```
-
-using element-wise addition.
-
-Key conclusion:
-
-```text
-new representation
-=
-previous representation
-+
-learned transformation
-```
-
-Residual connections preserve a direct information path through deep Transformer architectures.
-
----
-
-## Experiment 20 — Layer Normalization
-
-**Status:** COMPLETE
-
-Introduced `nn.LayerNorm(d_model)` after the attention residual representation.
-
-LayerNorm was applied independently to the feature dimensions of each token:
-
-```text
-h → normalize 8 features
-e → normalize 8 features
-l → normalize 8 features
-```
-
-The tensor shape remained:
-
-```text
-[3, 8]
-```
-
-For token `"e"`, the verified statistics before normalization were:
-
-```text
-mean     = -0.315053
-variance =  1.859519
-```
-
-After LayerNorm:
-
-```text
-mean     ≈ 0
-variance ≈ 1
-```
-
-Verified initialization:
-
-```text
-gamma = ones
-beta  = zeros
-```
-
-A manual implementation of:
-
-```text
-(x - mean)
------------------------
-sqrt(variance + epsilon)
-```
-
-matched PyTorch exactly within floating-point tolerance:
-
-```text
-MANUAL NORMALIZATION MATCH:
-True
-```
-
-Key conclusion:
-
-```text
-LayerNorm
-→ normalizes each token across its feature dimensions
-→ preserves sequence length and d_model
-```
-
----
-
-## Experiment 21 — Feed-Forward Network
-
-**Status:** COMPLETE
-
-Implemented the position-wise feed-forward network used inside a Transformer.
-
-Architecture:
-
-```text
-d_model = 8
-↓
-Linear(8, 32)
-↓
-GELU
-↓
-Linear(32, 8)
-↓
-d_model = 8
-```
-
-Verified shape progression:
-
-```text
-[3, 8]
-↓
-[3, 32]
-↓
-[3, 32]
-↓
-[3, 8]
-```
-
-The experiment verified that the same FFN parameters are reused for every token position.
-
-Processing token `"e"` independently produced the same result as processing it as part of the complete sequence:
-
-```text
-PROCESSING TOKEN ALONE MATCHES BATCHED RESULT:
-True
-```
-
-Changing only token `"h"` produced:
-
-```text
-h output unchanged: False
-e output unchanged: True
-l output unchanged: True
-```
-
-This demonstrates that the FFN transforms token positions independently during the forward pass.
-
-However, the parameters are shared.
-
-During training:
-
-```text
-loss from multiple positions
-↓
-gradients
-↓
-shared FFN parameters
-↓
-optimizer update
-```
-
-Therefore different token positions can indirectly influence future FFN outputs by contributing to updates of the shared parameters.
-
-Key distinction:
-
-```text
-ATTENTION
-→ communication between token positions
-```
-
-```text
-FFN
-→ nonlinear computation within each token position
-```
-
----
-
-## Experiment 22 — FFN Residual and Complete Transformer Block
-
-**Status:** COMPLETE
-
-Combined the Transformer mechanisms studied so far into one reusable `TransformerBlock`.
-
-Implemented:
-
-```text
-X
-↓
-Causal Multi-Head Attention
-↓
-Output Projection
-↓
-First Residual Connection
-↓
-LayerNorm
-↓
-Feed-Forward Network
-↓
-Second Residual Connection
-↓
-LayerNorm
-↓
-Transformer Block Output
-```
-
-The complete block preserved:
-
-```text
-[sequence_length, d_model]
-```
-
-through every external stage.
-
-Verified:
-
-```text
-Input                    [3, 8]
-Attention Output         [3, 8]
-First Residual           [3, 8]
-FFN Output               [3, 8]
-Second Residual          [3, 8]
-Transformer Block Output [3, 8]
-```
-
-For token `"e"`:
-
-```text
-normalized attention
-+
-FFN update
-=
-second residual
-```
-
-was verified manually:
-
-```text
-SECOND RESIDUAL MANUAL MATCH:
-True
-```
-
-The final representation had:
-
-```text
-mean ≈ 0
-variance ≈ 1
-```
-
-after the second LayerNorm.
-
-Key conclusion:
-
-```text
-attention
-→ communication between positions
-
-FFN
-→ nonlinear computation within positions
-
-residuals
-→ preserve direct information paths
-
-LayerNorm
-→ normalizes intermediate representations
-```
-
-These mechanisms now form a reusable Transformer block.
-
----
-
-## Experiment 23 — Stacked Transformer Blocks
-
-**Status:** COMPLETE
-
-Introduced model depth by stacking multiple independently parameterized Transformer blocks.
-
-Architecture:
-
-```text
-token + position embeddings
-↓
-Transformer Block 1
-↓
-Transformer Block 2
-↓
-Transformer Block 3
-↓
-final contextual representations
-```
-
-Verified that different blocks own different parameters:
-
-```text
-Block 1 and Block 2 share Query parameter object:
-False
-
-Block 1 and Block 2 Query values identical:
-False
-```
-
-Tracked token `"e"` through the stack and observed a different representation after every block.
-
-Verified:
-
-```text
-Block 1 output != input
-Block 2 output != Block 1 output
-Block 3 output != Block 2 output
-```
-
-All checks returned:
-
-```text
-True
-```
-
-Every block preserved:
-
-```text
-[sequence_length, d_model]
-```
-
-The experiment verified:
-
-```text
-ALL LAYERS PRESERVE [sequence_length, d_model]:
-True
-```
-
-Key conclusion:
-
-```text
-each block receives the previous block's output
-```
-
-and:
-
-```text
-each block normally owns independent trainable parameters
-```
-
-This introduces Transformer depth while preserving the model representation width.
-
----
-
-## Experiment 24 — Language-Model Head and Vocabulary Logits
-
-**Status:** COMPLETE
-
-Connected final Transformer representations to the vocabulary using:
-
-```text
-Linear(d_model, vocabulary_size)
-```
-
-For:
-
-```text
-d_model = 8
-vocabulary_size = 10
-```
-
-the LM Head performs:
-
-```text
-[8]
-→
-[10]
-```
-
-per token position.
-
-For the complete sequence:
-
-```text
-[3, 8]
-→
-[3, 10]
-```
-
-Verified that every sequence position produces a complete set of vocabulary logits.
-
-Because causal attention restricts available context:
-
-```text
-position 0 → prediction after "h"
-
-position 1 → prediction after "he"
-
-position 2 → prediction after "hel"
-```
-
-During generation, the final row is selected:
-
-```python
-next_token_logits = logits[-1]
-```
-
-resulting in:
-
-```text
-[10]
-```
-
-next-token scores for the complete prompt.
-
-A vocabulary logit for token `"l"` was manually reproduced as a dot product between:
-
-```text
-contextual representation [8]
-```
-
-and:
-
-```text
-LM-head token weight [8]
-```
-
-The result matched PyTorch:
-
-```text
-MANUAL LOGIT MATCH:
-True
-```
-
-Key conclusion:
-
-```text
-Transformer
-→ contextual representation
-
-LM Head
-→ vocabulary logits
-```
-
----
-
-## Experiment 25 — Softmax and Next-Token Probabilities
-
-**Status:** COMPLETE
-
-Converted verified vocabulary logits into next-token probabilities using Softmax.
-
-Starting logits:
-
-```text
-[10]
-```
-
-Softmax output:
-
-```text
-[10]
-```
-
-Verified:
-
-```text
-PROBABILITY SUM:
-1.0
-```
-
-The token with the highest logit and highest probability was:
-
-```text
-'d'
-```
-
-and:
-
-```text
-ARGMAX LOGIT MATCHES ARGMAX PROBABILITY:
-True
-```
-
-Implemented numerically stable Softmax manually:
-
-```text
-logits
-↓
-subtract max(logits)
-↓
-exponential
-↓
-divide by exponential sum
-```
-
-The manual calculation matched PyTorch:
-
-```text
-MANUAL SOFTMAX MATCH:
-True
-```
-
-For vocabulary token `"l"`:
-
-```text
-logit       ≈ -0.3606
-probability ≈ 0.0717
-            ≈ 7.17 %
-```
-
-Key conclusion:
-
-```text
-Softmax
-→ converts relative vocabulary scores
-→ into a probability distribution
-```
-
-while preserving the ranking of the logits.
-
----
-
-## Experiment 26 — Shifted Targets and CrossEntropyLoss
-
-**Status:** COMPLETE
-
-Goal:
-
-Teach the model what the correct next token actually is and quantify prediction error.
-
-For a sequence such as:
-
-```text
-hello
-```
-
-the training relationship is:
-
-```text
-input:
-h e l l
-
-target:
-e l l o
-```
-
-Each input position predicts the token immediately to its right.
-
-Planned flow:
-
-```text
-logits
-[sequence_length, vocabulary_size]
-
-+
-
-target token IDs
-[sequence_length]
-
-↓
-
-CrossEntropyLoss
-
-↓
-
-single scalar loss
-```
-
-The experiment will also verify manually why a low probability assigned to the correct token produces a larger loss.
-
-## Experiment 27 — Backpropagation and Gradients
-
-**Status:** COMPLETE
-
-Goal:
-
-Understand how the scalar language-model loss produces gradients for trainable parameters throughout the complete model.
-
-Planned flow:
-
-```text
-forward pass
-↓
-logits
-↓
-CrossEntropyLoss
-↓
-loss.backward()
-↓
-gradients
-```
-
-The experiment will inspect gradients for:
-
-```text
-LM Head
-Transformer parameters
-token embeddings
-```
-
-and verify an essential distinction:
-
-```text
-backward()
-→ calculates gradients
-
-optimizer.step()
-→ changes parameters
-```
-
-The optimizer update will remain a separate experiment.
-
-## Experiment 28 — Optimizer Update
-
-**Status:** COMPLETE
-
-Goal:
-
-Use the gradients calculated by backpropagation to modify trainable model parameters.
-
-Planned flow:
-
-```text
-forward
-↓
-loss
-↓
-backward
-↓
-gradients
-↓
-optimizer.step()
-↓
-updated parameters
-```
-
-The experiment will compare exact parameter values before and after the optimizer step and verify that the next forward pass produces a different loss.
-
-## Experiment 29 — Language-Model Training Loop
-
-**Status:** COMPLETE
-
-Goal:
-
-Combine the complete learning process into a repeated training loop.
-
-The experiment will integrate:
-
-```text
-forward pass
-↓
-CrossEntropyLoss
-↓
-zero_grad()
-↓
-backward()
-↓
-optimizer.step()
-↓
-repeat
-```
-
-It will track loss over multiple training steps and inspect how the model's next-token predictions change as its parameters learn from the training text.
-
-This marks the transition from isolated training mechanics to an actually trained tiny language model.
-
-## Experiment 30 — Autoregressive Generation and Sampling
-
-**Status:** NEXT
-
-Goal:
-
-Use a trained causal language model to generate a sequence one token at a time.
-
-The generation loop will follow:
-
 ```text
-current context
-↓
-model
-↓
-final-position logits
-↓
-token selection
-↓
-append selected token
-↓
-new context
-↓
-repeat
+text → tokenizer → token IDs → embeddings → Transformer
+     → logits → next-token probabilities → generated text
 ```
 
-The experiment will connect previously learned concepts:
+The roadmap holds the ordered route only. Each experiment's theory, hypothesis, implementation, actual run and limitations live in its own README under [topics/04_llm_engineering/](topics/04_llm_engineering/README.md); do not duplicate them here.
 
-```text
-causal attention
-final-position logits
-Softmax probabilities
-greedy selection
-sampling
-```
-
-and demonstrate the distinction between:
-
-```text
-training
-```
-
-and:
-
-```text
-inference / generation
-```
+## Experiment sequence
 
-Rather than splitting greedy decoding and probabilistic sampling into separate microscopic experiments, they will be studied together in the autoregressive generation workflow.
+"Experiment NN" is the global number across the whole Lab (see [Experiment numbering](docs/learning-method.md#experiment-numbering)). The folder column is the local sequence inside `topics/04_llm_engineering/`.
 
----
+| Experiment | Title | Folder | Status | New idea |
+|---|---|---|---|---|
+| 13 | Tokenization | `01_tokenization` | COMPLETE | token ≠ token ID |
+| 14 | Token Embeddings | `02_embeddings` | COMPLETE | embedding table lookup, `[8] → [8, 4]` |
+| 15 | Positional Embeddings | `03_positional_embeddings` | COMPLETE | token = WHAT, position = WHERE |
+| 16 | Self-Attention | `04_self_attention` | COMPLETE | Q, K, V and attention weights |
+| 17 | Causal Self-Attention | `05_causal_attention` | COMPLETE | causal mask |
+| 18 | Multi-Head Attention | `06_multi_head_attention` | COMPLETE | heads and concatenation |
+| 19 | Attention Output Projection and Residual | `07_attention_output_residual` | COMPLETE | output projection, residual path |
+| 20 | Layer Normalization | `08_layer_normalization` | COMPLETE | per-token normalization |
+| 21 | Feed-Forward Network | `09_feed_forward_network` | COMPLETE | position-wise expansion and projection |
+| 22 | FFN Residual and Complete Transformer Block | `10_transformer_block` | COMPLETE | the full block |
+| 23 | Stacked Transformer Blocks | `11_stacked_transformer_blocks` | COMPLETE | depth |
+| 24 | Language-Model Head and Vocabulary Logits | `12_lm_head_logits` | COMPLETE | hidden states → vocabulary logits |
+| 25 | Softmax and Next-Token Probabilities | `13_softmax_probabilities` | COMPLETE | logits → probabilities |
+| 26 | Shifted Targets and CrossEntropyLoss | `14_shifted_targets_cross_entropy` | COMPLETE | next-token loss |
+| 27 | Backpropagation and Gradients | `15_backpropagation_gradients` | COMPLETE | gradients per parameter |
+| 28 | Optimizer Update | `16_optimizer_update` | COMPLETE | `optimizer.step()` changes parameters |
+| 29 | Language-Model Training Loop | `17_training_loop` | COMPLETE | repeated training; a tiny trained LM |
+| 30 | Autoregressive Generation and Sampling | _(not created yet)_ | **NEXT — current target** | training vs inference |
 
-## Remaining LLM Fundamentals
+### Experiment 30 — Autoregressive Generation and Sampling (current target)
 
-After Next-Token Probabilities:
+Use the trained causal language model to generate one token at a time:
 
 ```text
-Autoregressive Generation
-↓
-Greedy Decoding
-↓
-Probabilistic Sampling
-↓
-Generated Text
+current context → model → final-position logits → token selection
+→ append selected token → new context → repeat
 ```
-
-Additional concepts:
-
-- greedy decoding,
-- temperature,
-- top-k,
-- top-p,
-- context window,
-- training vs inference,
-- model parameter count,
-- KV cache,
-- RoPE,
-- multi-query attention,
-- grouped-query attention,
-- pre-norm vs post-norm architectures.
 
----
+Greedy decoding and probabilistic sampling are studied together in this one workflow rather than as separate microscopic experiments. It connects causal attention, final-position logits and Softmax probabilities, and makes the difference between training and inference/generation explicit.
 
-## Phase 04 Synthesis Exercise
+## Remaining LLM fundamentals
 
-Connect the studied components in a small controlled GPT-like exercise using PyTorch, with a tiny dataset and an explicit question about training versus generation.
+After Experiment 30, short concept studies (no separate experiments planned unless needed): temperature, top-k, top-p, context window, training vs inference, model parameter count, KV cache, RoPE, multi-query and grouped-query attention, pre-norm vs post-norm.
 
-This synthesis is educational lab work, not a plan for an external repository. Keep its scope bounded and its limitations visible.
-
-The exercise should connect:
-
-```text
-tokenization
-↓
-embeddings
-↓
-causal Transformer
-↓
-LM head
-↓
-next-token loss
-↓
-training
-↓
-generation
-```
+## Phase 04 synthesis exercise
 
-The final implementation should make the connection between all previous experiments explicit.
+Connect the studied components in a small controlled GPT-like exercise in PyTorch with a tiny dataset and an explicit question about training versus generation. It is educational lab work, not a plan for an external repository; keep its scope bounded and its limitations visible.
 
 ---
 
@@ -1632,15 +637,11 @@ The final implementation should make the connection between all previous experim
 
 ## Concepts
 
-- pretrained models,
-- model loading,
-- inference,
-- context,
-- generation,
-- CPU inference,
-- GPU inference,
-- RAM,
-- VRAM.
+- pretrained models, model loading, model selection,
+- inference, context windows, KV-cache concepts, generation,
+- CPU inference, GPU inference, RAM versus VRAM,
+- tokens per second, time to first token, latency, throughput, batching concepts,
+- OpenAI-compatible local endpoints (the same request shape later reused in Phase 06).
 
 ## Practical Work
 
@@ -1648,18 +649,16 @@ Run a small compatible language model locally.
 
 Record:
 
-- model,
-- model size,
+- model, model size, quantization,
 - hardware,
 - memory usage,
-- generation parameters,
-- latency,
-- tokens per second.
+- generation parameters, context length,
+- latency, tokens per second.
 
 ## Block 5B — Ollama and local APIs
 
 - inference runtime, model management, local model server,
-- HTTP, JSON, API requests, streaming.
+- HTTP, JSON, API requests, streaming, OpenAI-compatible endpoint.
 
 ```text
 Python client → HTTP → Ollama → runtime → model → generated tokens → response
@@ -1674,9 +673,20 @@ Run compatible models through `llama.cpp` and compare Ollama versus llama.cpp.
 ## Block 5D — Hardware, quantization and benchmarking
 
 - parameter count, FP32, FP16, BF16, INT8, INT4, RAM, VRAM, memory bandwidth, GPU offload,
+- context length versus KV-cache memory, batching concepts,
 - latency, time to first token, tokens per second, throughput, warm-up, repeatability, quality evaluation.
 
 Compare configurations while controlling model, prompt, hardware and context; measure memory, latency, generation speed and output differences. Isolate a benchmark question with fixed prompts, controlled settings and repeated measurements.
+
+## Block 5E — Serving and gateways (awareness, later)
+
+| Technology | Architectural purpose | Status |
+|---|---|---|
+| Ollama, llama.cpp | first practical path on the learner's RTX 2060 Max-Q | hands-on |
+| **vLLM** | production-oriented model serving with an OpenAI-compatible server | awareness; not required on this hardware |
+| **LiteLLM** | model gateway: routing, retries, fallbacks, provider abstraction | awareness; understand the pattern before any use |
+
+Learn why serving and gateways exist (concurrency, batching, provider independence). Neither is a prerequisite for Phase 06.
 
 **Resources:** Hugging Face LLM Course (pretrained models, model usage).
 
@@ -1688,23 +698,59 @@ Compare configurations while controlling model, prompt, hardware and context; me
 
 **Track:** bridge. Topic directory: `topics/06_llm_application_interfaces/`. Replaces the former Phase 07 (Python LLM Integration) and the request half of the former Phase 14 (Tool Calling).
 
-Purpose: bridge model fundamentals to usable applications.
+Purpose: bridge model fundamentals to usable applications, and treat prompts as engineering artifacts.
 
 ## Concepts
 
-- Python ↔ local LLM boundaries,
-- chat / message interfaces, system / user / assistant roles,
-- prompt construction,
-- streaming,
-- structured outputs, JSON Schema, validation (Pydantic is a possible tool after the contract is understood),
-- function calling and tool-calling foundations,
-- error handling, timeouts, bounded retries, configuration.
+- Python ↔ model server boundary, HTTP inference, REST concepts,
+- OpenAI-compatible APIs, chat / message models (system / developer / user / assistant roles),
+- streaming, SSE concepts, async requests, concurrency concepts,
+- structured outputs, JSON Schema, Pydantic validation (after the contract is understood),
+- function calling and tool calling,
+- timeouts, retry / backoff, rate limits,
+- context management, token budgeting.
 
 Distinguish generating a tool-call request from validating arguments, checking permission, executing a function and returning its result. A parseable response does not prove a correct answer or authorize an action.
 
+## Prompt engineering is engineering
+
+Prompting is product and software work, not ad-hoc wording experiments.
+
+- prompt contracts: purpose, inputs, outputs, constraints, refusal / abstention behavior,
+- system / developer / user instruction hierarchy,
+- structured prompts, prompt templates, few-shot examples,
+- typed inputs and outputs (JSON Schema, Pydantic),
+- model-specific prompt behavior and prompt migration between models,
+- prompt injection resistance and context-budget awareness,
+- prompt versioning, golden evaluation datasets, regression testing, A/B comparisons, failure-mode analysis.
+
+```text
+define expected behavior
+↓
+write prompt / instructions
+↓
+build evaluation cases
+↓
+observe failures
+↓
+classify failure modes
+↓
+modify prompt / context / tools
+↓
+rerun evaluations
+↓
+version the improvement
+```
+
+**DSPy** (declarative LM programs; metric-driven prompt / program optimization) is a *later* technology, studied after manual prompt-engineering fundamentals and an evaluation set exist (see Phase 14 for how it differs from fine-tuning). It is not required before the manual workflow above.
+
+## Enterprise comparison (conceptual)
+
+Compare one request shape across: a local Ollama endpoint, an OpenAI-style API, **Azure OpenAI** and **Microsoft Foundry** model endpoints — authentication, deployments / versions, streaming, structured outputs, tool calling, tokens / context, rate limits and retries. ZERO EXTRA COST: hosted endpoints are studied architecturally from documentation unless the learner explicitly authorizes paid use.
+
 ## Practical Work
 
-Small educational experiments (none created yet): local chat client, structured-output extractor, streaming client, first controlled tool call.
+Small educational experiments (none created yet): local chat client, structured-output extractor with a golden evaluation set, streaming client, first controlled tool call, prompt-version regression run.
 
 ```text
 model requests action
@@ -1720,26 +766,56 @@ application automatically authorizes action
 
 **Track:** B — Applied AI Automation. Topic directory: `topics/07_ai_automation_foundations/`. New phase; it begins the explicit applied track. Supersedes the former "Automation" parallel track as a sequential block.
 
+This phase should support real business automation work.
+
 ## Concepts
 
-- business-process decomposition,
-- deterministic workflows,
-- rules versus AI (and when AI is not appropriate),
-- HTTP fundamentals, REST APIs, JSON, webhooks,
-- API authentication concepts,
-- data transformation and validation,
-- retries, timeouts, idempotency, error handling,
+- business-process discovery, workflow mapping,
+- deterministic versus probabilistic steps; rules versus AI (and when AI is not appropriate),
+- HTTP, REST, JSON, OpenAPI, webhooks,
+- authentication: API keys, OAuth2 / OIDC concepts,
+- pagination, rate limiting, timeouts, retries, exponential backoff, idempotency,
+- input validation, data transformation, error handling,
 - human approval and auditability,
 - workflow evaluation,
 - n8n fundamentals (local / self-hosted).
+
+## Decision hierarchy
+
+```text
+plain function
+↓
+deterministic workflow
+↓
+LLM call
+↓
+RAG
+↓
+agent
+↓
+multi-agent
+```
+
+Move down the list only when the previous level demonstrably cannot solve the problem. Choose the simplest architecture that works.
+
+## API-first versus browser automation
+
+```text
+prefer supported APIs
+before browser automation
+```
+
+Browser automation (**Playwright**, open source) is a useful fallback when no supported API exists. It is brittle (UI changes), harder to secure and harder to audit; reason about that trade-off before using it. Respect terms of service and authorization.
 
 n8n progression: fundamentals → API / workflow integrations → testing and error handling → (Phase 12) AI workflows → tools / agents. n8n is a workflow platform; learning it does not replace the fundamentals above.
 
 ## Practical Work
 
-Small future experiments (none created yet): deterministic incident triage, webhook → validation → routing, API → transform → output, retry / error-handling exercise, human-approval workflow, a simple local n8n workflow.
+Small future experiments (none created yet): deterministic incident triage, webhook → validation → routing, API → transform → output (with pagination and retry), retry / error-handling exercise, human-approval workflow, a simple local n8n workflow, a small browser-automation versus API comparison.
 
 The existing deterministic-triage exercise is kept outside this repository for now and may eventually become the first experiment here. Its `10/10` original cases and `4/4` tests are a baseline only, not proof of generalization.
+
+**Enterprise mapping:** Microsoft Copilot Studio (low-code agents) is introduced here conceptually and compared in Phase 12. No paid features are activated.
 
 **Resources:** n8n Academy (self-hosted / local; no paid tier required).
 
@@ -1755,16 +831,23 @@ This phase concerns **external embedding models used for retrieval**, not the in
 
 ## Concepts
 
-- embedding models, sentence / document embeddings,
-- vector similarity, cosine similarity, normalization,
-- nearest-neighbor search, semantic search,
-- chunking and metadata,
-- local indexes (FAISS concepts),
-- retrieval evaluation, reranking.
+- embedding models, dense vectors, sentence / document embeddings,
+- cosine similarity, normalization,
+- BM25 and sparse (lexical) retrieval concepts,
+- nearest-neighbor search, approximate nearest neighbors (ANN), HNSW,
+- metadata filtering, chunking and metadata,
+- hybrid retrieval (lexical + vector), reranking,
+- retrieval evaluation: recall, precision, ranking quality.
 
 ## Practical Work
 
-Small future experiments: sentence similarity, semantic search, local vector index, retrieval evaluation. Start with exact in-memory similarity so ranking is visible. FAISS, SQLite-based approaches and other local vector indexes are optional later comparisons, not required dependencies. No paid vector service.
+Small future experiments: sentence similarity, semantic search, BM25 versus dense comparison, local vector index, retrieval evaluation. Start with exact in-memory similarity so ranking is visible.
+
+Local technologies to compare (use one or two; mastering all three is not required): **FAISS**, **PostgreSQL + pgvector**, **Qdrant**. No paid vector service.
+
+## Enterprise mapping — Azure AI Search
+
+Understand how a managed enterprise service maps onto the same concepts: lexical search, vector search, hybrid search, semantic ranking, metadata filtering and enterprise access patterns. Studied from documentation; no Azure deployment is required.
 
 ---
 
@@ -1776,12 +859,13 @@ Small future experiments: sentence similarity, semantic search, local vector ind
 
 ## Concepts
 
-- ingestion, parsing, chunking,
-- embeddings, indexing, retrieval, reranking,
-- context construction, grounded generation,
-- citations, abstention,
-- hybrid retrieval, query rewriting,
-- RAG evaluation and failure modes (missing evidence, poor chunks, irrelevant retrieval, stale documents, unsupported claims, misleading citations).
+- document ingestion, parsing, OCR concepts, chunking, metadata,
+- embedding, indexing, retrieval, reranking,
+- context construction, grounded generation, citations, abstention,
+- query rewriting, multi-query retrieval, hybrid RAG,
+- RAG evaluation and failure modes (missing evidence, poor chunks, irrelevant retrieval, stale documents, unsupported claims, misleading citations),
+- document-level security and permission-aware retrieval,
+- RAG poisoning and data provenance.
 
 ## Practical Work
 
@@ -1789,7 +873,11 @@ Small future experiments: sentence similarity, semantic search, local vector ind
 documents → chunks → embeddings → retrieval → context → LLM → answer
 ```
 
-Evaluate retrieval and generation separately. Small future experiments: minimal local RAG with citations, retrieval failure analysis. Hybrid retrieval, query rewriting and reranking are compared after a baseline exposes a concrete failure. A small end-to-end RAG experiment belongs in the lab to understand ingestion, retrieval and grounding with controlled data.
+Evaluate retrieval and generation separately. Small future experiments: minimal local RAG with citations, retrieval failure analysis, a permission-aware retrieval toy. Hybrid retrieval, query rewriting and reranking are compared after a baseline exposes a concrete failure. A small end-to-end RAG experiment belongs in the lab to understand ingestion, retrieval and grounding with controlled data.
+
+Enterprise scenarios used as problem framings: internal knowledge base, technical documentation, policy assistant, support knowledge assistant, document intelligence.
+
+**LlamaIndex** is a useful framework to *compare* for retrieval, RAG and workflows — after the from-scratch / local RAG experiment, never before it.
 
 **Resources:** LangChain / LangGraph learn (RAG), after the from-scratch version.
 
@@ -1803,24 +891,39 @@ Evaluate retrieval and generation separately. Small future experiments: minimal 
 
 ## Concepts
 
-- validated tool execution and execution boundaries,
+- validated tool schemas and execution boundaries; the observation / result loop,
 - agent loop from scratch: state, actions, observations, termination,
-- short-term memory, long-term memory concepts, context engineering,
-- planning, retry / reflection loops, error recovery,
-- permissions, sandboxing, human approval,
+- short-term memory, long-term memory concepts,
+- planning, task decomposition, ReAct, plan-and-execute, routing, reflection / retry, error recovery,
+- context engineering and context compaction,
+- permissions, sandboxing, human-in-the-loop approvals,
+- background / long-running agents, checkpoints, resume / recovery,
 - budgets and tracing,
 - agent evaluation.
 
+## Patterns
+
+single agent + tools · router · supervisor · handoff · planner / executor · parallel fan-out / fan-in · subagents · specialized agents. Each pattern is compared with a single-agent baseline; multi-agent is justified only by separable roles.
+
+## Tool and data integrations
+
+files · REST APIs · SQL / database · search / retrieval · business systems. Early experiments never receive unrestricted shell or system access; tools are small, typed, allowlisted and sandboxed.
+
+## Agent skills and reusable capabilities (later concept)
+
+Reusable instructions, tool bundles, domain capabilities and progressive context loading (load detail only when needed). A concept inside this phase and Phase 12, not a separate phase.
+
 ## Practical Work
 
-Small future experiments: agent loop from scratch, agent with two or three controlled tools, memory / state experiment, Minimal Coding-Agent Experiment, agent evaluation. These are grouped learning questions, not pre-created directories.
+Small future experiments: agent loop from scratch, agent with two or three controlled tools, memory / state experiment, checkpoint / resume experiment, Minimal Coding-Agent Experiment, agent evaluation. These are grouped learning questions, not pre-created directories.
 
 | Block | Concepts and small lab work | Evidence before extending |
 |---|---|---|
 | Minimal loop and tool execution | Local model, controlled tool set, actions, observations, state, budgets, stopping conditions | Trace a complete task, a tool failure and budget termination |
-| State, memory and context | Current state, short-term context, persisted memory; context construction and recovery | Explain what survives between steps / runs; stale state must not become authority |
+| State, memory and context | Current state, short-term context, persisted memory; context construction, compaction and recovery | Explain what survives between steps / runs; stale state must not become authority |
 | Permissions and human approval | Argument validation, allowlists, sandbox boundaries, approvals, denied actions | Exercise permission denial, untrusted input and recovery; authorization stays in application code |
 | Planning, retries and evaluation | Compare a fixed workflow with planning, reflection and retries on a small task set | Success, errors, time and tool usage; retries must show benefit, not merely extra steps |
+| Patterns and long-running work | Router / supervisor / handoff versus a single agent; checkpoints and resume | Single-agent baseline first; resume must not repeat side effects |
 
 ### Minimal Coding-Agent Experiment
 
@@ -1834,19 +937,34 @@ The learning question is how tool calling becomes iterative tool use: request �
 
 ---
 
-# Phase 11 — MCP and AI Integration Protocols
+# Phase 11 — MCP and Agent Interoperability
 
 **Status:** PLANNED
 
-**Track:** B. Topic directory: `topics/11_mcp_integration/`. Split out of the former Phase 15 "Protocols and frameworks" block.
+**Track:** B. Topic directory: `topics/11_mcp_integration/`. Split out of the former Phase 15 "Protocols and frameworks" block. The directory name is unchanged; the scope now covers agent interoperability beyond MCP alone.
 
-## Concepts
+## MCP
 
-MCP architecture, client / server model, tools, resources, prompts, transports, permissions, local MCP servers, tool discovery, security boundaries. MCP is a protocol for connecting tools and context; it is not an agent loop or a permission policy.
+Client / server architecture, tools, resources, prompts, discovery, transports (stdio, Streamable HTTP), authorization, permissions, local versus remote servers, tool schemas, security boundaries, least privilege and approval for sensitive actions. MCP is a protocol for connecting tools and context; it is not an agent loop or a permission policy.
+
+## A2A — Agent2Agent
+
+A distinct concept from MCP:
+
+```text
+MCP → agent / application ↔ tools, context, resources
+A2A → independent agent   ↔ independent agent
+```
+
+Conceptually: agent discovery, capabilities, tasks, interoperability across frameworks, security boundaries. A2A is **PLANNED as awareness-to-practice**, not an immediate hands-on dependency.
+
+## Standards that make tools interoperable
+
+OpenAPI (describing HTTP services), JSON Schema (typed tool inputs / outputs), OAuth / OIDC (delegated authorization and identity). Emerging agent-to-UI protocols (for example AG-UI) are recorded as **awareness only** and promoted only if later market evidence justifies it.
 
 ## Practical Work
 
-Small future experiments: minimal local MCP server exposing one or two safe tools, MCP client interaction, safe local tool exposure.
+Small future experiments: minimal local MCP server exposing one or two safe tools, MCP client interaction, a least-privilege / approval exercise, an A2A concept walkthrough (reading and diagramming, not a dependency).
 
 ---
 
@@ -1864,13 +982,39 @@ agent loop from scratch → LangChain / LangGraph
 workflow fundamentals   → n8n
 ```
 
-## Concepts
+## Hands-on priority
 
-LangChain, LangGraph, state graphs, durable workflows, n8n AI workflows, subagents, handoffs, routers, multi-agent concepts, orchestration, agentic RAG, workflow-versus-agent comparison.
+| Technology | What to learn |
+|---|---|
+| **LangChain** | model / tool / retriever abstractions, structured output |
+| **LangGraph** | explicit state, nodes, edges, routing, durable execution, checkpoints, human-in-the-loop, retries, subgraphs, multi-agent orchestration |
+| **n8n AI workflows** | AI nodes inside deterministic workflows |
+| **Microsoft Agent Framework** | agents, tools, sessions / state, memory, middleware, workflows, MCP, human-in-the-loop, telemetry, hosting concepts |
+
+Microsoft Agent Framework is included because of the learner's Enterprise / Azure direction. It is the modern Microsoft successor to ideas from **AutoGen** and **Semantic Kernel**; those legacy frameworks are *historical / ecosystem awareness* only unless a job or project needs them.
+
+## Comparison and awareness
+
+PydanticAI · LlamaIndex agents / workflows · OpenAI Agents SDK architecture · CrewAI. Do not try to master every framework. For each, answer:
+
+```text
+What abstraction does this framework provide?
+What does it manage for me?
+What control do I lose?
+How does it handle state?
+How does it execute tools?
+How does it recover?
+How does it support evaluation / observability?
+```
+
+## Enterprise mapping
+
+- **Microsoft Foundry:** model catalog, endpoints / deployments, agents / tools, evaluation, tracing, monitoring, governance.
+- **Microsoft Copilot Studio** (also Phase 07): low-code agents, knowledge, tools / actions / connectors, workflow integration, state / conversations, authentication / governance. Learn *when to use Copilot Studio versus when to build custom Python agents*. No paid features are activated.
 
 ## Practical Work
 
-Small future experiments: the same workflow implemented manually versus with LangChain / LangGraph, a small LangGraph workflow, an n8n AI workflow, a subagent experiment, an agentic-RAG comparison. Each is compared against a single-agent or deterministic baseline, tracking state, permissions, termination and evaluation. Choose free local execution options; if a tutorial assumes a paid provider, document a local adaptation instead.
+Small future experiments: the same workflow implemented manually versus with LangChain / LangGraph, a small LangGraph workflow with checkpoints and a human approval, an n8n AI workflow, a subagent experiment, an agentic-RAG comparison, a framework-comparison write-up using the questions above. Each is compared against a single-agent or deterministic baseline, tracking state, permissions, termination and evaluation. Choose free local execution options; if a tutorial assumes a paid provider, document a local adaptation instead.
 
 **Resources:** LangChain / LangGraph learn, Hugging Face Agents Course, n8n Academy.
 
@@ -1884,9 +1028,11 @@ Small future experiments: the same workflow implemented manually versus with Lan
 
 ## Concepts
 
-- image input, text input, multimodal context,
-- vision-language models, multimodal embeddings,
-- later: image generation, audio, speech-to-text, text-to-speech, multimodal prompting, video concepts.
+- image input, text input, multimodal context, vision-language models, image understanding, multimodal embeddings,
+- document AI and OCR,
+- speech-to-text, text-to-speech, audio pipelines, streaming voice, turn detection, latency,
+- voice agents, multimodal tools,
+- later: image generation, video concepts.
 
 Voice overlaps multimodal and agentic AI but does not inherently require an agent loop.
 
@@ -1894,9 +1040,11 @@ Voice overlaps multimodal and agentic AI but does not inherently require an agen
 
 Evaluate a compatible multimodal model on a bounded task and evaluation set. A small voice exercise may connect recognition → LLM response generation → speech synthesis, measuring streaming latency and turn detection before tool actions. Voice agents come only after the agent fundamentals (Phase 10).
 
+Microsoft speech / vision / document services may be compared conceptually. ZERO EXTRA COST: exercises use local or free open-source models.
+
 ---
 
-# Phase 14 — Fine-Tuning, LoRA and QLoRA
+# Phase 14 — Model Adaptation: Fine-Tuning, LoRA and QLoRA
 
 **Status:** PLANNED
 
@@ -1904,13 +1052,23 @@ Evaluate a compatible multimodal model on a bounded task and evaluation set. A s
 
 ## Concepts
 
-- pretrained models, adaptation, supervised fine-tuning,
+- pretrained models, adaptation, supervised fine-tuning, instruction tuning,
 - LoRA, QLoRA, PEFT,
-- datasets and training-data quality, evaluation.
+- dataset quality, train / eval splits, synthetic-data concepts,
+- model distillation,
+- **when NOT to fine-tune:** RAG versus fine-tuning, prompt optimization versus fine-tuning.
+
+Keep three levers distinguishable:
+
+```text
+change the context   → RAG
+change the prompt / program (DSPy-style optimization) → no model weights change
+change the weights   → fine-tuning / LoRA / QLoRA
+```
 
 ## Practical Work
 
-Run a small controlled adaptation and compare it against a baseline. Include instruction tuning and model-merging concepts as later topics. Distinguish changing parameters from providing retrieved context. Scope any local training to available memory; no paid compute is required.
+Run a small controlled adaptation and compare it against a baseline, including a prompt-only and a retrieval baseline. Include model-merging concepts as a later topic. Scope any local training to available memory; no paid compute is required.
 
 **Resources:** Hugging Face LLM Course (fine-tuning chapters).
 
@@ -1922,15 +1080,24 @@ Run a small controlled adaptation and compare it against a baseline. Include ins
 
 **Track:** bridge. Former Phases 18 and 19; no topic directory yet.
 
+Strong enough for real AI-engineering jobs: agent systems combine API requests, background work, events, tools, human approvals and long-running tasks.
+
 ## Concepts
 
-- FastAPI, service APIs, streaming, concurrency, cancellation, queues, resource management,
-- logging, metrics, observability, failure handling,
-- HTTP clients, asynchronous requests, streaming UI, application state, network failures.
+- **FastAPI, Pydantic, async Python, REST APIs, OpenAPI,**
+- streaming: SSE, WebSockets concepts; cancellation, concurrency, resource management,
+- background jobs, queues, workers,
+- **PostgreSQL:** transactions, connection pooling; **Redis** concepts and caching,
+- architecture: microservices versus modular monolith, event-driven architecture, pub/sub, message brokers,
+- reliability patterns: idempotency, circuit breakers, sagas / compensation concepts,
+- logging, metrics, structured errors, failure handling,
+- client side: HTTP clients, asynchronous requests, streaming UI, application state, network failures.
+
+Understand or compare **Redis**, **RabbitMQ** and **Kafka** (concepts); mastering every broker is not required.
 
 ## Practical Work
 
-Build a small inference service with streaming, cancellation, bounded concurrency, structured errors, logs and metrics, and a client for it.
+Build a small inference service with streaming, cancellation, bounded concurrency, a background-job queue, structured errors, logs and metrics, and a client for it. Add one event-driven interaction (for example a long-running task with a human approval).
 
 ---
 
@@ -1942,11 +1109,17 @@ Build a small inference service with streaming, cancellation, bounded concurrenc
 
 ## Concepts
 
-packaging, dependencies, model artifacts, compatibility, installation, updates, offline operation.
+- Docker: Dockerfiles, images, containers, volumes, networks, Docker Compose,
+- environment variables, secrets, health checks,
+- dependency locking, reproducible environments,
+- local model packaging, compatibility, installation, updates, offline deployment,
+- sandboxing and isolation for coding / tool agents.
+
+Then Kubernetes fundamentals: pods, deployments, services, config / secrets, scaling, health probes; Helm as awareness.
 
 ## Practical Work
 
-Install and run a prototype on another machine without requiring network access.
+Install and run a prototype on another machine without requiring network access. Kubernetes is local / conceptual with small exercises only; no paid cluster is required.
 
 ---
 
@@ -1954,18 +1127,25 @@ Install and run a prototype on another machine without requiring network access.
 
 **Status:** PLANNED
 
-**Track:** bridge. Former Phase 21; no topic directory yet. Where Core and Applied converge.
+**Track:** bridge. Former Phase 21; no topic directory yet. Where Core, Applied, Software Engineering, LLMOps / MLOps and Enterprise AI converge.
 
 ## Concepts
 
-- product requirements, acceptance criteria,
-- reliability, privacy, security, AI safety,
-- observability, monitoring, regression testing, maintenance, recovery,
-- MLOps / LLMOps, local / offline deployment, performance, cost awareness.
+- **Software delivery:** Git, branching, pull-request discipline, CI / CD, GitHub Actions concepts, automated testing,
+- **Versioning and release:** model, prompt and dataset versioning; configuration management; rollback; canary and feature-flag concepts,
+- **Evaluation pipelines:** golden datasets, regression suites, LLM-as-judge limits, human review, agent evaluation,
+- **Observability:** logging, tracing of LLM / tool / agent steps, metrics, latency, token and cost tracking, error budgets, drift and feedback loops, OpenTelemetry concepts,
+- **Safety and governance:** security, privacy, prompt-injection defense, permissions, audit trails, compliance awareness,
+- product requirements, acceptance criteria, reliability, maintenance, recovery, local / offline deployment, performance, cost awareness,
+- technical communication: decision records, runbooks, README evidence, explaining trade-offs to non-engineers.
+
+## Azure / Microsoft architecture mapping (conceptual)
+
+Azure Functions · App Service · Container Apps · AKS / Kubernetes concepts · Storage · PostgreSQL / Cosmos DB concepts · Service Bus · Event Grid · Entra ID · Key Vault · Azure Monitor · Application Insights · private networking concepts. Map each to the generic concept already learned (queues, containers, secrets, identity, telemetry). **Microsoft Foundry** maps to model catalog, deployments, agents, evaluation, tracing, monitoring and governance. No paid Azure resources are required.
 
 ## Practical Work
 
-Use small controlled exercises to study production concerns such as evaluation, logging, caching, async execution, queues, packaging and regression tests. Each exercise answers a clear engineering question and documents its limits; this phase does not plan an external integrated system.
+Use small controlled exercises to study production concerns such as evaluation pipelines, logging and tracing, caching, async execution, queues, packaging, CI and regression tests. Each exercise answers a clear engineering question and documents its limits; this phase does not plan an external integrated system.
 
 Be able to justify:
 

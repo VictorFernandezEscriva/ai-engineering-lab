@@ -7,6 +7,10 @@
       "name": "Machine Learning",
       "path": "topics/01_machine_learning",
       "description": "Supervised learning, evaluation and generalization.",
+      "purpose": "Learn supervised learning, evaluation and generalization with small models you can inspect.",
+      "why": "Every later model is a learned function evaluated on held-out data; this is the vocabulary of fitting, capacity and generalization.",
+      "purpose": "Learn supervised learning, evaluation and generalization with small models you can inspect.",
+      "why": "Every later model is a learned function evaluated on held-out data; this is the vocabulary of fitting, capacity and generalization.",
       "phase": "Phase 01",
       "planned": false,
       "track": "core"
@@ -16,6 +20,10 @@
       "name": "Deep Learning",
       "path": "topics/02_deep_learning",
       "description": "Neural networks, loss, gradients and thresholds.",
+      "purpose": "Build and train small neural networks: loss, gradients and decision thresholds.",
+      "why": "Neural networks, loss and gradients are the machinery inside every language model.",
+      "purpose": "Build and train small neural networks: loss, gradients and decision thresholds.",
+      "why": "Neural networks, loss and gradients are the machinery inside every language model.",
       "phase": "Phase 02",
       "planned": false,
       "track": "core"
@@ -25,6 +33,10 @@
       "name": "Computer Vision",
       "path": "topics/03_computer_vision",
       "description": "Convolution and CNN image classification.",
+      "purpose": "Understand convolution and train CNN image classifiers with honest evaluation.",
+      "why": "Convolutional models make tensor shapes, evaluation and error analysis concrete before sequence models.",
+      "purpose": "Understand convolution and train CNN image classifiers with honest evaluation.",
+      "why": "Convolutional models make tensor shapes, evaluation and error analysis concrete before sequence models.",
       "phase": "Phase 03",
       "planned": false,
       "track": "core"
@@ -34,6 +46,10 @@
       "name": "LLM Engineering",
       "path": "topics/04_llm_engineering",
       "description": "Transformer internals from tokenization to the training loop.",
+      "purpose": "Build the Transformer from tokenization to a training loop, one mechanism at a time.",
+      "why": "Understanding the Transformer internals is what separates using an LLM API from engineering with models.",
+      "purpose": "Build the Transformer from tokenization to a training loop, one mechanism at a time.",
+      "why": "Understanding the Transformer internals is what separates using an LLM API from engineering with models.",
       "phase": "Phase 04",
       "planned": false,
       "track": "core"
@@ -44,7 +60,7 @@
       "phase": "Phase 05",
       "planned": true,
       "track": "bridge",
-      "description": "Future: pretrained models, runtimes (Ollama, llama.cpp), hardware, quantization and benchmarking.",
+      "description": "Future: Ollama, llama.cpp / GGUF, quantization, RAM vs VRAM, context / KV cache, tokens per second, local endpoints; vLLM and LiteLLM as awareness.",
       "path": "topics/05_local_models_inference"
     },
     {
@@ -53,7 +69,7 @@
       "phase": "Phase 06",
       "planned": true,
       "track": "bridge",
-      "description": "Future: Python ↔ local LLM, chat, streaming, structured outputs, first controlled tool call.",
+      "description": "Future: Python ↔ model server, streaming, structured outputs, tool calling, and prompt engineering as engineering (contracts, evaluation sets, versioning).",
       "path": "topics/06_llm_application_interfaces"
     },
     {
@@ -62,7 +78,7 @@
       "phase": "Phase 07",
       "planned": true,
       "track": "applied",
-      "description": "Future: process analysis, deterministic workflows, HTTP / webhooks, reliability, human approval, n8n.",
+      "description": "Future: process discovery, deterministic vs probabilistic steps, REST / OpenAPI / OAuth, reliability, human approval, n8n, API-first vs browser automation.",
       "path": "topics/07_ai_automation_foundations"
     },
     {
@@ -71,7 +87,7 @@
       "phase": "Phase 08",
       "planned": true,
       "track": "core",
-      "description": "Future: external embedding models, similarity, semantic search, chunking, retrieval evaluation.",
+      "description": "Future: dense, lexical (BM25) and hybrid retrieval, ANN / HNSW, metadata filtering, reranking, retrieval evaluation; Azure AI Search as enterprise mapping.",
       "path": "topics/08_embeddings_semantic_retrieval"
     },
     {
@@ -80,7 +96,7 @@
       "phase": "Phase 09",
       "planned": true,
       "track": "bridge",
-      "description": "Future: ingestion, retrieval, grounded generation, citations, RAG evaluation.",
+      "description": "Future: ingestion, grounded generation, citations, RAG evaluation, permission-aware retrieval and poisoning; LlamaIndex as comparison.",
       "path": "topics/09_rag_knowledge_systems"
     },
     {
@@ -89,16 +105,16 @@
       "phase": "Phase 10",
       "planned": true,
       "track": "applied",
-      "description": "Future: tool execution, agent loop from scratch, state, permissions, agent evaluation.",
+      "description": "Future: agent loop from scratch, tools, state, memory, patterns, permissions, checkpoints, agent evaluation, agent skills.",
       "path": "topics/10_agentic_systems"
     },
     {
       "id": "mcp",
-      "name": "MCP & Integration",
+      "name": "MCP & Agent Interoperability",
       "phase": "Phase 11",
       "planned": true,
       "track": "applied",
-      "description": "Future: MCP architecture, local servers, security boundaries.",
+      "description": "Future: MCP, A2A and the standards (OpenAPI, JSON Schema, OAuth / OIDC) behind interoperable tools.",
       "path": "topics/11_mcp_integration"
     },
     {
@@ -107,16 +123,53 @@
       "phase": "Phase 12",
       "planned": true,
       "track": "applied",
-      "description": "Future: LangChain, LangGraph, n8n AI workflows, subagents, orchestration.",
+      "description": "Future: LangChain, LangGraph, n8n AI workflows, Microsoft Agent Framework; framework comparison; Copilot Studio vs custom agents.",
       "path": "topics/12_agent_frameworks_orchestration"
     },
     {
-      "id": "later",
-      "name": "Later Core AI & Production",
-      "phase": "Phases 13–17",
-      "planned": true,
+      "id": "multimodal",
+      "name": "Multimodal / Voice",
+      "path": "topics/13_multimodal_voice",
+      "phase": "Phase 13",
       "track": "core",
-      "description": "Future: multimodal / voice, model adaptation, AI backend, production AI."
+      "description": "Future: vision-language models, document AI / OCR, speech, streaming voice, turn detection and latency.",
+      "planned": true
+    },
+    {
+      "id": "adaptation",
+      "name": "Model Adaptation",
+      "path": "topics/14_model_adaptation",
+      "phase": "Phase 14",
+      "track": "core",
+      "description": "Future: fine-tuning, LoRA / QLoRA, dataset quality, distillation; when not to fine-tune; DSPy-style optimization.",
+      "planned": true
+    },
+    {
+      "id": "backend",
+      "name": "AI Backend & Client Integration",
+      "path": "topics/15_ai_backend_client_integration",
+      "phase": "Phase 15",
+      "track": "bridge",
+      "description": "Future: FastAPI, async Python, PostgreSQL, Redis, queues, event-driven architecture and reliability patterns.",
+      "planned": true
+    },
+    {
+      "id": "packaging",
+      "name": "Packaging & Offline Distribution",
+      "path": "topics/16_packaging_offline_distribution",
+      "phase": "Phase 16",
+      "track": "bridge",
+      "description": "Future: Docker, Compose, reproducible and offline deployment, agent sandboxing, Kubernetes fundamentals.",
+      "planned": true
+    },
+    {
+      "id": "production",
+      "name": "Production AI Engineering",
+      "path": "topics/17_production_ai_engineering",
+      "phase": "Phase 17",
+      "track": "bridge",
+      "description": "Future: CI/CD, evaluation pipelines, observability, SLOs, FinOps, governance, Azure architecture mapping.",
+      "planned": true
     },
     {
       "id": "cross",
@@ -139,17 +192,15 @@
         {
           "title": "Machine Learning topic overview",
           "path": "topics/01_machine_learning/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-ml-01_decision_tree"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/01_machine_learning/01_decision_tree/README.md",
+      "content_status": "available"
     },
     {
       "id": "ml.decision_tree",
@@ -164,17 +215,15 @@
         {
           "title": "Machine Learning topic overview",
           "path": "topics/01_machine_learning/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-ml-01_decision_tree"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/01_machine_learning/01_decision_tree/README.md",
+      "content_status": "available"
     },
     {
       "id": "ml.overfitting",
@@ -191,17 +240,15 @@
         {
           "title": "Machine Learning topic overview",
           "path": "topics/01_machine_learning/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-ml-02_overfitting"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/01_machine_learning/02_overfitting/README.md",
+      "content_status": "available"
     },
     {
       "id": "dl.binary_classifier",
@@ -216,17 +263,15 @@
         {
           "title": "Deep Learning topic overview",
           "path": "topics/02_deep_learning/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-dl-01_binary_classifier"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/02_deep_learning/01_binary_classifier/README.md",
+      "content_status": "available"
     },
     {
       "id": "dl.train_test_thresholds",
@@ -242,17 +287,15 @@
         {
           "title": "Deep Learning topic overview",
           "path": "topics/02_deep_learning/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-dl-02_train_test_and_thresholds"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/02_deep_learning/02_train_test_and_thresholds/README.md",
+      "content_status": "available"
     },
     {
       "id": "cv.convolution",
@@ -267,10 +310,6 @@
         {
           "title": "Computer Vision topic overview",
           "path": "topics/03_computer_vision/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
@@ -278,7 +317,9 @@
         "ex-cv-02_multiple_filters"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/03_computer_vision/01_convolution/README.md",
+      "content_status": "available"
     },
     {
       "id": "cv.cnn_shapes",
@@ -293,10 +334,6 @@
         {
           "title": "Computer Vision topic overview",
           "path": "topics/03_computer_vision/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
@@ -304,7 +341,9 @@
         "ex-cv-04_shapes_evaluation"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/03_computer_vision/03_shapes_cnn/README.md",
+      "content_status": "available"
     },
     {
       "id": "cv.mnist_pipeline",
@@ -319,10 +358,6 @@
         {
           "title": "Computer Vision topic overview",
           "path": "topics/03_computer_vision/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
@@ -330,7 +365,9 @@
         "ex-cv-06_mnist_dataloader"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/03_computer_vision/05_mnist/README.md",
+      "content_status": "available"
     },
     {
       "id": "cv.mnist_cnn",
@@ -348,10 +385,6 @@
         {
           "title": "Computer Vision topic overview",
           "path": "topics/03_computer_vision/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
@@ -359,30 +392,32 @@
         "ex-cv-08_mnist_error_analysis"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/03_computer_vision/07_mnist_cnn/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.tokenization",
       "name": "Tokenization and token IDs",
       "area": "llm",
       "description": "Text to vocabulary to IDs and back (character level).",
-      "prerequisites": [],
+      "prerequisites": [
+        "dl.train_test_thresholds"
+      ],
       "related": [],
       "resources": [
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-01_tokenization"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/01_tokenization/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.embeddings",
@@ -397,17 +432,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-02_embeddings"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/02_embeddings/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.positional",
@@ -422,17 +455,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-03_positional_embeddings"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/03_positional_embeddings/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.self_attention",
@@ -447,17 +478,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-04_self_attention"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/04_self_attention/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.causal_attention",
@@ -472,17 +501,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-05_causal_attention"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/05_causal_attention/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.multi_head",
@@ -497,17 +524,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-06_multi_head_attention"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/06_multi_head_attention/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.attention_output",
@@ -522,17 +547,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-07_attention_output_residual"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/07_attention_output_residual/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.layer_norm",
@@ -547,17 +570,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-08_layer_normalization"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/08_layer_normalization/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.ffn",
@@ -572,17 +593,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-09_feed_forward_network"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/09_feed_forward_network/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.transformer_block",
@@ -597,17 +616,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-10_transformer_block"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/10_transformer_block/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.stacked_blocks",
@@ -622,17 +639,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-11_stacked_transformer_blocks"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/11_stacked_transformer_blocks/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.lm_head",
@@ -647,17 +662,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-12_lm_head_logits"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/12_lm_head_logits/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.softmax",
@@ -672,17 +685,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-13_softmax_probabilities"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/13_softmax_probabilities/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.cross_entropy",
@@ -699,17 +710,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-14_shifted_targets_cross_entropy"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/14_shifted_targets_cross_entropy/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.backprop",
@@ -726,17 +735,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-15_backpropagation_gradients"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/15_backpropagation_gradients/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.optimizer",
@@ -751,17 +758,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-16_optimizer_update"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/16_optimizer_update/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.training_loop",
@@ -776,17 +781,15 @@
         {
           "title": "LLM Engineering topic overview",
           "path": "topics/04_llm_engineering/README.md"
-        },
-        {
-          "title": "Learning method",
-          "path": "docs/learning-method.md"
         }
       ],
       "exercises": [
         "ex-llm-17_training_loop"
       ],
       "planned": false,
-      "track": "core"
+      "track": "core",
+      "content_path": "topics/04_llm_engineering/17_training_loop/README.md",
+      "content_status": "available"
     },
     {
       "id": "llm.generation",
@@ -799,13 +802,15 @@
       "related": [],
       "resources": [
         {
-          "title": "Roadmap — Experiment 30",
+          "title": "Roadmap — Experiment 30 (plan, not theory)",
           "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
       "planned": true,
-      "track": "core"
+      "track": "core",
+      "content_status": "partial",
+      "content_path": "docs/model-runtime-application.md"
     },
     {
       "id": "local.inference",
@@ -817,18 +822,11 @@
         "llm.generation"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/05_local_models_inference/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "partial",
+      "content_path": "docs/model-runtime-application.md"
     },
     {
       "id": "local.runtimes",
@@ -840,18 +838,11 @@
         "local.inference"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/05_local_models_inference/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "partial",
+      "content_path": "docs/model-runtime-application.md"
     },
     {
       "id": "local.hardware_quantization",
@@ -863,18 +854,11 @@
         "local.runtimes"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/05_local_models_inference/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "partial",
+      "content_path": "docs/model-runtime-application.md"
     },
     {
       "id": "iface.python_local_llm",
@@ -886,18 +870,10 @@
         "local.runtimes"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/06_llm_application_interfaces/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "iface.structured_outputs",
@@ -909,18 +885,10 @@
         "iface.python_local_llm"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/06_llm_application_interfaces/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "iface.reliability",
@@ -932,18 +900,10 @@
         "iface.python_local_llm"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/06_llm_application_interfaces/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "iface.tool_calling",
@@ -955,18 +915,10 @@
         "iface.structured_outputs"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/06_llm_application_interfaces/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "auto.process_decomposition",
@@ -976,18 +928,10 @@
       "description": "Map a workflow, separate deterministic from semantic steps and decide whether AI is appropriate (Phase 07).",
       "prerequisites": [],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/07_ai_automation_foundations/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "auto.deterministic_workflows",
@@ -999,18 +943,10 @@
         "auto.process_decomposition"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/07_ai_automation_foundations/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "auto.http_webhooks",
@@ -1022,18 +958,10 @@
         "auto.deterministic_workflows"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/07_ai_automation_foundations/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "auto.reliability",
@@ -1045,18 +973,10 @@
         "auto.http_webhooks"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/07_ai_automation_foundations/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "auto.human_approval",
@@ -1068,18 +988,10 @@
         "auto.reliability"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/07_ai_automation_foundations/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "auto.n8n",
@@ -1091,42 +1003,26 @@
         "auto.reliability"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/07_ai_automation_foundations/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "auto.rules_vs_ai",
       "name": "Rules vs LLM vs RAG vs agent",
       "area": "automation",
       "track": "applied",
-      "description": "Choose the simplest architecture that solves the problem; an agent is never the default (Phase 07).",
+      "description": "Decision hierarchy: plain function → deterministic workflow → LLM call → RAG → agent → multi-agent (Phase 07); no material yet.",
       "prerequisites": [
         "auto.deterministic_workflows",
         "iface.structured_outputs"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/07_ai_automation_foundations/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "ret.embedding_models",
@@ -1140,18 +1036,10 @@
       "related": [
         "llm.embeddings"
       ],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/08_embeddings_semantic_retrieval/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "ret.similarity_search",
@@ -1163,18 +1051,10 @@
         "ret.embedding_models"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/08_embeddings_semantic_retrieval/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "ret.chunking_indexes",
@@ -1186,18 +1066,10 @@
         "ret.similarity_search"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/08_embeddings_semantic_retrieval/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "ret.evaluation",
@@ -1209,18 +1081,10 @@
         "ret.chunking_indexes"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/08_embeddings_semantic_retrieval/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "rag.pipeline",
@@ -1233,18 +1097,10 @@
         "iface.structured_outputs"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/09_rag_knowledge_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "rag.grounding",
@@ -1256,18 +1112,10 @@
         "rag.pipeline"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/09_rag_knowledge_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "rag.evaluation",
@@ -1280,41 +1128,26 @@
         "ret.evaluation"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/09_rag_knowledge_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "rag.hybrid",
-      "name": "Hybrid retrieval & query rewriting",
+      "name": "Query rewriting, multi-query & hybrid RAG",
       "area": "rag",
       "track": "core",
       "description": "Compare improvements against a baseline that exposed a concrete failure (Phase 09).",
       "prerequisites": [
-        "rag.evaluation"
+        "rag.evaluation",
+        "ret.lexical_sparse"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/09_rag_knowledge_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "agent.tool_execution",
@@ -1326,18 +1159,10 @@
         "iface.tool_calling"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/10_agentic_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "agent.loop",
@@ -1349,41 +1174,25 @@
         "agent.tool_execution"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/10_agentic_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "agent.state_memory",
       "name": "State, memory & context engineering",
       "area": "agents",
       "track": "applied",
-      "description": "What survives between steps and runs (Phase 10).",
+      "description": "Agent state, short- and long-term memory, context engineering, context compression and long-context strategies (Phase 10); no material yet.",
       "prerequisites": [
         "agent.loop"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/10_agentic_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "agent.permissions",
@@ -1396,18 +1205,10 @@
         "auto.human_approval"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/10_agentic_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "agent.coding_agent",
@@ -1419,42 +1220,26 @@
         "agent.permissions"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/10_agentic_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "agent.evaluation",
       "name": "Agent evaluation",
       "area": "agents",
       "track": "applied",
-      "description": "Success, errors, cost and denied actions measured against a baseline (Phase 10).",
+      "description": "Task success, trajectory / tool-use evaluation, cost and time against a single-agent or deterministic baseline (Phase 10); no material yet.",
       "prerequisites": [
         "agent.permissions",
         "agent.state_memory"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/10_agentic_systems/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "mcp.architecture",
@@ -1466,18 +1251,10 @@
         "agent.loop"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/11_mcp_integration/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "mcp.local_server",
@@ -1489,18 +1266,10 @@
         "mcp.architecture"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/11_mcp_integration/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "mcp.security",
@@ -1513,18 +1282,10 @@
         "agent.permissions"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/11_mcp_integration/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "fw.langchain",
@@ -1537,18 +1298,10 @@
         "rag.pipeline"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/12_agent_frameworks_orchestration/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "fw.langgraph",
@@ -1561,18 +1314,10 @@
         "agent.state_memory"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/12_agent_frameworks_orchestration/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "fw.n8n_ai",
@@ -1585,18 +1330,10 @@
         "agent.loop"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/12_agent_frameworks_orchestration/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "fw.multi_agent",
@@ -1609,18 +1346,10 @@
         "agent.evaluation"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/12_agent_frameworks_orchestration/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "fw.agentic_rag",
@@ -1633,94 +1362,83 @@
         "rag.evaluation"
       ],
       "related": [],
-      "resources": [
-        {
-          "title": "Phase overview",
-          "path": "topics/12_agent_frameworks_orchestration/README.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
-        }
-      ],
+      "resources": [],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "later.multimodal_voice",
       "name": "Multimodal AI & voice",
-      "area": "later",
+      "area": "multimodal",
       "track": "core",
-      "description": "Vision-language models, audio, speech and voice systems (Phase 13).",
+      "description": "Vision-language models, document AI / OCR, speech, streaming voice, turn detection and latency (Phase 13); no material yet.",
       "prerequisites": [
-        "local.hardware_quantization"
+        "local.hardware_quantization",
+        "cv.mnist_cnn"
       ],
-      "related": [],
+      "related": [
+        "iface.python_local_llm"
+      ],
       "resources": [
         {
           "title": "AI Engineering map",
           "path": "docs/ai-engineering-map.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "later.adaptation",
       "name": "Fine-tuning, LoRA, QLoRA & PEFT",
-      "area": "later",
+      "area": "adaptation",
       "track": "core",
-      "description": "Model adaptation compared against an unchanged baseline (Phase 14).",
+      "description": "Fine-tuning, instruction tuning, LoRA, QLoRA, PEFT, dataset quality, distillation; when NOT to fine-tune (Phase 14); no material yet.",
       "prerequisites": [
         "local.hardware_quantization"
       ],
-      "related": [],
+      "related": [
+        "iface.prompt_evaluation"
+      ],
       "resources": [
         {
           "title": "AI Engineering map",
           "path": "docs/ai-engineering-map.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "later.backend",
       "name": "AI backend & client integration",
-      "area": "later",
+      "area": "backend",
       "track": "bridge",
-      "description": "Inference services, streaming, cancellation and clients (Phases 15–16).",
+      "description": "FastAPI, Pydantic, async Python, SSE / WebSockets, PostgreSQL, Redis, background jobs, microservices vs modular monolith (Phase 15); no material yet.",
       "prerequisites": [
-        "iface.reliability"
+        "iface.reliability",
+        "iface.streaming_async"
       ],
       "related": [],
       "resources": [
         {
           "title": "AI Engineering map",
           "path": "docs/ai-engineering-map.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "later.production",
       "name": "Production AI, MLOps & LLMOps",
-      "area": "later",
+      "area": "production",
       "track": "bridge",
-      "description": "Reliability, monitoring, regression testing and offline deployment (Phase 17).",
+      "description": "Reliability, security, privacy, safety, Responsible AI governance, model / data provenance, audit trails, acceptance criteria and maintenance of production AI (Phase 17); no material yet.",
       "prerequisites": [
         "later.backend",
         "rag.evaluation",
@@ -1731,14 +1449,11 @@
         {
           "title": "AI Engineering map",
           "path": "docs/ai-engineering-map.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "xc.problem_framing",
@@ -1752,14 +1467,12 @@
         {
           "title": "AI Engineering map",
           "path": "docs/ai-engineering-map.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "partial",
+      "content_path": "ROADMAP.md"
     },
     {
       "id": "xc.evaluation",
@@ -1770,19 +1483,22 @@
       "prerequisites": [
         "xc.problem_framing"
       ],
-      "related": [],
+      "related": [
+        "iface.prompt_evaluation",
+        "ret.evaluation",
+        "rag.evaluation",
+        "agent.evaluation"
+      ],
       "resources": [
         {
           "title": "AI Engineering map",
           "path": "docs/ai-engineering-map.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "partial",
+      "content_path": "docs/learning-method.md"
     },
     {
       "id": "xc.security_privacy",
@@ -1793,19 +1509,18 @@
       "prerequisites": [
         "xc.evaluation"
       ],
-      "related": [],
+      "related": [
+        "xc.ai_threat_modeling"
+      ],
       "resources": [
         {
           "title": "AI Engineering map",
           "path": "docs/ai-engineering-map.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
     },
     {
       "id": "xc.observability",
@@ -1816,19 +1531,509 @@
       "prerequisites": [
         "xc.security_privacy"
       ],
-      "related": [],
+      "related": [
+        "later.llmops",
+        "later.ops_reliability"
+      ],
       "resources": [
         {
           "title": "AI Engineering map",
           "path": "docs/ai-engineering-map.md"
-        },
-        {
-          "title": "Roadmap",
-          "path": "ROADMAP.md"
         }
       ],
       "exercises": [],
-      "planned": true
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "local.performance",
+      "name": "Context, KV cache & throughput",
+      "area": "local",
+      "track": "core",
+      "description": "Context windows, KV-cache memory, prompt / prefix caching concepts, time to first token, tokens per second, batching and long-context cost (Phase 05); no material yet.",
+      "prerequisites": [
+        "local.hardware_quantization"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "local.serving",
+      "name": "Serving & gateways (vLLM, LiteLLM)",
+      "area": "local",
+      "track": "bridge",
+      "description": "Awareness: production-oriented serving with OpenAI-compatible endpoints (vLLM) and model gateways (LiteLLM). Not required on this hardware.",
+      "prerequisites": [
+        "local.performance"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "iface.prompt_contracts",
+      "name": "Prompt contracts & instruction hierarchy",
+      "area": "iface",
+      "track": "bridge",
+      "description": "Prompts as engineering artifacts: contracts, system / developer / user hierarchy, templates, few-shot, typed I/O, injection resistance, context budget (Phase 06).",
+      "prerequisites": [
+        "iface.python_local_llm"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "iface.prompt_evaluation",
+      "name": "Prompt evaluation & versioning",
+      "area": "iface",
+      "track": "bridge",
+      "description": "Golden datasets, failure-mode analysis, regression tests, A/B comparisons, prompt versioning and migration between models (Phase 06).",
+      "prerequisites": [
+        "iface.prompt_contracts",
+        "iface.structured_outputs",
+        "xc.evaluation"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "iface.streaming_async",
+      "name": "Streaming, async & rate limits",
+      "area": "iface",
+      "track": "bridge",
+      "description": "SSE concepts, async requests, concurrency, rate limits and token budgeting; compare local, OpenAI-style, Azure OpenAI and Foundry endpoints conceptually (Phase 06).",
+      "prerequisites": [
+        "iface.python_local_llm"
+      ],
+      "related": [
+        "iface.reliability"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "auto.api_integration",
+      "name": "Third-party API integration",
+      "area": "automation",
+      "track": "applied",
+      "description": "OpenAPI, API keys, OAuth2 / OIDC concepts, pagination, rate limits, backoff and idempotency in real integrations (Phase 07).",
+      "prerequisites": [
+        "auto.http_webhooks"
+      ],
+      "related": [
+        "auto.reliability"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "auto.browser_automation",
+      "name": "API-first vs browser automation",
+      "area": "automation",
+      "track": "applied",
+      "description": "Prefer supported APIs before browser automation; Playwright as an open-source fallback; computer-use agents as awareness; brittleness and security trade-offs (Phase 07).",
+      "prerequisites": [
+        "auto.api_integration"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "ret.lexical_sparse",
+      "name": "BM25 & sparse retrieval",
+      "area": "retrieval",
+      "track": "core",
+      "description": "Lexical retrieval concepts, BM25 and when sparse beats dense (Phase 08).",
+      "prerequisites": [
+        "ret.similarity_search"
+      ],
+      "related": [
+        "rag.hybrid"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "ret.vector_indexes",
+      "name": "ANN, HNSW & vector stores",
+      "area": "retrieval",
+      "track": "core",
+      "description": "Approximate nearest neighbors, HNSW, metadata filtering and FAISS / pgvector / Qdrant; Azure AI Search as enterprise mapping (Phase 08).",
+      "prerequisites": [
+        "ret.similarity_search"
+      ],
+      "related": [
+        "ret.lexical_sparse"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "rag.ingestion",
+      "name": "Ingestion, parsing & OCR",
+      "area": "rag",
+      "track": "bridge",
+      "description": "Document ingestion, parsing, OCR concepts, metadata and provenance for RAG (Phase 09).",
+      "prerequisites": [
+        "ret.chunking_indexes"
+      ],
+      "related": [
+        "rag.pipeline"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "rag.security",
+      "name": "Permission-aware retrieval & RAG poisoning",
+      "area": "rag",
+      "track": "bridge",
+      "description": "Document-level security, permission-aware retrieval, RAG poisoning and data provenance (Phase 09).",
+      "prerequisites": [
+        "rag.grounding",
+        "rag.ingestion"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "agent.patterns",
+      "name": "Agent patterns: router, supervisor, handoff",
+      "area": "agents",
+      "track": "applied",
+      "description": "Single agent + tools, router, supervisor, handoff, planner / executor, fan-out / fan-in, subagents; always against a single-agent baseline (Phase 10).",
+      "prerequisites": [
+        "agent.loop"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "agent.integrations",
+      "name": "Tool & data integrations",
+      "area": "agents",
+      "track": "applied",
+      "description": "Files, REST APIs, SQL / database, search / retrieval and business systems as tools, without unrestricted shell access (Phase 10).",
+      "prerequisites": [
+        "agent.tool_execution",
+        "auto.api_integration"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "agent.long_running",
+      "name": "Checkpoints, resume & long-running agents",
+      "area": "agents",
+      "track": "applied",
+      "description": "Background agents, checkpoints, resume / recovery and context compaction (Phase 10).",
+      "prerequisites": [
+        "agent.state_memory",
+        "agent.permissions"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "agent.skills",
+      "name": "Agent skills & reusable capabilities",
+      "area": "agents",
+      "track": "applied",
+      "description": "Later concept: reusable instructions, tool bundles, domain capabilities and progressive context loading (Phase 10 / 12).",
+      "prerequisites": [
+        "agent.patterns",
+        "agent.state_memory"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "mcp.transports_auth",
+      "name": "MCP transports, authorization & API standards",
+      "area": "mcp",
+      "track": "applied",
+      "description": "stdio vs Streamable HTTP, authorization, least privilege, plus OpenAPI, JSON Schema and OAuth / OIDC for interoperable tools (Phase 11).",
+      "prerequisites": [
+        "mcp.architecture"
+      ],
+      "related": [
+        "mcp.security"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "mcp.a2a",
+      "name": "Agent2Agent (A2A)",
+      "area": "mcp",
+      "track": "applied",
+      "description": "Agent ↔ agent interoperability: discovery, capabilities, tasks, security boundaries; distinct from MCP (agent ↔ tools). Planned awareness-to-practice (Phase 11).",
+      "prerequisites": [
+        "mcp.architecture",
+        "agent.patterns"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "fw.microsoft_agent_framework",
+      "name": "Microsoft Agent Framework",
+      "area": "frameworks",
+      "track": "applied",
+      "description": "Agents, tools, sessions / state, memory, middleware, workflows, MCP, human-in-the-loop, telemetry, hosting; successor to ideas from AutoGen and Semantic Kernel (Phase 12).",
+      "prerequisites": [
+        "agent.loop",
+        "mcp.architecture"
+      ],
+      "related": [
+        "fw.langgraph"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "fw.comparison",
+      "name": "Framework comparison lens",
+      "area": "frameworks",
+      "track": "applied",
+      "description": "Compare PydanticAI, LlamaIndex, OpenAI Agents SDK and CrewAI by abstraction, state, tool execution, recovery and observability (Phase 12).",
+      "prerequisites": [
+        "fw.langgraph"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "fw.copilot_studio",
+      "name": "Low-code agents: Copilot Studio vs custom",
+      "area": "frameworks",
+      "track": "applied",
+      "description": "When to use Copilot Studio (knowledge, connectors, governance) versus custom Python agents; no paid features (Phase 07 / 12).",
+      "prerequisites": [
+        "auto.rules_vs_ai",
+        "agent.loop"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "later.event_driven",
+      "name": "Event-driven architecture & queues",
+      "area": "backend",
+      "track": "core",
+      "description": "Distributed-systems basics, background jobs, queues, pub/sub, brokers (Redis, RabbitMQ, Kafka concepts), durable workflows, idempotency, circuit breakers and sagas (Phase 15).",
+      "prerequisites": [
+        "later.backend"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "later.containers",
+      "name": "Docker & Kubernetes fundamentals",
+      "area": "packaging",
+      "track": "core",
+      "description": "Dockerfiles, Compose, secrets, health checks, offline packaging, sandboxing agents; Kubernetes fundamentals (Phase 16).",
+      "prerequisites": [
+        "later.backend"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "later.cloud_azure",
+      "name": "Azure architecture mapping",
+      "area": "production",
+      "track": "bridge",
+      "description": "Map Functions, Container Apps, Service Bus, Event Grid, Entra ID, Key Vault, Azure Monitor, networking / private endpoints, load balancing, autoscaling, high availability and IaC awareness to concepts already learned; no paid resources (Phases 15–17).",
+      "prerequisites": [
+        "later.event_driven",
+        "later.containers"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "later.llmops",
+      "name": "CI/CD, evaluation pipelines & observability",
+      "area": "production",
+      "track": "core",
+      "description": "Git / PR discipline, CI/CD, model / prompt / dataset versioning, evaluation pipelines, rollback, tracing and OpenTelemetry concepts; Foundry mapping (Phase 17).",
+      "prerequisites": [
+        "later.production",
+        "iface.prompt_evaluation"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "later.prompt_optimization",
+      "name": "Prompt optimization (DSPy) vs fine-tuning",
+      "area": "adaptation",
+      "track": "core",
+      "description": "Later: DSPy declarative programs and metric-driven optimization, distinct from changing weights; when not to fine-tune (Phases 06 / 14).",
+      "prerequisites": [
+        "iface.prompt_evaluation",
+        "later.adaptation"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "xc.delivery_outcomes",
+      "name": "Incremental delivery & outcome tracking",
+      "area": "cross",
+      "track": "cross-cutting",
+      "description": "Milestone → acceptance criterion → tests → evidence; baseline, metric and failure modes for every applied experiment; technical communication.",
+      "prerequisites": [
+        "xc.problem_framing"
+      ],
+      "related": [],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "available",
+      "content_path": "docs/learning-method.md"
+    },
+    {
+      "id": "later.ops_reliability",
+      "name": "SLOs, incident response & AI FinOps",
+      "area": "production",
+      "track": "bridge",
+      "description": "SLI / SLO / SLA concepts, incident response, runbooks, postmortems, cost engineering and online experimentation (A/B) for AI systems (Phase 17).",
+      "prerequisites": [
+        "later.llmops"
+      ],
+      "related": [
+        "xc.observability"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "xc.solution_architecture",
+      "name": "Solution architecture & ADRs",
+      "area": "cross",
+      "track": "cross-cutting",
+      "description": "Requirements and non-functional requirements, architecture / data-flow / deployment diagrams, ADRs, build vs buy, local vs managed, quality-latency-cost-security trade-offs, proof of concept and acceptance criteria.",
+      "prerequisites": [
+        "xc.problem_framing"
+      ],
+      "related": [
+        "later.cloud_azure",
+        "auto.rules_vs_ai"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "xc.ai_threat_modeling",
+      "name": "AI threat modeling & prompt injection",
+      "area": "cross",
+      "track": "cross-cutting",
+      "description": "Direct and indirect prompt injection, tool abuse, data leakage, PII, secrets, RBAC / least privilege, tenant isolation, model and package supply chain, output validation, audit trails and threat modeling.",
+      "prerequisites": [
+        "xc.security_privacy"
+      ],
+      "related": [
+        "rag.security",
+        "mcp.security",
+        "agent.permissions"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
+    },
+    {
+      "id": "xc.data_engineering",
+      "name": "Data pipelines, contracts & quality",
+      "area": "cross",
+      "track": "cross-cutting",
+      "description": "ETL / ELT concepts, data contracts and schema evolution, data-quality checks, provenance and synthetic data for AI systems.",
+      "prerequisites": [
+        "xc.problem_framing"
+      ],
+      "related": [
+        "auto.http_webhooks",
+        "rag.ingestion",
+        "later.adaptation"
+      ],
+      "resources": [],
+      "exercises": [],
+      "planned": true,
+      "content_status": "planned"
     }
   ],
   "exercises": [
@@ -2157,6 +2362,794 @@
         "fw.n8n_ai"
       ],
       "timing": "N8N101 workflow fundamentals → N8N102 APIs, webhooks and integrations → N8N103 AI workflows, agents, testing and best practices. Use a local / self-hosted instance; n8n Cloud is not required."
+    }
+  ],
+  "technologies": [
+    {
+      "id": "ollama",
+      "name": "Ollama",
+      "tier": "hands-on",
+      "nodes": [
+        "local.runtimes"
+      ],
+      "purpose": "Local model server with an OpenAI-compatible endpoint."
+    },
+    {
+      "id": "llama-cpp",
+      "name": "llama.cpp / GGUF",
+      "tier": "hands-on",
+      "nodes": [
+        "local.runtimes",
+        "local.hardware_quantization"
+      ],
+      "purpose": "Native inference, GGUF models, quantization, GPU offload."
+    },
+    {
+      "id": "vllm",
+      "name": "vLLM",
+      "tier": "awareness",
+      "nodes": [
+        "local.serving"
+      ],
+      "purpose": "Production-oriented model serving; not required on an RTX 2060 Max-Q."
+    },
+    {
+      "id": "litellm",
+      "name": "LiteLLM",
+      "tier": "awareness",
+      "nodes": [
+        "local.serving"
+      ],
+      "purpose": "Model gateway: routing, retries, provider abstraction."
+    },
+    {
+      "id": "pydantic",
+      "name": "Pydantic",
+      "tier": "hands-on",
+      "nodes": [
+        "iface.structured_outputs",
+        "iface.prompt_contracts"
+      ],
+      "purpose": "Typed validation of model inputs and outputs."
+    },
+    {
+      "id": "json-schema",
+      "name": "JSON Schema",
+      "tier": "hands-on",
+      "nodes": [
+        "iface.structured_outputs",
+        "mcp.transports_auth"
+      ],
+      "purpose": "Contract language for structured outputs and tool arguments."
+    },
+    {
+      "id": "dspy",
+      "name": "DSPy",
+      "tier": "awareness",
+      "nodes": [
+        "later.prompt_optimization"
+      ],
+      "purpose": "Later: declarative LM programs and metric-driven prompt / program optimization."
+    },
+    {
+      "id": "azure-openai",
+      "name": "Azure OpenAI",
+      "tier": "enterprise-mapping",
+      "nodes": [
+        "iface.streaming_async",
+        "iface.python_local_llm"
+      ],
+      "purpose": "Hosted inference API compared architecturally; no paid use."
+    },
+    {
+      "id": "microsoft-foundry",
+      "name": "Microsoft Foundry",
+      "tier": "enterprise-mapping",
+      "nodes": [
+        "iface.streaming_async",
+        "fw.microsoft_agent_framework",
+        "later.llmops"
+      ],
+      "purpose": "Model catalog, deployments, agents, evaluation, tracing, governance."
+    },
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "tier": "hands-on",
+      "nodes": [
+        "auto.n8n",
+        "fw.n8n_ai"
+      ],
+      "purpose": "Self-hosted workflow automation."
+    },
+    {
+      "id": "openapi",
+      "name": "OpenAPI",
+      "tier": "hands-on",
+      "nodes": [
+        "auto.api_integration",
+        "mcp.transports_auth"
+      ],
+      "purpose": "Machine-readable HTTP API descriptions."
+    },
+    {
+      "id": "oauth-oidc",
+      "name": "OAuth2 / OIDC",
+      "tier": "awareness",
+      "nodes": [
+        "auto.api_integration",
+        "mcp.transports_auth"
+      ],
+      "purpose": "Delegated authorization and identity concepts."
+    },
+    {
+      "id": "playwright",
+      "name": "Playwright",
+      "tier": "hands-on",
+      "nodes": [
+        "auto.browser_automation"
+      ],
+      "purpose": "Open-source browser automation as a fallback when no supported API exists."
+    },
+    {
+      "id": "copilot-studio",
+      "name": "Microsoft Copilot Studio",
+      "tier": "enterprise-mapping",
+      "nodes": [
+        "fw.copilot_studio"
+      ],
+      "purpose": "Low-code agents; compare with custom Python agents; no paid features."
+    },
+    {
+      "id": "bm25",
+      "name": "BM25",
+      "tier": "hands-on",
+      "nodes": [
+        "ret.lexical_sparse"
+      ],
+      "purpose": "Lexical ranking baseline."
+    },
+    {
+      "id": "faiss",
+      "name": "FAISS",
+      "tier": "hands-on",
+      "nodes": [
+        "ret.vector_indexes"
+      ],
+      "purpose": "Local vector index; one of FAISS / pgvector / Qdrant to practice."
+    },
+    {
+      "id": "pgvector",
+      "name": "PostgreSQL + pgvector",
+      "tier": "hands-on",
+      "nodes": [
+        "ret.vector_indexes"
+      ],
+      "purpose": "Vectors inside a relational database."
+    },
+    {
+      "id": "qdrant",
+      "name": "Qdrant",
+      "tier": "compare",
+      "nodes": [
+        "ret.vector_indexes"
+      ],
+      "purpose": "Dedicated open-source vector database."
+    },
+    {
+      "id": "azure-ai-search",
+      "name": "Azure AI Search",
+      "tier": "enterprise-mapping",
+      "nodes": [
+        "ret.vector_indexes",
+        "rag.security"
+      ],
+      "purpose": "Lexical, vector, hybrid and semantic-ranked enterprise search."
+    },
+    {
+      "id": "llamaindex",
+      "name": "LlamaIndex",
+      "tier": "compare",
+      "nodes": [
+        "rag.pipeline",
+        "fw.comparison"
+      ],
+      "purpose": "RAG / workflow framework to compare after the from-scratch RAG."
+    },
+    {
+      "id": "mcp",
+      "name": "Model Context Protocol",
+      "tier": "hands-on",
+      "nodes": [
+        "mcp.architecture",
+        "mcp.local_server"
+      ],
+      "purpose": "Protocol connecting agents to tools, resources and prompts."
+    },
+    {
+      "id": "a2a",
+      "name": "Agent2Agent (A2A)",
+      "tier": "awareness",
+      "nodes": [
+        "mcp.a2a"
+      ],
+      "purpose": "Agent ↔ agent interoperability; planned awareness-to-practice."
+    },
+    {
+      "id": "ag-ui",
+      "name": "AG-UI and agent/UI protocols",
+      "tier": "awareness",
+      "nodes": [
+        "mcp.a2a"
+      ],
+      "purpose": "Awareness only unless later market evidence promotes it."
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain",
+      "tier": "hands-on",
+      "nodes": [
+        "fw.langchain"
+      ],
+      "purpose": "Model, tool and retriever abstractions."
+    },
+    {
+      "id": "langgraph",
+      "name": "LangGraph",
+      "tier": "hands-on",
+      "nodes": [
+        "fw.langgraph"
+      ],
+      "purpose": "Explicit state graphs, durable execution, checkpoints, human-in-the-loop."
+    },
+    {
+      "id": "microsoft-agent-framework",
+      "name": "Microsoft Agent Framework",
+      "tier": "hands-on",
+      "nodes": [
+        "fw.microsoft_agent_framework"
+      ],
+      "purpose": "Modern Microsoft successor to ideas from AutoGen and Semantic Kernel."
+    },
+    {
+      "id": "autogen-semantic-kernel",
+      "name": "AutoGen / Semantic Kernel",
+      "tier": "awareness",
+      "nodes": [
+        "fw.microsoft_agent_framework"
+      ],
+      "purpose": "Historical / ecosystem awareness only."
+    },
+    {
+      "id": "pydantic-ai",
+      "name": "PydanticAI",
+      "tier": "compare",
+      "nodes": [
+        "fw.comparison"
+      ],
+      "purpose": "Typed agent framework."
+    },
+    {
+      "id": "openai-agents-sdk",
+      "name": "OpenAI Agents SDK",
+      "tier": "compare",
+      "nodes": [
+        "fw.comparison"
+      ],
+      "purpose": "Architecture comparison."
+    },
+    {
+      "id": "crewai",
+      "name": "CrewAI",
+      "tier": "awareness",
+      "nodes": [
+        "fw.comparison"
+      ],
+      "purpose": "Role-based multi-agent framework; awareness unless evidence justifies more."
+    },
+    {
+      "id": "fastapi",
+      "name": "FastAPI",
+      "tier": "hands-on",
+      "nodes": [
+        "later.backend"
+      ],
+      "purpose": "Async Python web framework for AI services."
+    },
+    {
+      "id": "postgresql",
+      "name": "PostgreSQL",
+      "tier": "hands-on",
+      "nodes": [
+        "later.backend"
+      ],
+      "purpose": "Transactions, pooling, relational data."
+    },
+    {
+      "id": "redis-rabbitmq-kafka",
+      "name": "Redis / RabbitMQ / Kafka",
+      "tier": "compare",
+      "nodes": [
+        "later.event_driven"
+      ],
+      "purpose": "Caching, queues and event streaming concepts; mastery of all not required."
+    },
+    {
+      "id": "docker",
+      "name": "Docker & Compose",
+      "tier": "hands-on",
+      "nodes": [
+        "later.containers"
+      ],
+      "purpose": "Reproducible, offline-capable packaging."
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes (Helm awareness)",
+      "tier": "awareness",
+      "nodes": [
+        "later.containers"
+      ],
+      "purpose": "Fundamentals only; no paid cluster."
+    },
+    {
+      "id": "github-actions",
+      "name": "Git & GitHub Actions",
+      "tier": "hands-on",
+      "nodes": [
+        "later.llmops"
+      ],
+      "purpose": "PR discipline, CI, automated evaluation."
+    },
+    {
+      "id": "azure-architecture",
+      "name": "Azure services (Functions, Container Apps, Service Bus, Entra ID, Key Vault, Monitor)",
+      "tier": "enterprise-mapping",
+      "nodes": [
+        "later.cloud_azure"
+      ],
+      "purpose": "Mapped to generic concepts; no paid resources."
+    },
+    {
+      "id": "pytorch",
+      "name": "PyTorch",
+      "tier": "hands-on",
+      "nodes": [
+        "dl.binary_classifier",
+        "cv.mnist_cnn",
+        "llm.training_loop"
+      ],
+      "purpose": "Tensors, autograd and training loops used by every existing experiment."
+    },
+    {
+      "id": "scikit-learn",
+      "name": "scikit-learn",
+      "tier": "hands-on",
+      "nodes": [
+        "ml.decision_tree",
+        "ml.overfitting"
+      ],
+      "purpose": "Classical ML baselines and evaluation."
+    },
+    {
+      "id": "promptfoo",
+      "name": "Promptfoo",
+      "tier": "compare",
+      "nodes": [
+        "iface.prompt_evaluation"
+      ],
+      "purpose": "Open-source prompt regression runner; compare with a hand-written eval loop first."
+    },
+    {
+      "id": "deepeval-ragas",
+      "name": "DeepEval / Ragas",
+      "tier": "compare",
+      "nodes": [
+        "rag.evaluation",
+        "agent.evaluation"
+      ],
+      "purpose": "Evaluation libraries; understand the metrics before adopting one."
+    },
+    {
+      "id": "opentelemetry",
+      "name": "OpenTelemetry",
+      "tier": "awareness",
+      "nodes": [
+        "xc.observability",
+        "later.llmops"
+      ],
+      "purpose": "Vendor-neutral traces, metrics and logs."
+    },
+    {
+      "id": "phoenix",
+      "name": "Arize Phoenix",
+      "tier": "awareness",
+      "nodes": [
+        "later.llmops"
+      ],
+      "purpose": "Open-source LLM tracing / evaluation UI; awareness of the category."
+    },
+    {
+      "id": "iac",
+      "name": "Infrastructure as code (Bicep / Terraform)",
+      "tier": "awareness",
+      "nodes": [
+        "later.cloud_azure"
+      ],
+      "purpose": "Declarative infrastructure; vocabulary only, no resources created."
+    }
+  ],
+  "documents": [
+    {
+      "id": "readme",
+      "title": "README",
+      "path": "README.md",
+      "role": "What the Lab is, professional direction, current position, global map, navigation."
+    },
+    {
+      "id": "roadmap",
+      "title": "ROADMAP",
+      "path": "ROADMAP.md",
+      "role": "The one ordered learning journey (17 phases, two tracks)."
+    },
+    {
+      "id": "map",
+      "title": "AI Engineering Map",
+      "path": "docs/ai-engineering-map.md",
+      "role": "Static map of the knowledge universe."
+    },
+    {
+      "id": "method",
+      "title": "Learning method",
+      "path": "docs/learning-method.md",
+      "role": "How learning, validation, incremental delivery and outcomes work."
+    },
+    {
+      "id": "capabilities",
+      "title": "Professional capabilities",
+      "path": "docs/professional-capabilities.md",
+      "role": "Curriculum → professional capabilities, technology tiers, Microsoft/Azure mapping."
+    },
+    {
+      "id": "runtime",
+      "title": "Model, runtime and application",
+      "path": "docs/model-runtime-application.md",
+      "role": "Execution-stack theory used by Phases 04–05."
+    },
+    {
+      "id": "glossary",
+      "title": "Glossary",
+      "path": "docs/glossary.md",
+      "role": "Terms that appear in actual notes."
+    },
+    {
+      "id": "ecosystem",
+      "title": "Ecosystem map",
+      "path": "docs/ecosystem-map.md",
+      "role": "Technology and framework landscape: tools, platforms, protocols and where each fits."
+    },
+    {
+      "id": "verification",
+      "title": "Verification log",
+      "path": "docs/verification.md",
+      "role": "Dated, historical verification records."
+    },
+    {
+      "id": "cockpit",
+      "title": "Learning Cockpit",
+      "path": "tools/learning_cockpit/README.md",
+      "role": "How the atlas and progress tracker work."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "tool_integration",
+      "name": "Complex tool integration",
+      "nodes": [
+        "iface.tool_calling",
+        "agent.tool_execution",
+        "agent.integrations",
+        "mcp.architecture",
+        "mcp.local_server"
+      ]
+    },
+    {
+      "id": "multi_source_data",
+      "name": "Multiple data sources",
+      "nodes": [
+        "rag.pipeline",
+        "rag.ingestion",
+        "agent.integrations",
+        "ret.vector_indexes",
+        "xc.data_engineering"
+      ]
+    },
+    {
+      "id": "orchestration",
+      "name": "Agent orchestration",
+      "nodes": [
+        "agent.patterns",
+        "fw.langgraph",
+        "fw.multi_agent",
+        "fw.n8n_ai",
+        "fw.microsoft_agent_framework",
+        "fw.agentic_rag",
+        "fw.comparison"
+      ]
+    },
+    {
+      "id": "third_party_api",
+      "name": "Third-party API integration",
+      "nodes": [
+        "auto.http_webhooks",
+        "auto.api_integration",
+        "auto.browser_automation",
+        "iface.python_local_llm",
+        "iface.streaming_async"
+      ]
+    },
+    {
+      "id": "prompt_engineering",
+      "name": "Prompt engineering as product work",
+      "nodes": [
+        "iface.prompt_contracts",
+        "iface.prompt_evaluation",
+        "iface.structured_outputs",
+        "later.prompt_optimization"
+      ]
+    },
+    {
+      "id": "incremental_delivery",
+      "name": "Incremental delivery",
+      "nodes": [
+        "xc.delivery_outcomes",
+        "later.llmops"
+      ]
+    },
+    {
+      "id": "testing_evaluation",
+      "name": "Testing and evaluation",
+      "nodes": [
+        "xc.evaluation",
+        "iface.prompt_evaluation",
+        "ret.evaluation",
+        "rag.evaluation",
+        "agent.evaluation",
+        "later.llmops"
+      ]
+    },
+    {
+      "id": "backend",
+      "name": "Backend engineering",
+      "nodes": [
+        "later.backend",
+        "later.event_driven",
+        "iface.streaming_async"
+      ]
+    },
+    {
+      "id": "state_management",
+      "name": "State management",
+      "nodes": [
+        "agent.state_memory",
+        "agent.long_running",
+        "fw.langgraph"
+      ]
+    },
+    {
+      "id": "event_driven",
+      "name": "Event-driven architectures",
+      "nodes": [
+        "later.event_driven",
+        "auto.http_webhooks",
+        "agent.long_running"
+      ]
+    },
+    {
+      "id": "hybrid_systems",
+      "name": "Deterministic + generative hybrid systems",
+      "nodes": [
+        "auto.deterministic_workflows",
+        "auto.rules_vs_ai",
+        "auto.human_approval",
+        "fw.agentic_rag",
+        "fw.copilot_studio"
+      ]
+    },
+    {
+      "id": "cicd",
+      "name": "CI/CD",
+      "nodes": [
+        "later.llmops"
+      ]
+    },
+    {
+      "id": "containers",
+      "name": "Containerization",
+      "nodes": [
+        "later.containers"
+      ]
+    },
+    {
+      "id": "cloud_architecture",
+      "name": "Cloud architecture",
+      "nodes": [
+        "later.cloud_azure",
+        "later.containers",
+        "xc.solution_architecture"
+      ]
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "nodes": [
+        "xc.observability",
+        "later.llmops",
+        "later.ops_reliability"
+      ]
+    },
+    {
+      "id": "mcp",
+      "name": "MCP",
+      "nodes": [
+        "mcp.architecture",
+        "mcp.local_server",
+        "mcp.security",
+        "mcp.transports_auth",
+        "mcp.a2a"
+      ]
+    },
+    {
+      "id": "tech_communication",
+      "name": "Technical communication",
+      "nodes": [
+        "xc.delivery_outcomes",
+        "xc.solution_architecture"
+      ]
+    },
+    {
+      "id": "ai_security",
+      "name": "AI security",
+      "nodes": [
+        "xc.security_privacy",
+        "xc.ai_threat_modeling",
+        "rag.security",
+        "mcp.security",
+        "agent.permissions"
+      ]
+    },
+    {
+      "id": "solution_architecture",
+      "name": "Solution architecture",
+      "nodes": [
+        "xc.solution_architecture",
+        "xc.problem_framing",
+        "auto.rules_vs_ai",
+        "later.cloud_azure"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": "ai_engineer",
+      "name": "AI Engineer",
+      "capabilities": [
+        "prompt_engineering",
+        "tool_integration",
+        "testing_evaluation",
+        "backend",
+        "observability"
+      ],
+      "areas": [
+        "llm",
+        "local",
+        "iface"
+      ]
+    },
+    {
+      "id": "llm_engineer",
+      "name": "LLM Engineer",
+      "capabilities": [
+        "prompt_engineering",
+        "testing_evaluation",
+        "observability"
+      ],
+      "areas": [
+        "llm",
+        "local",
+        "iface",
+        "adaptation"
+      ]
+    },
+    {
+      "id": "rag_engineer",
+      "name": "RAG Engineer",
+      "capabilities": [
+        "multi_source_data",
+        "testing_evaluation",
+        "ai_security"
+      ],
+      "areas": [
+        "retrieval",
+        "rag"
+      ]
+    },
+    {
+      "id": "agent_engineer",
+      "name": "AI Agent Engineer",
+      "capabilities": [
+        "tool_integration",
+        "orchestration",
+        "state_management",
+        "mcp",
+        "testing_evaluation",
+        "ai_security"
+      ],
+      "areas": [
+        "agents",
+        "mcp",
+        "frameworks"
+      ]
+    },
+    {
+      "id": "automation_engineer",
+      "name": "AI Automation Engineer",
+      "capabilities": [
+        "third_party_api",
+        "hybrid_systems",
+        "tool_integration",
+        "event_driven",
+        "orchestration"
+      ],
+      "areas": [
+        "automation"
+      ]
+    },
+    {
+      "id": "solutions_engineer",
+      "name": "AI Solutions Engineer",
+      "capabilities": [
+        "third_party_api",
+        "tool_integration",
+        "tech_communication",
+        "hybrid_systems",
+        "containers"
+      ],
+      "areas": [
+        "automation",
+        "rag"
+      ]
+    },
+    {
+      "id": "cloud_ai_engineer",
+      "name": "Cloud AI Engineer",
+      "capabilities": [
+        "cloud_architecture",
+        "containers",
+        "cicd",
+        "backend",
+        "event_driven",
+        "observability"
+      ],
+      "areas": [
+        "packaging",
+        "production"
+      ]
+    },
+    {
+      "id": "solutions_architect",
+      "name": "AI Solutions Architect",
+      "capabilities": [
+        "solution_architecture",
+        "cloud_architecture",
+        "ai_security",
+        "tech_communication",
+        "hybrid_systems",
+        "orchestration"
+      ],
+      "areas": [
+        "production"
+      ]
     }
   ]
 }

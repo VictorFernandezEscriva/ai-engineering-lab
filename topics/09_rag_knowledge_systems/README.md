@@ -6,46 +6,53 @@
 
 ## Purpose
 
-Ground generation in external documents: ingest, retrieve, build context, cite and abstain, and evaluate each stage separately.
+Build grounded question answering over documents and evaluate retrieval and generation separately, including security of the knowledge base.
 
 ## Why it matters
 
-Companies mostly need models that answer from their own documents. RAG also fails in specific ways (missing evidence, poor chunks, unsupported claims) that must be measured.
+RAG is the most common enterprise pattern. Failures are usually retrieval, permission or provenance failures, not model failures.
 
 ## Prerequisites
 
-- Phase 06 — LLM Application Interfaces
 - Phase 08 — Embeddings & Semantic Retrieval
+- Phase 06 — LLM Application Interfaces
 
 ## Core concepts
 
-- Ingestion, parsing and chunking
-- Embeddings, indexing, retrieval and reranking
-- Context construction and grounded generation
-- Citations and abstention
-- Hybrid retrieval and query rewriting
+- Ingestion, parsing, OCR concepts, chunking, metadata
+- Embedding, indexing, retrieval, reranking
+- Context construction, citations, grounding, abstention
+- Query rewriting, multi-query retrieval, hybrid RAG
 - RAG evaluation and failure modes
+- Document-level security and permission-aware retrieval
+- RAG poisoning and data provenance
+
+## Enterprise scenarios
+
+Internal knowledge base · technical documentation · policy assistant · support knowledge assistant · document intelligence.
 
 ## Small future Lab experiments
 
-Ideas only; no experiment directory or code exists yet.
+Ideas only; no experiment directory or code exists yet. Larger experiments follow the Lab-wide incremental-delivery rule (milestone → acceptance criterion → implementation → tests → evidence).
 
-- Minimal local RAG with citations
+- Minimal local RAG with citations (from scratch first)
 - Retrieval failure analysis
+- Permission-aware retrieval toy
+- Hybrid retrieval or query rewriting once a baseline exposes a failure
 
-Every applied experiment should state its baseline, what success means, the failure modes, how generalization is tested, whether AI beats deterministic logic, what happens when the model fails, and when a human intervenes.
+Every applied experiment states its problem, baseline, success metric, what changed, evidence of improvement, remaining failure modes and the simplest architecture that works.
 
 ## Relevant technologies
 
-- Local models via Ollama / llama.cpp
-- Local indexes (NumPy, FAISS, SQLite)
-- LangChain only after the from-scratch version
+- **From-scratch local RAG** — hands-on
+- **LlamaIndex** — compare: retrieval / RAG / workflows framework, only after the from-scratch experiment
+- **Azure AI Search** — enterprise mapping for enterprise RAG and access control
 
-ZERO EXTRA COST: local models, open-source tools and free official resources only.
+See [Professional capabilities and technology tiers](../../docs/professional-capabilities.md) for tiers. ZERO EXTRA COST: local models, open-source tools and free official resources only; enterprise and paid services are studied conceptually unless explicitly authorized.
 
 ## Selected learning resources
 
-LangChain / LangGraph learning material (RAG), after the from-scratch version. Resources are registered once, with their links, in the Learning Cockpit catalog (`tools/learning_cockpit/catalog/catalog.json`) and summarized in the roadmap.
+LangChain / LangGraph learn (RAG), after the from-scratch version. Resources are registered once, with their links, in the Learning Cockpit catalog (`tools/learning_cockpit/catalog/catalog.json`) and summarized in the roadmap.
 
 ## Boundary
 

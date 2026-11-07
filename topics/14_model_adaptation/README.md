@@ -1,4 +1,4 @@
-# Model Adaptation: Fine-Tuning, LoRA and QLoRA
+# Model Adaptation
 
 **Status: PLANNED (future work).** Corresponds to [ROADMAP Phase 14](../../ROADMAP.md). It has not started and this directory contains no experiments. Nothing here implies mastery.
 
@@ -6,36 +6,50 @@
 
 ## Purpose
 
-Adapt a pretrained model to a task and compare it against the unchanged baseline.
+Adapt a pretrained model with fine-tuning, LoRA and QLoRA, and know when not to.
 
 ## Why it matters
 
-Adaptation is costly and often unnecessary; knowing when it beats prompting or retrieval is a core judgement.
+Most problems are solved with better context or prompts. Adaptation needs a baseline, quality data and an evaluation set.
 
 ## Prerequisites
 
-- Phase 04 — LLM Engineering (training loop)
 - Phase 05 — Local Models & Inference
-- Phase 09 — RAG (to contrast context with parameter changes)
+- Phase 06 — prompt evaluation (baseline)
 
 ## Core concepts
 
-- Supervised fine-tuning and instruction tuning
+- Fine-tuning and instruction tuning
 - LoRA, QLoRA, PEFT
-- Training-data quality and datasets
-- Evaluation against a baseline
-- Model merging concepts
+- Dataset quality, train / eval splits, synthetic-data concepts
+- Model distillation
+- When NOT to fine-tune; RAG versus fine-tuning; prompt optimization versus fine-tuning
 
-## Potential small Lab experiments
+```text
+change the context → RAG
+change the prompt / program → DSPy-style optimization
+change the weights → fine-tuning / LoRA / QLoRA
+```
 
-Ideas only; no experiment directory or code exists yet.
+## Small future Lab experiments
 
-- Small controlled LoRA adaptation compared with the base model
-- Dataset-quality experiment
+Ideas only; no experiment directory or code exists yet. Larger experiments follow the Lab-wide incremental-delivery rule (milestone → acceptance criterion → implementation → tests → evidence).
 
-## Relevant technologies and resources
+- Small controlled adaptation compared with prompt-only and retrieval baselines
 
-- PyTorch, PEFT (open source, sized to local memory)
-- Resources: Hugging Face LLM Course (adaptation chapters)
+Every applied experiment states its problem, baseline, success metric, what changed, evidence of improvement, remaining failure modes and the simplest architecture that works.
 
-ZERO EXTRA COST: local models, open-source tools and free official resources only. Resource links are canonical in the Learning Cockpit catalog.
+## Relevant technologies
+
+- **Hugging Face PEFT tooling** — hands-on, scoped to available memory
+- **DSPy** — later: prompt / program optimization, kept conceptually distinct from changing weights
+
+See [Professional capabilities and technology tiers](../../docs/professional-capabilities.md) for tiers. ZERO EXTRA COST: local models, open-source tools and free official resources only; enterprise and paid services are studied conceptually unless explicitly authorized.
+
+## Selected learning resources
+
+Hugging Face LLM Course (fine-tuning chapters). Resources are registered once, with their links, in the Learning Cockpit catalog (`tools/learning_cockpit/catalog/catalog.json`) and summarized in the roadmap.
+
+## Boundary
+
+Small experiments belong here; large multi-technology systems belong in independent repositories.

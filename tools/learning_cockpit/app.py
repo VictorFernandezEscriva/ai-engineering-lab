@@ -9,8 +9,10 @@ import re
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
-from catalog import REPO_ROOT, load_catalog
-from store import Store, ValidationError
+from urllib.parse import parse_qs, urlsplit
+
+from catalog import REPO_ROOT, content_paths, load_catalog, resolve_repo_path
+from store import EVIDENCE_KINDS, Store, ValidationError
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_DATA_DIR = HERE / "data"
@@ -21,6 +23,7 @@ STATIC = {
 }
 LOOPBACK_HOSTS = {"127.0.0.1", "localhost", "::1"}
 MAX_BODY = 64 * 1024
+MAX_CONTENT = 2 * 1024 * 1024
 NODE_RE = re.compile(r"^/api/nodes/([A-Za-z0-9_.-]+)(/status|/evidence)?$")
 TASK_RE = re.compile(r"^/api/tasks/(\d+)$")
 
@@ -32,8 +35,10 @@ def _host_only(header):
     return header.rsplit(":", 1)[0] if header.count(":") == 1 else header
 
 
-def make_handler(catalog, store):
+def make_handler(catalog, store, repo_root=REPO_ROOT):
     nodes = {n["id"]: n for n in catalog["nodes"]}
+    allowed = content_paths(catalog)  # the only files /api/content can ever return
+    public_catalog = {**catalog, "evidence_kinds": list(EVIDENCE_KINDS), "content_paths": sorted(allowed)}
 
     class Handler(BaseHTTPRequestHandler):
         server_version = "LearningCockpit"
@@ -65,12 +70,15 @@ def make_handler(catalog, store):
         def do_GET(self):
             if not self._host_ok():
                 return
-            path = self.path.split("?", 1)[0]
+            parts = urlsplit(self.path)
+            path = parts.path
+            if path == "/api/content":
+                return self._content(parse_qs(parts.query).get("path", [""])[0])
             if path in STATIC:
                 name, ctype = STATIC[path]
                 self._send(200, (HERE / "static" / name).read_bytes(), ctype)
             elif path == "/api/catalog":
-                self._send(200, catalog)
+                self._send(200, public_catalog)
             elif path == "/api/state":
                 self._send(200, store.snapshot())
             else:
@@ -81,6 +89,15 @@ def make_handler(catalog, store):
                                      "evidence": store.evidence(match.group(1))})
                 else:
                     self._error(404, "not found")
+
+        def _content(self, rel):
+            """Read-only Markdown for a catalog-approved path. Exact allowlist match: no browsing, no traversal."""
+            if rel not in allowed:
+                return self._error(404, "not found")
+            target = resolve_repo_path(rel, repo_root)
+            if target is None or not target.is_file() or target.stat().st_size > MAX_CONTENT:
+                return self._error(404, "not found")
+            self._send(200, {"path": rel, "text": target.read_text(encoding="utf-8")})
 
         def _read_json(self):
             try:
@@ -145,7 +162,7 @@ def create_server(host="127.0.0.1", port=8765, data_dir=DEFAULT_DATA_DIR, repo_r
     data_dir = Path(data_dir)
     data_dir.mkdir(parents=True, exist_ok=True)
     store = Store(data_dir / "progress.db", [n["id"] for n in catalog["nodes"]], repo_root)
-    server = HTTPServer((host, port), make_handler(catalog, store))
+    server = HTTPServer((host, port), make_handler(catalog, store, repo_root))
     server.store = store
     return server
 

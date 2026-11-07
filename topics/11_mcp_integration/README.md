@@ -1,4 +1,4 @@
-# MCP and AI Integration Protocols
+# MCP and Agent Interoperability
 
 **Status: PLANNED (future work).** Corresponds to [ROADMAP Phase 11](../../ROADMAP.md). It has not started and this directory contains no experiments. Nothing here implies mastery.
 
@@ -6,11 +6,11 @@
 
 ## Purpose
 
-Understand the Model Context Protocol as a way to expose tools and context to AI clients, and its security boundaries.
+Learn how tools and context are exposed to agents (MCP), how independent agents talk to each other (A2A) and which standards make that interoperable.
 
 ## Why it matters
 
-MCP standardizes tool exposure but does not provide an agent loop or a permission policy. Seeing it after the primitives makes those limits clear.
+Integration is the bulk of real agent work. Protocols define the boundary; they do not provide permission policy.
 
 ## Prerequisites
 
@@ -18,29 +18,30 @@ MCP standardizes tool exposure but does not provide an agent loop or a permissio
 
 ## Core concepts
 
-- MCP architecture and the client/server model
-- Tools, resources and prompts
-- Transports
-- Tool discovery
-- Permissions and security boundaries
-- Local MCP servers
+- MCP: client / server, tools, resources, prompts, discovery, stdio and Streamable HTTP, authorization, local versus remote servers, tool schemas
+- Security boundaries, least privilege, approval for sensitive actions
+- A2A (Agent2Agent): agent discovery, capabilities, tasks, cross-framework interoperability, security boundaries
+- MCP ↔ A2A: agent ↔ tools / context versus agent ↔ agent
+- OpenAPI, JSON Schema, OAuth / OIDC for interoperable tools and services
 
 ## Small future Lab experiments
 
-Ideas only; no experiment directory or code exists yet.
+Ideas only; no experiment directory or code exists yet. Larger experiments follow the Lab-wide incremental-delivery rule (milestone → acceptance criterion → implementation → tests → evidence).
 
-- Minimal local MCP server exposing 1–2 safe tools
+- Minimal local MCP server with one or two safe tools
 - MCP client interaction
-- Safe local tool exposure
+- Least-privilege and approval exercise
+- A2A concept walkthrough (reading / diagramming, not a dependency)
 
-Every applied experiment should state its baseline, what success means, the failure modes, how generalization is tested, whether AI beats deterministic logic, what happens when the model fails, and when a human intervenes.
+Every applied experiment states its problem, baseline, success metric, what changed, evidence of improvement, remaining failure modes and the simplest architecture that works.
 
 ## Relevant technologies
 
-- Official open-source MCP SDKs (local use)
-- Python
+- **MCP** — hands-on
+- **A2A** — planned: awareness-to-practice, not an immediate dependency
+- **AG-UI and other agent / UI protocols** — awareness only unless later market evidence justifies promotion
 
-ZERO EXTRA COST: local models, open-source tools and free official resources only.
+See [Professional capabilities and technology tiers](../../docs/professional-capabilities.md) for tiers. ZERO EXTRA COST: local models, open-source tools and free official resources only; enterprise and paid services are studied conceptually unless explicitly authorized.
 
 ## Selected learning resources
 

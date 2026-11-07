@@ -6,11 +6,11 @@
 
 ## Purpose
 
-Begin the applied track: learn to analyse a business process, separate deterministic steps from semantic ones, and build reliable workflows around APIs and data before adding AI.
+Analyze real business processes and automate them with deterministic workflows, reliable API integration and human approval, adding AI only where it helps.
 
 ## Why it matters
 
-Most business value comes from choosing the simplest sound architecture. Rules, APIs and validation solve many problems without a model; knowing the boundary is the core professional skill.
+Most real automation value is plumbing done reliably. The decision hierarchy keeps agents from being the default answer.
 
 ## Prerequisites
 
@@ -18,41 +18,42 @@ Most business value comes from choosing the simplest sound architecture. Rules, 
 
 ## Core concepts
 
-- Business-process decomposition
-- Deterministic workflows and rules vs AI
-- HTTP, REST APIs, JSON, webhooks
-- API authentication concepts
-- Data transformation and validation
-- Retries, timeouts, idempotency and error handling
+- Business-process discovery and workflow mapping
+- Deterministic versus probabilistic steps
+- HTTP, REST, JSON, OpenAPI, webhooks
+- API keys, OAuth2 / OIDC concepts
+- Pagination, rate limiting, timeouts, retries, exponential backoff, idempotency
+- Input validation, data transformation, error handling
 - Human approval and auditability
-- Workflow evaluation: baseline, failure modes, generalization
-- n8n fundamentals (local / self-hosted)
+- n8n (local, self-hosted)
+- Decision hierarchy: plain function → deterministic workflow → LLM call → RAG → agent → multi-agent
+- API-first versus browser automation: prefer supported APIs before browser automation
 
 ## Small future Lab experiments
 
-Ideas only; no experiment directory or code exists yet.
+Ideas only; no experiment directory or code exists yet. Larger experiments follow the Lab-wide incremental-delivery rule (milestone → acceptance criterion → implementation → tests → evidence).
 
-- Deterministic incident triage (an existing external exercise may eventually become the first experiment here; it is not moved by this documentation)
+- Deterministic incident triage
 - Webhook → validation → routing
-- API → transform → output
-- Retry / error-handling exercise
+- API → transform → output with pagination and retry
 - Human-approval workflow
-- Simple local n8n workflow
+- A simple local n8n workflow
+- Small API versus Playwright comparison
 
-Every applied experiment should state its baseline, what success means, the failure modes, how generalization is tested, whether AI beats deterministic logic, what happens when the model fails, and when a human intervenes.
+Every applied experiment states its problem, baseline, success metric, what changed, evidence of improvement, remaining failure modes and the simplest architecture that works.
 
 ## Relevant technologies
 
-- Python
-- n8n (self-hosted / local only; no paid Cloud tier)
-- Free public APIs only where explicitly permitted
-- SQLite
+- **n8n (self-hosted), OpenAPI** — hands-on
+- **Playwright** — hands-on as an open-source fallback when no supported API exists
+- **OAuth2 / OIDC** — awareness of concepts
+- **Microsoft Copilot Studio** — enterprise mapping: low-code agents; compared in Phase 12; no paid features
 
-ZERO EXTRA COST: local models, open-source tools and free official resources only.
+See [Professional capabilities and technology tiers](../../docs/professional-capabilities.md) for tiers. ZERO EXTRA COST: local models, open-source tools and free official resources only; enterprise and paid services are studied conceptually unless explicitly authorized.
 
 ## Selected learning resources
 
-n8n Academy. Resources are registered once, with their links, in the Learning Cockpit catalog (`tools/learning_cockpit/catalog/catalog.json`) and summarized in the roadmap.
+n8n Academy (self-hosted / local; no paid tier required). Resources are registered once, with their links, in the Learning Cockpit catalog (`tools/learning_cockpit/catalog/catalog.json`) and summarized in the roadmap.
 
 ## Boundary
 

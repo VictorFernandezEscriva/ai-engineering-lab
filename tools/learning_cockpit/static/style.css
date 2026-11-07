@@ -112,3 +112,62 @@ button.secondary { background:transparent; color:var(--accent); }
 .hint { margin:.4rem 0 0; font-size:.8rem; }
 .edge.next { stroke:var(--accent); stroke-width:2; stroke-dasharray:5 4; stroke-opacity:.9; }
 @media (max-width: 900px) { .mapcols { height:auto; } .mapwrap { height:60vh; } .mapwrap.drawer-open svg.map { margin-right:0; } }
+
+/* ---- atlas: overview, breadcrumbs, theory viewer ---- */
+.crumbs { display:flex; flex-wrap:wrap; align-items:center; gap:.4rem; margin:.4rem 0; font-size:.9rem; }
+.crumbs .spacer { flex:1 1 auto; }
+.crumbs a.tab { padding:.1rem .6rem; border:1px solid var(--line); border-radius:6px; text-decoration:none; background:var(--card); }
+.crumbs a.tab.on { border-color:var(--accent); font-weight:700; }
+.phasehead { padding:.4rem .8rem; } .phasehead p { margin:.2rem 0; }
+svg.overview .phase { cursor:pointer; outline:none; }
+.phase .box { fill:var(--card); stroke:var(--fg); stroke-opacity:.35; stroke-width:1.5; }
+.phase:hover .box, .phase:focus .box { stroke:var(--accent); stroke-opacity:1; stroke-width:3; }
+.phase.planned .box { stroke-dasharray:5 3; } .phase.covered .box { stroke:var(--validated); stroke-opacity:.9; stroke-dasharray:none; }
+.phase .ph-name { font-size:13px; font-weight:600; }
+.tag-pill { fill:var(--fg); opacity:.85; } .tag-text { fill:var(--bg); font-size:9px; font-weight:700; letter-spacing:.05em; }
+.node.ext { opacity:.55; } .node.ext:hover, .node.ext.selected { opacity:1; }
+.node.needed .box { stroke:var(--accent); stroke-dasharray:2 3; }
+.key.need { color:var(--accent); }
+.badge.theory-available { background:var(--validated); } .badge.theory-partial { background:var(--practiced); }
+.badge.theory-implied { background:var(--studying); } .badge.theory-planned { background:transparent; color:var(--muted); border:1px solid var(--line); }
+a.btn { display:inline-block; padding:.2rem .7rem; border-radius:6px; background:var(--accent); color:#fff; text-decoration:none; }
+.docview { max-width:62rem; margin:0 auto; }
+.md { line-height:1.55; } .md .mdh { margin:1.2rem 0 .4rem; } .md h2.mdh { font-size:1.5rem; } .md h3.mdh { font-size:1.2rem; } .md h4.mdh { font-size:1.05rem; }
+.md pre, .rawdoc { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:.6rem .8rem; overflow:auto; font-size:.85rem; white-space:pre; }
+.md pre code { border:0; padding:0; word-break:normal; background:transparent; }
+.md blockquote { margin:.5rem 0; padding:.1rem .8rem; border-left:3px solid var(--line); color:var(--muted); }
+.md .tablewrap { overflow:auto; } .md table { border-collapse:collapse; font-size:.9rem; } .md th, .md td { border:1px solid var(--line); padding:.25rem .5rem; vertical-align:top; }
+.md li.ind1 { margin-left:1.2rem; } .md li.ind2 { margin-left:2.4rem; } .md li.ind3 { margin-left:3.6rem; }
+.deadlink { color:var(--muted); } .hidden { display:none; }
+details { margin:.3rem 0; } summary { cursor:pointer; }
+.phase .label { fill:var(--fg); }
+
+
+/* ---- final usability pass ---- */
+/* map viewport: its height is fitted to the window by JS, so the horizontal scrollbar is always on screen */
+.mapwrap { overflow:auto; scrollbar-width:auto; scrollbar-color:color-mix(in srgb, var(--fg) 45%, transparent) color-mix(in srgb, var(--fg) 8%, transparent); }
+.mapwrap::-webkit-scrollbar { width:14px; height:14px; }
+.mapwrap::-webkit-scrollbar-track { background:color-mix(in srgb, var(--fg) 8%, transparent); }
+.mapwrap::-webkit-scrollbar-thumb { background:color-mix(in srgb, var(--fg) 45%, transparent); border-radius:7px; border:2px solid transparent; background-clip:padding-box; }
+.mapwrap::-webkit-scrollbar-thumb:hover { background:color-mix(in srgb, var(--accent) 80%, transparent); background-clip:padding-box; }
+.legend { position:relative; }
+.legend .help { margin:0 0 0 auto; }
+.legend .help summary { color:var(--accent); font-size:.8rem; }
+.legend .help dl { position:absolute; right:.4rem; top:100%; z-index:5; width:min(30rem, 92vw); margin:.2rem 0 0; padding:.6rem .9rem;
+  background:var(--card); border:1px solid var(--line); border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.3); }
+.legend .help dt { font-weight:700; margin-top:.35rem; } .legend .help dd { margin:0; color:var(--muted); }
+.track-head { letter-spacing:.06em; }
+.ph-purpose { fill:var(--muted); } .ph-meta { letter-spacing:.04em; }
+.phase.current .box { stroke:var(--accent); stroke-opacity:1; stroke-width:2.5; }
+.phasehead summary { cursor:pointer; padding:.1rem 0; }
+.ph-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(16rem, 1fr)); gap:.4rem 1.5rem; margin:.4rem 0; }
+.ph-item { font-size:.9rem; } .ph-k { display:block; font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.ph-foot { margin:.3rem 0 0; }
+.badge.ctx-here { background:var(--accent); } .badge.ctx-cov { background:transparent; color:var(--validated); border:1px solid var(--validated); }
+.badge.ctx-need { background:transparent; color:var(--accent); border:1px dashed var(--accent); }
+.badge.ctx-future { background:transparent; color:var(--muted); border:1px solid var(--line); }
+.panel .ctx { margin:.1rem 0 .3rem; font-size:.85rem; color:var(--muted); }
+.panel li details { margin:.2rem 0 0; } .panel li details code { display:block; margin:.15rem 0; }
+.docview .source { margin:.2rem 0 .8rem; font-size:.8rem; }
+@media (max-width: 900px) { .legend .help dl { position:static; box-shadow:none; } }
+.chip { padding:.25rem .7rem; } .banner .note { font-size:.78rem; } .crumbs { margin:.25rem 0; }

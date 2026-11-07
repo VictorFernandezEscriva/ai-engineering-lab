@@ -6,11 +6,11 @@
 
 ## Purpose
 
-Extend language models to images, audio and speech, and evaluate multimodal and voice workflows on bounded tasks.
+Extend models beyond text: images, documents, speech and voice pipelines.
 
 ## Why it matters
 
-Real inputs are rarely text only; multimodal and voice interfaces change latency, evaluation and failure modes.
+Real inputs are documents, screenshots and audio. Latency and turn detection dominate voice quality.
 
 ## Prerequisites
 
@@ -20,22 +20,32 @@ Real inputs are rarely text only; multimodal and voice interfaces change latency
 
 ## Core concepts
 
-- Image and text input, multimodal context
-- Vision-language models, multimodal embeddings
-- Speech-to-text and text-to-speech
-- Voice pipelines: streaming latency and turn detection
-- Voice agents only after Phase 10
+- Vision-language models and image understanding
+- Document AI and OCR
+- Speech-to-text, text-to-speech, audio pipelines
+- Streaming voice, turn detection, latency
+- Voice agents (after Phase 10) and multimodal tools
 
-## Potential small Lab experiments
+## Small future Lab experiments
 
-Ideas only; no experiment directory or code exists yet.
+Ideas only; no experiment directory or code exists yet. Larger experiments follow the Lab-wide incremental-delivery rule (milestone → acceptance criterion → implementation → tests → evidence).
 
-- Evaluate a local multimodal model on a bounded task
-- Recognition → LLM → speech synthesis latency measurement
+- Evaluate a multimodal model on a bounded task with an evaluation set
+- Recognition → LLM → synthesis voice loop measuring latency and turn detection
 
-## Relevant technologies and resources
+Every applied experiment states its problem, baseline, success metric, what changed, evidence of improvement, remaining failure modes and the simplest architecture that works.
 
-- Local open multimodal and speech models
-- Resources: none selected yet
+## Relevant technologies
 
-ZERO EXTRA COST: local models, open-source tools and free official resources only. Resource links are canonical in the Learning Cockpit catalog.
+- **Local / open-source multimodal and speech models** — hands-on, ZERO EXTRA COST
+- **Microsoft speech, vision and document services** — enterprise mapping, conceptual only
+
+See [Professional capabilities and technology tiers](../../docs/professional-capabilities.md) for tiers. ZERO EXTRA COST: local models, open-source tools and free official resources only; enterprise and paid services are studied conceptually unless explicitly authorized.
+
+## Selected learning resources
+
+None selected yet. Resources are registered once, with their links, in the Learning Cockpit catalog (`tools/learning_cockpit/catalog/catalog.json`) and summarized in the roadmap.
+
+## Boundary
+
+Small experiments belong here; large multi-technology systems belong in independent repositories.
